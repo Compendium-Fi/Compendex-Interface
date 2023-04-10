@@ -8,7 +8,7 @@ import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   Token,
   AccountInfo as TokenAccount,
-} from "@solana/spl-token-v1";
+} from "@solana/spl-token";
 import { Connection, PublicKey } from "@solana/web3.js";
 
 export async function getOwnedAssociatedTokenAccounts(

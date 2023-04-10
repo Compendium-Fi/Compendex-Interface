@@ -70,6 +70,7 @@
     "@project-serum/serum": "^0.13.65",
     "@react-aria/ssr": "^3.5.0",
     "@solana/spl-name-service": "^0.1.4",
+    "@solana/spl-token": "^0.1.8",
     "@solana/spl-token-v2": "npm:@solana/spl-token@0.2.0",
     "@solana/wallet-adapter-bitpie": "^0.5.17",
     "@solana/wallet-adapter-blocto": "^0.5.21",
