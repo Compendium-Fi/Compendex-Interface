@@ -1,0 +1,126 @@
+.Name {
+  font-size: 14px;
+}
+
+.Image {
+  height: 68px;
+  width: 68px;
+  border-radius: 10px;
+  margin-top: 20px;
+  object-fit: contain;
+}
+.nft-card {
+  background-color: rgba(51, 65, 85, 0.3);
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(51, 66, 87, 0.6);
+  border-radius: 5px;
+  box-shadow: rgb(15 23 42 / 30%) 0px 4px 16px 2px;
+  width: 275px;
+  height: 105px;
+  display: flex;
+  justify-content: flex-start;
+
+  align-items: center;
+  padding-left: 1.2em;
+  margin-bottom: 20px !important;
+  margin-right: 20px !important;
+
+  gap: 20px;
+}
+.nft-name {
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgb(255, 255, 255, 0.5);
+}
+.nft-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 90%;
+  height: 100%;
+  gap: 20px;
+}
+
+.nft-card-title {
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  word-wrap: break-word !important;
+}
+.nft-rank {
+  height: 45px;
+  width: 100%;
+  border-top: solid 1px rgba(18, 18, 18, 0.1);
+  border-bottom: solid 1px rgba(18, 18, 18, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rank-badge {
+  background-color: rgba(152, 77, 222, 0.25);
+  color: #6366f1;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.25;
+  padding-top: 3.5px;
+  height: 25px;
+  width: 245px;
+  border-radius: 10px;
+  text-align: center;
+  display: block;
+}
+.nft-sell-button {
+  cursor: inherit;
+  background: none rgb(50, 205, 153);
+  border: none;
+  text-align: center;
+
+  box-sizing: border-box;
+
+  height: 30px;
+  width: 141px;
+
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  line-height: 1;
+  border-radius: 5px;
+
+  text-decoration: none;
+  font-style: normal;
+}
+.nft-details-btn {
+  cursor: inherit;
+  background: none rgb(80, 80, 221);
+  border: none;
+  text-align: center;
+
+  box-sizing: border-box;
+
+  height: 30px;
+  width: 85px;
+
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  line-height: 1;
+  border-radius: 5px;
+}
+.nft-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  align-self: flex-end;
+}
+.input ::placeholder {
+  color: rgba(0, 0, 0, 0.85) !important;
+}
