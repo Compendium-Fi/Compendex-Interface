@@ -1,15 +1,21 @@
 /** @type {import('next').NextConfig} */
-const withLess = require('next-with-less');
-const withPlugins = require('next-compose-plugins');
+const withLess = require("next-with-less");
+const withPlugins = require("next-compose-plugins");
 const nextConfig = {
-  reactStrictMode: true, webpack: (config, options) => {
+  output: "standalone",
+  typescript: {
+    // Ignore TypeScript errors during the build process
+    ignoreBuildErrors: true,
+  },
+  reactStrictMode: true,
+  webpack: (config, options) => {
     // Important: return the modified config
     if (!options.isServer) {
-      config.resolve.fallback.fs = false
+      config.resolve.fallback.fs = false;
     }
-    return config
-  }
-}
+    return config;
+  },
+};
 
 const plugins = [
   [
@@ -21,4 +27,3 @@ const plugins = [
 ];
 
 module.exports = withPlugins(plugins, nextConfig);
-

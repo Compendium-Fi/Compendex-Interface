@@ -1,0 +1,27 @@
+name: Build and Run Docker Image
+
+on:
+  push
+
+jobs:
+  build-and-run:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: develop
+      - name: Stop and remove existing container
+        run: |
+          docker stop front-end || true
+          docker rm front-end || true
+      - name: Remove unused Docker images and build cache
+        run: |
+          docker image prune --force
+          docker builder prune --force --all
+      - name: Build Docker image
+        run: docker build -t my-docker-image .
+      - name: Run Docker container
+        run: docker run -d --name front-end -p 3000:3000 my-docker-image
+      - name: Remove unused Docker images
+        run: docker image prune --force

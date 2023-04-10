@@ -6,7 +6,7 @@ import { ValidateStatus } from 'antd/lib/form/FormItem';
 import { TokenInstructions } from '@project-serum/serum';
 import { parseTokenMintData, useMintToTickers } from '../utils/tokens';
 import { AutoComplete, Form, Tooltip } from 'antd';
-import Link from './Link';
+import Link from 'next/link';
 
 export interface MintInfo {
   address: PublicKey;
@@ -85,7 +85,7 @@ export function useMintInput(
           title={
             <>
               {tooltip} You can look up token mint addresses on{' '}
-              <Link external to="https://sollet.io">
+              <Link href="https://sollet.io" target='_blank'>
                 sollet.io
               </Link>
               .
