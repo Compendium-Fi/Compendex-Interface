@@ -16,6 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <Head>
           <script src="/static/datafeeds/udf/dist/bundle.js" />
           <link rel="shortcut icon" href="/static/imgs/favicon.ico" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@500&display=swap" rel="stylesheet"></link>
           <title>{process.env.NEXT_PUBLIC_WEBSITE_TITLE}</title>
         </Head>
         <GlobalStyle />
