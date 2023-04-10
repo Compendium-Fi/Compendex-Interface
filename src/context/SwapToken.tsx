@@ -13,7 +13,7 @@ import {
 import {
     getOwnedAssociatedTokenAccounts,
     parseTokenAccountData
-} from "../utils/tokens";
+} from "../utils/tokens-utils";
 import { SOL_MINT } from "../utils/pubkeys";
 import { useConnection } from "../utils/connection";
 import { useWallet } from "@solana/wallet-adapter-react";
