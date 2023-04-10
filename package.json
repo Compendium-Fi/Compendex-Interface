@@ -46,12 +46,14 @@
     "superstruct": "0.8.3",
     "typescript": "^3.9.7",
     "@solana/spl-token-v1": "npm:@solana/spl-token@0.1.8",
+    "@solana/spl-token-v2": "npm:@solana/spl-token@0.2.0",
     "superstruct-old": "npm:superstruct@0.8.3"
   },
   "dependencies": {
     "@bonfida/hooks": "^0.0.4",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@jup-ag/api": "^0.0.3",
     "@jup-ag/core": "^4.0.0-beta.16",
     "@jup-ag/react-hook": "^4.0.0-beta.16",
     "@mantine/core": "^6.0.2",
