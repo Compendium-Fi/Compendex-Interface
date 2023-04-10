@@ -74,7 +74,7 @@ function AppImpl({ children }: { children: any }) {
     [network]
   );
   return (
-    <MantineProvider theme={{ colorScheme: "dark", primaryColor: "dark" }}>
+    <MantineProvider theme={{ colorScheme: "dark", primaryColor: "dark", fontFamily: 'Poppins' }} withGlobalStyles>
       <Notifications />
       <ConnectionProvider>
         <ReferrerProvider>
