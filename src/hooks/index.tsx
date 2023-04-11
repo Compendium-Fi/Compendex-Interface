@@ -4,3 +4,4 @@ export * from "./useValidateRpc";
 export * from "./useTokenAccounts";
 export * from "./useSolanaCongested";
 export * from './useTokenInfoQuery'
+export * from './useTokenAccountBalance'

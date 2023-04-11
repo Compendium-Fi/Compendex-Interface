@@ -41,7 +41,7 @@ import { useJupiterApiContext } from "../../../context/jupiter";
 import { Slippage } from "./Slippage";
 import { useRouter } from "next/router";
 import { useTokenList } from "@/context/tokenList";
-
+import { useWalletTokenBalance } from '@lndgalante/solutils';
 interface IJupiterFormProps { fromMint?: string, toMint?: string }
 
 const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {

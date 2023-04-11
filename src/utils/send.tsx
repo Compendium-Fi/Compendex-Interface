@@ -17,7 +17,7 @@ import {
   Token,
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID
-} from '@solana/spl-token';
+} from '@solana/spl-token-v1';
 import BN from "bn.js";
 import {
   DexInstructions,
@@ -786,7 +786,7 @@ export async function sendSignedTransaction({
       let parsedError;
       if (
         typeof simulateResult.err == "object" &&
-        "InstructionError" in simulateResult.err 
+        "InstructionError" in simulateResult.err
       ) {
         const parsedErrorInfo = parseInstructionErrorResponse(
           signedTransaction,
