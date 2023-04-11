@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@500&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@500&display=swap');
+.MuiTab-textColorPrimary.Mui-selected{
+  color:#E2E8F0 !important;
+}
 @media screen and (max-width: 1850px) {
   .tradePage {
     height: 100% !important;

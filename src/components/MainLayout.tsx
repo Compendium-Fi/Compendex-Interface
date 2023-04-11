@@ -38,6 +38,7 @@ function AppImpl({ children }: { children: any }) {
   const network = useMemo(() => endpoint as WalletAdapterNetwork, [endpoint]);
   const theme = createTheme({
     spacing: 0,
+
     components: {
       MuiTabs: {
         styleOverrides: {
@@ -50,10 +51,13 @@ function AppImpl({ children }: { children: any }) {
         styleOverrides: {
           "root": {
             "&.Mui-selected": {
-              "color": "#E2E8F0"
+              color: "#E2E8F0 !important",
             }
+          }, "textColorPrimary": {
+            color: "red"
           }
-        }
+        },
+
       }
 
     },

@@ -22,6 +22,10 @@ const useTvlStyles = createStyles((theme) => ({
       backgroundColor: "rgba(44, 69, 102, 1)",
     },
   },
+  volumeDecrease: {
+    color: "red",
+    borderColor: "red",
+  },
   tvlInfo: {
     display: "flex",
     justifyContent: "center",
@@ -86,6 +90,7 @@ const useTvlStyles = createStyles((theme) => ({
         borderColor: "red",
       },
     },
+   
   },
 }));
 const useCommonStyles = createStyles((theme) => ({
@@ -1096,7 +1101,7 @@ const usePopOverStyles = createStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-end",
-    gap:"5px"
+    gap: "5px"
   },
   poolPrice: {
     fontFamily: "Poppins",
