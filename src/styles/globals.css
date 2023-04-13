@@ -15813,3 +15813,13 @@ input[type="number"] {
   text-align: right;
   line-height: 1;
 }
+.card-label {
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(181, 181, 181);
+  text-align: center;
+  line-height: 1;
+  align-self: center;
+  margin-left: 25px;
+}

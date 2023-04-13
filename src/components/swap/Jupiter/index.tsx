@@ -478,13 +478,7 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
           </div>
 
           <div className={classes.swapForm} style={{ marginBottom: "0.2em" }}>
-            <div>
-              <Balance
-                tokenAccounts={tokenAccounts}
-                token={outputTokenInfo}
-                solBalance={solBalance}
-              />
-            </div>
+
             <div className={classes.inputContainer}>
               <div>
                 <SelectCoin
@@ -494,6 +488,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
                 />
               </div>
               <div className={classes.outputDisplay}>{outputAmount}</div>
+            </div>
+            <div>
+              <Balance
+                tokenAccounts={tokenAccounts}
+                token={outputTokenInfo}
+                solBalance={solBalance}
+              />
             </div>
           </div>
 

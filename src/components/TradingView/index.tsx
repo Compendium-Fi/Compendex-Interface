@@ -6,11 +6,10 @@ import {
   ChartingLibraryWidgetOptions, IChartingLibraryWidget, widget
 } from "../../../public/static/charting_library";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { convertResolutionToApi, useTvDataFeed } from "@/utils/Datafeed";
+import React from "react";
 import { useMarket } from "../../utils/markets";
 import { flatten } from "../../utils/utils";
-import React from "react";
-import { convertResolutionToApi, useTvDataFeed } from "@/utils/Datafeed";
 
 export interface ChartContainerProps {
   symbol: ChartingLibraryWidgetOptions["symbol"];

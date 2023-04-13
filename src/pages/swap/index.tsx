@@ -115,7 +115,9 @@ const AppInner = ({ tokenList }) => {
 
     const fromTokenData = useTokenInfoQuery(`tokenInfo-from`, fromMint);
     const toTokenData = useTokenInfoQuery(`tokenInfo-to`, toMint);
-
+    useMemo(() => {
+      console.log("Token Data", fromTokenData, toTokenData)
+    }, [fromTokenData, toTokenData])
     const [value, setValue] = React.useState("1");
     const [swapValue, setSwapValue] = useState("1");
     const handleSwapChange = (event, newValue) => {

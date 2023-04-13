@@ -90,7 +90,7 @@ const useTvlStyles = createStyles((theme) => ({
         borderColor: "red",
       },
     },
-   
+
   },
 }));
 const useCommonStyles = createStyles((theme) => ({
@@ -377,12 +377,13 @@ const useSwapStyles = createStyles((theme) => ({
     flexDirection: "row",
     alignItems: "center",
     marginRight: theme.spacing.xs,
+    padding: "8px"
   },
   balanceLabel: {
     marginRight: theme.spacing.xs,
-    fontSize: theme.fontSizes.sm,
-    fontWeight: "bold",
-    color: theme.colors.white,
+    color: "rgb(226, 232, 240)",
+    fontSize: "12px",
+    fontWeight: 400
   },
   balanceValue: {
     color: "rgb(226, 232, 240)",
@@ -564,8 +565,8 @@ const useSwapStyles = createStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "center",
     width: "100%",
-    marginTop: "10px",
-    marginBottom: "10px",
+    marginTop: "5px",
+    marginBottom: "5px",
   },
   receiveContainer: {
     display: "flex",
@@ -722,7 +723,7 @@ const useSwapStyles = createStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "0.2em",
+    padding: "1em",
     cursor: "pointer",
     marginBottom: "10px !important",
     position: "relative",
@@ -735,11 +736,11 @@ const useSwapStyles = createStyles((theme) => ({
     borderRadius: 5,
     width: "100%",
     height: 70,
-    margin: "0.2em",
+    padding: "1em",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "0.2em",
+  
     cursor: "pointer",
     marginBottom: "10px !important",
     minWidth: "100%",
@@ -780,7 +781,7 @@ const useSwapStyles = createStyles((theme) => ({
     lineHeight: 1,
     borderRadius: "5px",
     marginTop: "0.8em",
-    height: "48px",
+    height: "38px",
     transition:
       "color 300ms ease 0s, border-color 300ms ease 0s, background 300ms ease 0s",
     boxShadow: "none",
