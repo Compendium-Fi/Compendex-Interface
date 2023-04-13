@@ -12448,6 +12448,7 @@ code {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
+  font-size: 12px !important;
 }
 .news-info #news-title {
   white-space: pre-wrap;
@@ -15337,6 +15338,7 @@ code {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
+  font-size: 12px !important;
 }
 .news-info #news-title {
   white-space: pre-wrap;
