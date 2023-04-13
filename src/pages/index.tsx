@@ -22,6 +22,7 @@ import { useViewport } from "@/context/viewPort";
 import { useCommonStyles } from "@/components/styles";
 
 import JupiterForm from "@/components/swap/Jupiter";
+import { Skeleton } from "@mantine/core";
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
@@ -416,40 +417,55 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
               </Box>
               <TabPanel value="1">
                 <div className="inner-tab" style={{ padding: "0.7em" }}>
-                  {volumeByPairs.slice(0, 10).map((elm, ind) => (
-                    <TrendingSwapItem
-                      sellTokenSymbol={elm.name.split("/")[0]}
-                      buyTokenSymbol={elm.name.split("/")[1]}
-                      key={ind.toString()}
-                      volume={elm.value}
-                    />
-                  ))}
+                  <Skeleton visible={volumeByPairs.length == 0} sx={{
+                    "&::before": { background: "#0f172a" },
+                    "&::after": { background: "#17264a" },
+                  }}>
+                    {volumeByPairs.slice(0, 10).map((elm, ind) => (
+                      <TrendingSwapItem
+                        sellTokenSymbol={elm.name.split("/")[0]}
+                        buyTokenSymbol={elm.name.split("/")[1]}
+                        key={ind.toString()}
+                        volume={elm.value}
+                      />
+                    ))}
+                  </Skeleton >
                 </div>
               </TabPanel>
               <TabPanel value="2">
                 {" "}
                 <div className="inner-tab" style={{ padding: "0.7em" }}>
-                  {topBuys.slice(0, 10).map((elm, ind) => (
-                    <SellBuyItem
-                      key={ind.toString()}
-                      tokenSymbol={elm.symbol}
-                      volume={elm.amount}
-                      side={"buy"}
-                    />
-                  ))}
+                  <Skeleton visible={volumeByPairs.length == 0} sx={{
+                    "&::before": { background: "#0f172a" },
+                    "&::after": { background: "#17264a" },
+                  }}>
+                    {topBuys.slice(0, 10).map((elm, ind) => (
+                      <SellBuyItem
+                        key={ind.toString()}
+                        tokenSymbol={elm.symbol}
+                        volume={elm.amount}
+                        side={"buy"}
+                      />
+                    ))}
+                  </Skeleton>
                 </div>
               </TabPanel>
               <TabPanel value="3">
                 {" "}
                 <div className="inner-tab" style={{ padding: "0.7em" }}>
-                  {topSells.slice(0, 10).map((elm, ind) => (
-                    <SellBuyItem
-                      key={ind.toString()}
-                      tokenSymbol={elm.symbol}
-                      volume={elm.amount}
-                      side={"sell"}
-                    />
-                  ))}
+                  <Skeleton visible={volumeByPairs.length == 0} sx={{
+                    "&::before": { background: "#0f172a" },
+                    "&::after": { background: "#17264a" },
+                  }}>
+                    {topSells.slice(0, 10).map((elm, ind) => (
+                      <SellBuyItem
+                        key={ind.toString()}
+                        tokenSymbol={elm.symbol}
+                        volume={elm.amount}
+                        side={"sell"}
+                      />
+                    ))}
+                  </Skeleton>
                 </div>
               </TabPanel>
             </TabContext>
@@ -715,6 +731,10 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
               </Box>
               <TabPanel value="1">
                 <div className="inner-tab" style={{ padding: "0.7em" }}>
+                <Skeleton visible={volumeByPairs.length == 0} sx={{
+                    "&::before": { background: "#0f172a" },
+                    "&::after": { background: "#17264a" },
+                  }}>
                   {volumeByPairs.slice(0, 10).map((elm, ind) => (
                     <TrendingSwapItem
                       sellTokenSymbol={elm.name.split("/")[0]}
@@ -723,11 +743,16 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
                       volume={elm.value}
                     />
                   ))}
+                  </Skeleton>
                 </div>
               </TabPanel>
               <TabPanel value="2">
                 {" "}
                 <div className="inner-tab" style={{ padding: "0.7em" }}>
+                <Skeleton visible={volumeByPairs.length == 0} sx={{
+                    "&::before": { background: "#0f172a" },
+                    "&::after": { background: "#17264a" },
+                  }}>
                   {topBuys.slice(0, 10).map((elm, ind) => (
                     <SellBuyItem
                       key={ind.toString()}
@@ -736,6 +761,7 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
                       side={"buy"}
                     />
                   ))}
+                  </Skeleton>
                 </div>
               </TabPanel>
               <TabPanel value="3">

@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { Skeleton } from "@mantine/core";
 import axios from "axios";
-import TokenListContext from "../context/context/tokenListContext";
+import React, { useEffect, useMemo, useState } from "react";
 import PoolItem from "./PoolItem";
-import "react-loading-skeleton/dist/skeleton.css";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+
 const TopLendingYields = () => {
   const [protocolList, setProtocolList] = useState([]);
   const [poolList, setPoolList] = useState([]);
   const [editPoolList, setEditPoolList] = useState([]);
 
   const [yieldList, setYieldList] = useState([]);
-  const { splTokenList } = useContext(TokenListContext);
+ 
 
   const pullData = async () => {
     try {
@@ -59,7 +58,7 @@ const TopLendingYields = () => {
       {editPoolList.length !== 0 ? (
         editPoolList
           .filter((elm) => {
-           
+
             return (
               elm.poolInfo !== null &&
               elm.poolInfo !== undefined &&
@@ -70,14 +69,18 @@ const TopLendingYields = () => {
 
           .map((elm) => <PoolItem poolInfo={elm} />)
       ) : (
-        <SkeletonTheme baseColor="#0f172a" highlightColor="#17264a">
-          <Skeleton
-            style={{
-              height: "680px",
-              minWidth: "100%",
-            }}
-          />
-        </SkeletonTheme>
+
+        <Skeleton
+          style={{
+            height: "680px",
+            minWidth: "100%",
+          }}
+          sx={{
+            "&::before": { background: "#0f172a" },
+            "&::after": { background: "#17264a" },
+          }}
+        />
+
       )}
     </div>
   );

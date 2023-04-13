@@ -617,7 +617,7 @@ const AppInner = ({ tokenList }) => {
                 gap: "5px",
               }}
             >
-              {/* <img src={pricingIcon} alt="" /> */}
+              <img src={"/assets/img/pricing.png"} alt="" />
               <span>Price Movements</span>
             </div>
           </Col>
@@ -670,7 +670,7 @@ const AppInner = ({ tokenList }) => {
                 gap: "5px",
               }}
             >
-              {/* <img src={pricingIcon} alt="" /> */}
+               <img src={"/assets/img/pricing.png"} alt="" />
               <span>Price Movements</span>
             </div>
           </Col>

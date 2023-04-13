@@ -31,6 +31,10 @@ const TopTVLComp = () => {
             height: "680px",
             minWidth: "100%",
           }}
+          sx={{
+            "&::before": { background: "#0f172a" },
+            "&::after": { background: "#17264a" },
+          }}
         />
 
       )}

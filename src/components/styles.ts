@@ -740,7 +740,7 @@ const useSwapStyles = createStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-  
+
     cursor: "pointer",
     marginBottom: "10px !important",
     minWidth: "100%",
@@ -943,22 +943,26 @@ const useStableTokenStyles = createStyles((theme) => ({
     },
 
     "& #volume": {
-      overflow: "visible",
-      fontFamily: "Poppins",
-      fontSize: 12,
-      fontWeight: 400,
-      color: theme.colors.gray[5],
-      textAlign: "right",
-      lineHeight: 1,
-      padding: "0px 5px",
-      borderStyle: "solid",
-      borderWidth: 1,
-      borderColor: theme.colors.dark[3],
-      borderRadius: 2,
-      minWidth: 32,
-      height: "max-content",
+
     },
   },
+  volumeItem: {
+    overflow: "visible",
+    fontFamily: "Poppins",
+    fontSize: 12,
+    fontWeight: 400,
+    color: theme.colors.gray[5],
+    textAlign: "right",
+    lineHeight: 1,
+    padding: "5px",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: theme.colors.dark[3],
+    borderRadius: 2,
+    minWidth: 32,
+    height: "max-content",
+    
+  }
 }));
 const useNewsStyles = createStyles((theme) => ({
   newsItem: {
