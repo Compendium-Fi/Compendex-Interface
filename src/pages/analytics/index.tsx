@@ -165,7 +165,7 @@ function TradePageInner() {
                           gap: "5px",
                         }}
                       >
-                        {/* <img src={pricingIcon} alt="" /> */}
+                        <img src={"/assets/img/pricing.png"} alt="" />
                         <span>Price Movements</span>
                       </div>
                     </Col>
@@ -219,7 +219,7 @@ function TradePageInner() {
                           gap: "5px",
                         }}
                       >
-                        {/* <img src={pricingIcon} alt="" /> */}
+                        <img src={"/assets/img/pricing.png"} alt="" />
                         <span>Price Movements</span>
                       </div>
                     </Col>

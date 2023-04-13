@@ -42,6 +42,7 @@ import { Slippage } from "./Slippage";
 import { useRouter } from "next/router";
 import { useTokenList } from "@/context/tokenList";
 import { useWalletTokenBalance } from '@lndgalante/solutils';
+import { showNotification } from "@mantine/notifications";
 interface IJupiterFormProps { fromMint?: string, toMint?: string }
 
 const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
@@ -184,6 +185,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
       !isFinite(parsedAmount) ||
       !inputTokenInfo?.address
     ) {
+      showNotification({
+        title: <span>Error</span>,
+        message: <span>Invalid amount</span>,
+        color: 'red',
+
+        loading: false,
+      });
       // return toast.info(<p className="text-xs font-bold">Invalid amount</p>);
     }
 
@@ -200,13 +208,28 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
           : null;
 
     if (!userBalances) {
+      showNotification({
+        title: <span>Error</span>,
+        message: <span>Could not find user balances</span>,
+        color: 'red',
+
+        loading: false,
+      });
       // return toast.info(
       //   <p className="text-xs font-bold">Could not find user balances</p>
       // );
     }
 
     if (userBalances < parsedAmount) {
-      return <div></div>;
+      showNotification({
+        title: <span>Error</span>,
+        message: <span> Not enough balances (only have {userBalances.toFixed(2)})
+          {inputTokenInfo.symbol})</span>,
+        color: 'red',
+
+        loading: false,
+      });
+      //return <div></div>;
       // return toast.info(
       //   <p className="text-xs font-bold">
       //     Not enough balances (only have {round(userBalances, 2)}
@@ -219,6 +242,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
     try {
       if (!loadingRoute && selectedRoute && publicKey && signAllTransactions) {
         setSwapping(true);
+        showNotification({
+          title: <span>Info</span>,
+          message: <span>Preparing Transaction</span>,
+          color: 'blue',
+
+          loading: false,
+        });
         // toast(<RenderUpdate updateText="Preparing transaction" load={true} />, {
         //   type: toast.TYPE.INFO,
         //   autoClose: false,
@@ -264,7 +294,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
         //   ),
         //   toastId: toastId.current,
         // });
+        showNotification({
+          title: <span>Info</span>,
+          message: <span>Sending transaction</span>,
+          color: 'blue',
 
+          loading: true,
+        });
         await signAllTransactions([transaction]);
         const rawTransaction = transaction.serialize();
         const txid = await retry(async () => {
@@ -276,7 +312,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
           console.log(`https://solscan.io/tx/${tx}`);
           return tx;
         });
+        showNotification({
+          title: <span>Transaction confirmed 👌</span>,
+          message: <span>View Transaction on {<Link href={`https://solscan.io/tx/${txid}`} target="_blank">Solscan</Link>}</span>,
+          color: 'green',
 
+          loading: false,
+        });
         // let c = 1;
         // const len = transactions.length;
         // for (let transaction of transactions) {
@@ -311,6 +353,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
       console.error("Error", e);
       const isError = e instanceof Error;
       if (isError && e.message.includes("Transaction simulation")) {
+        showNotification({
+          title: <span>Transaction Failed </span>,
+          message: <span>Transaction simulation failed</span>,
+          color: 'red',
+
+          loading: false,
+        });
         // toast.update(toastId.current, {
         //   type: toast.TYPE.INFO,
         //   autoClose: 5_000,
@@ -322,6 +371,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
         //   ),
         // });
       } else if (isError && e.message.includes("blockhash")) {
+        showNotification({
+          title: <span>Transaction Failed </span>,
+          message: <span>Blockhash not found</span>,
+          color: 'red',
+
+          loading: false,
+        });
         // toast.update(toastId.current, {
         //   type: toast.TYPE.INFO,
         //   autoClose: 5_000,

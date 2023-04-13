@@ -15771,6 +15771,19 @@ input[type="number"] {
   grid-gap: 5px;
   gap: 5px;
 }
+.price-title img {
+  width: 30px;
+  height: 30px;
+}
+.price-title span {
+  white-space: pre-wrap;
+  overflow: visible;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(226, 232, 240);
+  line-height: 1;
+}
 .ticker-container {
   width: 100%; /* width of the ticker container */
   overflow: hidden; /* hide the text that goes out of the container */
