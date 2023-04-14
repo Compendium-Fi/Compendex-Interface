@@ -10,7 +10,7 @@ const CryptoNewsCom = () => {
   const fetchFeed = useCallback(() => {
     axios
       .get(
-        `https://api.rss2json.com/v1/api.json?rss_url=https://cointelegraph.com/rss`
+        `https://api.rss2json.com/v1/api.json?rss_url=https://www.coindesk.com/arc/outboundfeeds/rss/`
       )
       .then((response) => {
         setFeed(response.data.items);
@@ -27,8 +27,9 @@ const CryptoNewsCom = () => {
       {" "}
       {feed &&
         feed.map((elm, ind) => {
-          let item = parse(elm["description"]);
-          let textToDisplay = item[3]["props"]["children"];
+          console.log("Elm", elm)
+          // let item = parse(elm["description"]);
+          // let textToDisplay = item[3]["props"]["children"];
           return (
             <div className="news-item" key={ind.toString()}>
               <div className="left-item">
@@ -36,7 +37,7 @@ const CryptoNewsCom = () => {
                 <div className="news-info">
                   <span id="news-title">{elm["title"]}</span>
 
-                  <span id="news-description">{textToDisplay}</span>
+                  <span id="news-description">{elm['content']}</span>
                 </div>
               </div>
               <Button
