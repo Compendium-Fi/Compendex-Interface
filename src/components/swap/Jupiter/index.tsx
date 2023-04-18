@@ -33,7 +33,7 @@ import WalletConnect from "@/components/WalletConnect";
 import { useSwapStyles } from "@/components/styles";
 import { useGlobalSwap } from "@/context/GlobalSwap";
 import { useConnection } from "@/utils/connection";
-import { Button, Loader, UnstyledButton } from "@mantine/core";
+import { Button, Group, Loader, UnstyledButton } from "@mantine/core";
 import { Refresh } from "@mui/icons-material";
 import Link from "next/link";
 import { useQueryClient } from "react-query";
@@ -456,15 +456,10 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
     <>
       <div className={classes.root}>
         <div style={{ position: "relative" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "20px",
-            }}
+          <Group my={10} position="apart"
+
           >
-            {/* <InfoLabel /> */}
+
 
             <Slippage slippage={slippage} setSlippage={setSlippage} />
             {location.pathname === "/" ? (
@@ -475,7 +470,7 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
               <a
                 style={{
                   whiteSpace: "pre-wrap",
-                  fontFamily: "Poppins",
+                  fontFamily: "Roboto",
                   fontSize: "10px",
                   color: "rgba(226, 232, 240, 0.51)",
                   textAlign: "center",
@@ -491,7 +486,7 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
             <UnstyledButton onClick={() => { }}>
               <Refresh style={{ color: "#7791E0" }} />
             </UnstyledButton>
-          </div>
+          </Group>
         </div>
 
         <div className={classes.header}>
@@ -533,7 +528,7 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
             </UnstyledButton>
           </div>
 
-          <div className={classes.swapForm} style={{ marginBottom: "0.2em" }}>
+          <div className={classes.swapForm}>
 
             <div className={classes.inputContainer}>
               <div>
@@ -563,7 +558,7 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
                 alignItems: "center",
               }}
             >
-              <Loader variant="bars" />
+              <Loader variant="bars"  />
             </div>
           )}
           {!hasRoute && !loadingRoute && (

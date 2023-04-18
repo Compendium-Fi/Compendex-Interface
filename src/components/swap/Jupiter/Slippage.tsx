@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { ButtonModal, ButtonBorderGradient } from "../Buttons";
 //import { AdjustmentsIcon, InformationCircleIcon } from "@heroicons/react/solid";
-import clsx from "clsx";
 import { useSwapStyles } from "@/components/styles";
-import { Button, UnstyledButton } from "@mantine/core";
-import { Settings } from "@material-ui/icons";
+import { Button, Popover } from "@mantine/core";
+
+import { InfoRounded, Settings } from "@material-ui/icons";
 const OPTIONS = [1, 5, 10];
 
 export const Slippage = ({
@@ -27,68 +26,86 @@ export const Slippage = ({
   };
 
   return (
-    // <ButtonModal
-    //   visible={visible}
-    //   setVisible={setVisible}
-    //   buttonClass={classes.selectButton}
-    //   buttonText={
-    //     <div className={classes.btnText}>
-    //       {/* <AdjustmentsIcon className="w-3 mr-2 rotate-90" /> */}
-    //       <span className="text-xs"> {slippage / 10} %</span>
-    //     </div>
-    //   }
-    // >
-    //   <div>
-    //     <h2 className={classes.h2}>Slippage settings</h2>
-    //     <div className={classes.slippageContainer}>
-    //       {OPTIONS.map((e) => {
-    //         return <Button className={classes.btnContainer}>{e / 10}%</Button>;
-    //       })}
-    //     </div>
-    //     <div className="mt-5">
-    //       <div
-    //         style={{
-    //           position: "relative",
-    //           backgroundImage: custom
-    //             ? "linear-gradient(to right, #10B981, #3B82F6)"
-    //             : "none",
-    //           padding: "2px",
-    //           borderRadius: "6px",
-    //           height: "50px",
-    //         }}
-    //       >
-    //         <input
-    //           onChange={(e) => setInput(10 * parseFloat(e.target.value.trim()))}
-    //           placeholder="0.00 %"
-    //           value={(input || 0) / 10}
-    //           type="number"
-    //           max={100}
-    //           min={0}
-    //           className={classes.slippageInput}
-    //         />
-    //         <span className={classes.percentage}>%</span>
-    //       </div>
-    //     </div>
-    //     {!canSubmit && (
-    //       <div className={classes.slippageError}>
-    //         <div className={classes.slippageError}>
-    //           {/* <InformationCircleIcon className="h-[15px] text-orange-300 mr-2" /> */}
-    //           <span className="text-sm text-white">
-    //             Slippage must be between 0 and 50
-    //           </span>
-    //         </div>
-    //       </div>
-    //     )}
-    //   </div>
-    //   <Button onClick={handleSave}>Save settings</Button>
-    // </ButtonModal>
+
     <>
-      <UnstyledButton>
-        {" "}
-        <Settings
-          style={{ color: "#7791E0", width: "20px", height: "20px" }}
-        />{" "}
-      </UnstyledButton>
+
+      <Popover width={350} position="bottom" withArrow shadow="md">
+        <Popover.Target>
+          <Settings
+            style={{ color: "#7791E0", width: "20px", height: "20px", border: '1px solid #132235 !important' }}
+          />
+        </Popover.Target>
+        <Popover.Dropdown style={{
+          backgroundColor: "rgb(3, 10, 19)",
+          borderStyle: "solid",
+          borderWidth: "2px",
+          borderColor: "rgb(19, 34, 53)",
+          borderRadius: "10px",
+        }}>
+          <>
+            {" "}
+            <div>
+              <span className={classes.h2}>Slippage settings</span>
+              <div className={classes.slippageContainer}>
+                {OPTIONS.map((e) => {
+                  return (
+                    <Button className={classes.btnContainer} onClick={() => setInput(e)}>{e / 10}%</Button>
+                  );
+                })}
+              </div>
+              <div className="mt-5">
+                <div
+                  style={{
+                    position: "relative",
+
+                    padding: "2px",
+                    borderRadius: "6px",
+                    height: "50px",
+
+                    maxWidth: "100%",
+                    width: "100% !important",
+
+                    background: "rgba(19, 34, 53, 0.5)",
+                    border: "1px solid #132235",
+
+                    // display: flex;
+                    // align-items: center;
+                    // padding: 1em;
+                    // flex-direction: row;
+                    // flex: 1 1;
+                    // margin-bottom: 10px;
+                    // justify-content: space-between;
+                  }}
+                >
+                  <input
+                    onChange={(e) =>
+                      setInput(10 * parseFloat(e.target.value.trim()))
+                    }
+                    placeholder="0.00 %"
+                    value={(input || 0) / 10}
+                    type="number"
+                    max={100}
+                    min={0}
+                    className={classes.slippageInput}
+                  />
+                  <span className={classes.percentage}>%</span>
+                </div>
+              </div>
+              {!canSubmit && (
+                <div className={classes.slippageError}>
+                  <div className={classes.slippageErrorInner}>
+                    <InfoRounded className={classes.infoIcon} />
+                    <span className={classes.slippageText}>
+                      Slippage must be between 0 and 50
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+            <Button onClick={handleSave} color="teal" mt={10}>Save settings</Button>
+          </>
+        </Popover.Dropdown>
+      </Popover>
     </>
   );
 };
