@@ -83,6 +83,8 @@ const WalletConnect = () => {
         {wallets.map(({ adapter }, ind) => {
           const onClick = function () {
             select(adapter.name);
+            adapter.connect()
+            //connect(); 
             setIsModalVisible(false);
           };
 
