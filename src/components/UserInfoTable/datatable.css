@@ -14,18 +14,12 @@
   /* padding-bottom: 10em; */
 }
 
-.ant-table-thead > tr > th {
-  /* background: transparent !important; */
-  /* color: #000 !important; */
-}
 
 .ant-table-tbody > tr > td {
   background: transparent !important;
   /* color: #000 !important; */
 }
-.ant-typography {
-  /* color: #000 !important; */
-}
+
 .ant-table-container {
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;

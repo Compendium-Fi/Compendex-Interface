@@ -619,9 +619,7 @@
   box-shadow: none !important;
 }
 
-.ant-table-thead > tr > th {
-  /* border-bottom: solid 1px rgba(12, 12, 12, 0.2) !important; */
-}
+
 .ant-pagination-prev .ant-pagination-item-link,
 .ant-pagination-next .ant-pagination-item-link {
   border: solid 1px rgba(12, 12, 12, 0.2) !important;
