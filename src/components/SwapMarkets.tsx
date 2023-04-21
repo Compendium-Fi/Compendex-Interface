@@ -78,7 +78,7 @@ const SwapMarkets = () => {
         <li>
           <span className="market-name">(Trade) SOL/USDC</span>{" "}
           <Link
-            to={"/serum/market/9wFFyRfZBsuAha4YcuxcXLKwMxJR43S7fPfQLusDBzvT"}
+            to={"/market/9wFFyRfZBsuAha4YcuxcXLKwMxJR43S7fPfQLusDBzvT"}
           >
             Trade Now
           </Link>
@@ -87,7 +87,7 @@ const SwapMarkets = () => {
         <li>
           <span className="market-name">(Trade) SRM/USDC</span>{" "}
           <Link
-            to={"/serum/market/ByRys5tuUWDgL73G8JBAEfkdFf8JWBzPBDHsBVQ5vbQA"}
+            to={"/market/ByRys5tuUWDgL73G8JBAEfkdFf8JWBzPBDHsBVQ5vbQA"}
           >
             Trade Now
           </Link>
@@ -95,7 +95,7 @@ const SwapMarkets = () => {
         <li id="last">
           <span className="market-name">(Trade) RAY/USDC</span>{" "}
           <Link
-            to={"/serum/market/2xiv8A5xrJ7RnGdxXB42uFEkYHJjszEhaJyKKt4WaLep"}
+            to={"/market/2xiv8A5xrJ7RnGdxXB42uFEkYHJjszEhaJyKKt4WaLep"}
           >
             Trade Now
           </Link>

@@ -280,7 +280,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }) => {
     };
     const handleOrderChange = (event, newValue) => {
         if (newValue === "2") {
-            history.push("/serum");
+           history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
         } else {
             setOrderValue(newValue);
         }
@@ -603,7 +603,7 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }) => {
     };
     const handleOrderChange = (event, newValue) => {
         if (newValue === "2") {
-            history.push("/serum");
+           history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
         } else {
             setOrderValue(newValue);
         }
@@ -932,7 +932,7 @@ const RenderSmall = ({ screenWidth }) => {
     };
     const handleOrderChange = (event, newValue) => {
         if (newValue === "2") {
-            history.push("/serum");
+           history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
         } else {
             setOrderValue(newValue);
         }

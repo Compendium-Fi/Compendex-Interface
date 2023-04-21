@@ -322,7 +322,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
     setStatsTab(newValue);
   };
   const handleOrderChange = (event: any, newValue: string) => {
-    console.log("New Value", newValue);
+
     if (newValue === "2") {
       history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
     } else {
@@ -352,7 +352,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         }}
       >
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={oderValue}>
               <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                 <TabList
@@ -401,7 +401,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         </Col>
 
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             {" "}
             <TabContext value={trendingSwapView}>
               <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
@@ -490,7 +490,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         }}
       >
         <Col flex={"436px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -529,7 +529,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
           </div>
         </Col>
         <Col flex={"436px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={statsTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -623,9 +623,9 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
     setStatsTab(newValue);
   };
   const handleOrderChange = (event: any, newValue: string) => {
-    console.log("New Value", newValue);
+   
     if (newValue === "2") {
-      history.push("/serum");
+      history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
     } else {
       setOrderValue(newValue);
     }
@@ -653,7 +653,7 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         }}
       >
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={oderValue}>
               <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                 <TabList
@@ -715,7 +715,7 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         }}
       >
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             {" "}
             <TabContext value={trendingSwapView}>
               <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
@@ -785,7 +785,7 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         </Col>
 
         <Col flex={"auto"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -824,7 +824,7 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
           </div>
         </Col>
         <Col flex={"auto"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={statsTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -935,7 +935,7 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
   };
   const handleOrderChange = (event: any, newValue: string) => {
     if (newValue === "2") {
-      history.push("/serum");
+     history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
     } else {
       setOrderValue(newValue);
     }
@@ -956,7 +956,7 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={oderValue}>
                 <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                   <TabList
@@ -1011,7 +1011,7 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               {" "}
               <TabContext value={trendingSwapView}>
                 <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
@@ -1074,7 +1074,7 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={nftTab}>
                 <Box
                   sx={{
@@ -1121,7 +1121,7 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={statsTab}>
                 <Box
                   sx={{

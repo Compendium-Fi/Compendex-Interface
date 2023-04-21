@@ -18,7 +18,7 @@ const TopLendingYields = () => {
         axios.get("https://api.llama.fi/lite/protocols2"),
         axios.get("https://api.llama.fi/config/yields?a=1"),
       ]);
-      //   console.log("Data", result);
+   
       setProtocolList(
         result[1].data.protocols.filter((elm) => elm.chains.includes("Solana"))
       );
@@ -42,7 +42,7 @@ const TopLendingYields = () => {
       .map((elm) => {
         let selectedPool;
         let selectedYield = yieldList[elm.project];
-        //console.log("selected Yield", selectedYield);
+    
         if (selectedYield) {
           selectedPool = protocolList.find(
             (elm) => elm.name.toUpperCase() === selectedYield.name.toUpperCase()

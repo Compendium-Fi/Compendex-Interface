@@ -28,8 +28,7 @@ const MainHeader = () => {
       openSidebar();
     }
   }
-  // const history = useHistory();
-  // const location = useLocation();
+
 
   const getTokenPrice = async () => {
     try {
@@ -100,15 +99,7 @@ const MainHeader = () => {
             >
               <span>Trade</span>
             </Link>
-            <Link
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-              className="header-link-btn"
-              href={"/nft"}
-            >
-              <span>NFT</span>
-            </Link>
+
 
             <Link
               className={`${location.pathname.includes("/analytics")
@@ -150,6 +141,15 @@ const MainHeader = () => {
                 </div>
               </div>
             </Link>
+            <a
+
+              className="header-link-btn"
+              href="docs.compendex.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Docs</span>
+            </a>
           </div>
         </div>
         <div className="header-content-mobile">

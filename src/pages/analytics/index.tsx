@@ -288,7 +288,7 @@ const RenderNormal = ({ screenWidth }) => {
         }}
       >
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={statsTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -339,7 +339,7 @@ const RenderNormal = ({ screenWidth }) => {
         </Col>
 
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -381,7 +381,7 @@ const RenderNormal = ({ screenWidth }) => {
         }}
       >
         <Col flex={"436px"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -408,7 +408,7 @@ const RenderNormal = ({ screenWidth }) => {
           </div>
         </Col>
         <Col flex={"436px"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -624,7 +624,7 @@ const RenderMedium = ({ screenWidth }) => {
         }}
       >
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={statsTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -688,7 +688,7 @@ const RenderMedium = ({ screenWidth }) => {
         }}
       >
         <Col flex={"auto"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -716,7 +716,7 @@ const RenderMedium = ({ screenWidth }) => {
         </Col>
 
         <Col flex={"auto"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -743,7 +743,7 @@ const RenderMedium = ({ screenWidth }) => {
           </div>
         </Col>
         <Col flex={"auto"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -856,7 +856,7 @@ const RenderSmall = ({ screenWidth }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={statsTab}>
                 <Box
                   sx={{
@@ -917,7 +917,7 @@ const RenderSmall = ({ screenWidth }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={nftTab}>
                 <Box
                   sx={{
@@ -952,7 +952,7 @@ const RenderSmall = ({ screenWidth }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={nftTab}>
                 <Box
                   sx={{
@@ -993,7 +993,7 @@ const RenderSmall = ({ screenWidth }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={nftTab}>
                 <Box
                   sx={{

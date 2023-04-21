@@ -310,7 +310,7 @@ const useSwapStyles = createStyles((theme) => ({
     justifyContent: "center",
 
     width: "100%",
-    maxWidth: 450,
+    // maxWidth: 450,
     borderRadius: 15,
     padding: "10px",
     paddingBottom: 10,

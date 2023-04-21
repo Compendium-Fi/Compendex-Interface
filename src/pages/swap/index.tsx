@@ -116,13 +116,13 @@ const AppInner = ({ tokenList }) => {
     const fromTokenData = useTokenInfoQuery(`tokenInfo-from`, fromMint);
     const toTokenData = useTokenInfoQuery(`tokenInfo-to`, toMint);
     useMemo(() => {
-      console.log("Token Data", fromTokenData, toTokenData)
+  
     }, [fromTokenData, toTokenData])
     const [value, setValue] = React.useState("1");
     const [swapValue, setSwapValue] = useState("1");
     const handleSwapChange = (event, newValue) => {
-      if (newValue === "2") {
-        history.push("/serum");
+      if (newValue == "2") {
+        history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
       } else {
         setSwapValue(newValue);
       }
@@ -149,7 +149,7 @@ const AppInner = ({ tokenList }) => {
           }}
         >
           <Col flex={"360px"}>
-            <div className="home-card-container">
+            <div className=" data-card-container">
               <TabContext value={swapValue}>
                 <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                   <TabList
@@ -274,7 +274,21 @@ const AppInner = ({ tokenList }) => {
     const classes = useStyles();
 
     const [value, setValue] = React.useState("1");
+    const { fromMint, toMint } = useGlobalSwap();
 
+    const fromTokenData = useTokenInfoQuery(`tokenInfo-from`, fromMint);
+    const toTokenData = useTokenInfoQuery(`tokenInfo-to`, toMint);
+    const [swapValue, setSwapValue] = useState("1");
+    const handleSwapChange = (event, newValue) => {
+      if (newValue == "2") {
+        history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
+      } else {
+        setSwapValue(newValue);
+      }
+    };
+    useMemo(() => {
+    
+    }, [fromTokenData, toTokenData])
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -297,13 +311,14 @@ const AppInner = ({ tokenList }) => {
           }}
         >
           <Col flex={"360px"}>
-            <div className="home-card-container">
-              <TabContext value={value}>
+            <div className=" data-card-container">
+              <TabContext value={swapValue} >
                 <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                   <TabList
                     className={classes.root}
                     scrollButtons="auto"
                     TabIndicatorProps={{ style: { minWidth: "auto" } }}
+                    onChange={handleSwapChange}
                   >
                     <Tab label={`Smart Swap`} value="1" />
                     {/* <Tab label={`Limit Order`} value="2" /> */}
@@ -326,32 +341,45 @@ const AppInner = ({ tokenList }) => {
                     aria-label="Token History Chart"
                     className={classes.root}
                   >
-                    {/* <Tab
-                                            label={`${fromTokenData ? fromTokenData.tokenInfo.symbol : ""
-                                                } Price chart`}
-                                            value="1"
-                                        />
-                                        <Tab
-                                            label={`${toTokenData ? toTokenData.tokenInfo.symbol : ""
-                                                } Price chart`}
-                                            value="2"
-                                        /> */}
+                    <Tab
+                      label={`${!fromTokenData.isLoading &&
+                        !fromTokenData.isError &&
+                        fromTokenData.data.tokenInfo
+                        ? fromTokenData.data.tokenInfo.tokenInfo.name
+                        : ""
+                        } Price chart`}
+                      value="1"
+                    />
+                    <Tab
+                      label={`${!toTokenData.isLoading &&
+                        !toTokenData.isError && toTokenData.data &&
+                        toTokenData.data.tokenInfo
+                        ? toTokenData.data.tokenInfo.tokenInfo.name
+                        : ""
+                        } Price chart`}
+                      value="2"
+                    />
                   </TabList>
                 </Box>
                 <TabPanel value="1">
-                  {/* <SwapTokenHistoryChart
-                                        firstToken={!selectedFirst}
-                                        setFirstToken={setSelectedFirst}
-                                        tokenHistory={fromTokenHistory}
-                                    /> */}
+                  <SwapTokenHistoryChart
+                    tokenHistory={
+                      !fromTokenData.isLoading &&
+                      !fromTokenData.isError &&
+                      fromTokenData.data.tokenHistory &&
+                      fromTokenData.data.tokenHistory
+                    }
+                  />
                 </TabPanel>
                 <TabPanel value="2">
-                  {" "}
-                  {/* <SwapTokenHistoryChart
-                                        firstToken={selectedFirst}
-                                        setFirstToken={setSelectedFirst}
-                                        tokenHistory={toTokenHistory}
-                                    /> */}
+                  <SwapTokenHistoryChart
+                    tokenHistory={
+                      !toTokenData.isLoading &&
+                      !toTokenData.isError && toTokenData.data &&
+                      toTokenData.data.tokenHistory &&
+                      toTokenData.data.tokenHistory
+                    }
+                  />
                 </TabPanel>
               </TabContext>
             </div>
@@ -414,6 +442,21 @@ const AppInner = ({ tokenList }) => {
     const classes = useStyles();
 
     const [value, setValue] = React.useState("1");
+    const { fromMint, toMint } = useGlobalSwap();
+
+    const fromTokenData = useTokenInfoQuery(`tokenInfo-from`, fromMint);
+    const toTokenData = useTokenInfoQuery(`tokenInfo-to`, toMint);
+    const [swapValue, setSwapValue] = useState("1");
+    const handleSwapChange = (event, newValue) => {
+      if (newValue == "2") {
+        history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
+      } else {
+        setSwapValue(newValue);
+      }
+    };
+    useMemo(() => {
+      
+    }, [fromTokenData, toTokenData])
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -432,16 +475,17 @@ const AppInner = ({ tokenList }) => {
             style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
           >
             <Col flex={"auto"}>
-              <div className="home-card-container">
+              <div className=" data-card-container">
                 <TabContext value={value}>
                   <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                     <TabList
                       className={classes.root}
                       scrollButtons="auto"
                       TabIndicatorProps={{ style: { minWidth: "auto" } }}
+                      onChange={handleSwapChange}
                     >
                       <Tab label={`Smart Swap`} value="1" />
-                      {/* <Tab label={`Limit Order`} value="2" /> */}
+
                       <Tab label={`Open Book`} value="2" />
                     </TabList>
                   </Box>
@@ -465,32 +509,45 @@ const AppInner = ({ tokenList }) => {
                       aria-label="Token History Chart"
                       className={classes.root}
                     >
-                      {/* <Tab
-                                                label={`${fromTokenData ? fromTokenData.tokenInfo.symbol : ""
-                                                    } Price chart`}
-                                                value="1"
-                                            />
-                                            <Tab
-                                                label={`${toTokenData ? toTokenData.tokenInfo.symbol : ""
-                                                    } Price chart`}
-                                                value="2"
-                                            /> */}
+                      <Tab
+                        label={`${!fromTokenData.isLoading &&
+                          !fromTokenData.isError &&
+                          fromTokenData.data.tokenInfo
+                          ? fromTokenData.data.tokenInfo.tokenInfo.name
+                          : ""
+                          } Price chart`}
+                        value="1"
+                      />
+                      <Tab
+                        label={`${!toTokenData.isLoading &&
+                          !toTokenData.isError && toTokenData.data &&
+                          toTokenData.data.tokenInfo
+                          ? toTokenData.data.tokenInfo.tokenInfo.name
+                          : ""
+                          } Price chart`}
+                        value="2"
+                      />
                     </TabList>
                   </Box>
                   <TabPanel value="1">
-                    {/* <SwapTokenHistoryChart
-                                            firstToken={!selectedFirst}
-                                            setFirstToken={setSelectedFirst}
-                                            tokenHistory={fromTokenHistory}
-                                        /> */}
+                    <SwapTokenHistoryChart
+                      tokenHistory={
+                        !fromTokenData.isLoading &&
+                        !fromTokenData.isError &&
+                        fromTokenData.data.tokenHistory &&
+                        fromTokenData.data.tokenHistory
+                      }
+                    />
                   </TabPanel>
                   <TabPanel value="2">
-                    {" "}
-                    {/* <SwapTokenHistoryChart
-                                            firstToken={selectedFirst}
-                                            setFirstToken={setSelectedFirst}
-                                            tokenHistory={toTokenHistory}
-                                        /> */}
+                    <SwapTokenHistoryChart
+                      tokenHistory={
+                        !toTokenData.isLoading &&
+                        !toTokenData.isError && toTokenData.data &&
+                        toTokenData.data.tokenHistory &&
+                        toTokenData.data.tokenHistory
+                      }
+                    />
                   </TabPanel>
                 </TabContext>
               </div>
@@ -670,7 +727,7 @@ const AppInner = ({ tokenList }) => {
                 gap: "5px",
               }}
             >
-               <img src={"/assets/img/pricing.png"} alt="" />
+              <img src={"/assets/img/pricing.png"} alt="" />
               <span>Price Movements</span>
             </div>
           </Col>

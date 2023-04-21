@@ -55,7 +55,7 @@ const BuySellCard = () => {
     setValue(newValue);
   };
   return (
-    <div className="home-card-container">
+    <div className=" data-card-container">
       {" "}
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>

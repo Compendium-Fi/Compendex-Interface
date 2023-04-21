@@ -6,12 +6,14 @@ import {
 import Icon from "@mdi/react";
 import CandlestickChart from "@mui/icons-material/CandlestickChart";
 import CloseIcon from "@mui/icons-material/Close";
-import { Tooltip } from "antd";
+
 import { v4 as uuidv4 } from "uuid";
 import DataObjectIcon from "@mui/icons-material/DataObject";
 import { mdiPalette } from "@mdi/js";
 import { useSideBar } from '../context/SideBar';
 import Link from "next/link";
+import { Tooltip } from '@mantine/core'
+import { DockOutlined, HelpOutline } from "@material-ui/icons";
 const Sidebar = () => {
   const { isOpen, openSidebar, closeSidebar } = useSideBar();
 
@@ -68,7 +70,7 @@ const Sidebar = () => {
       </div>
       <div className="sidebar__body">
         <nav className="sidebar__nav">
-          <Tooltip placement="rightTop" title="Dashboard" color={"geekblue"}>
+          <Tooltip placement="rightTop" title="Dashboard" color="dark">
             <Link
               className={`sidebar__item ${location.pathname === "/" ? "active" : ""
                 }`}
@@ -82,7 +84,7 @@ const Sidebar = () => {
             </Link>
           </Tooltip>
           <span className="side_bar_hint sidebar__item">TRADING TOOLS</span>
-          <Tooltip placement="rightTop" title="Swap" color={"geekblue"}>
+          <Tooltip placement="rightTop" title="Swap" color="dark">
             <Link
               href="/swap"
               className={`sidebar__item ${location.pathname === "/swap" ? "active" : ""
@@ -95,7 +97,7 @@ const Sidebar = () => {
             </Link>
           </Tooltip>
 
-          <Tooltip placement="rightTop" title="Trade" color={"geekblue"}>
+          <Tooltip placement="rightTop" title="Trade" color="dark">
             <Link
               className={`sidebar__item ${location.pathname.includes("/serum") ? "active" : ""
                 }`}
@@ -108,29 +110,14 @@ const Sidebar = () => {
             </Link>
           </Tooltip>
 
-          <span className="side_bar_hint sidebar__item">Nft / Metaverse</span>
-          <Tooltip
-            placement="rightTop"
-            title="NFT / Metaverse"
-            color={"geekblue"}
-          >
-            <Link
-              className={`sidebar__item ${location.pathname.includes("/nft") ? "active" : ""
-                }`}
-              href="/nft"
-            >
-              <div className="sidebar__icon ">
-                <Icon path={mdiPalette} size={1} color="#FFF" />
-              </div>
-              <div className="sidebar__text">NFT</div>
-            </Link>
-          </Tooltip>
+          {/* <span className="side_bar_hint sidebar__item">Nft / Metaverse</span> */}
+
 
           <span className="side_bar_hint sidebar__item">DATA</span>
           <Tooltip
             placement="rightTop"
             title="All Solana Protcols"
-            color={"geekblue"}
+            color="dark"
           >
             <Link
               className={`sidebar__item ${location.pathname === "/analytics" ? "active" : ""
@@ -162,6 +149,20 @@ const Sidebar = () => {
               </div>
               <div className="sidebar__text">Tools</div>
             </Link>
+          </Tooltip>
+          <Tooltip color="dark">
+            <a
+              className={`sidebar__item ${location.pathname.includes("/nft") ? "active" : ""
+                }`}
+              href="docs.compendex.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="sidebar__icon ">
+               <HelpOutline color="#FFFF" style={{color:"#FFF"}}/>
+              </div>
+              <div className="sidebar__text">Docs</div>
+            </a>
           </Tooltip>
         </nav>
       </div>

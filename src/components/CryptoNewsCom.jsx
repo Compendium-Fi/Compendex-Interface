@@ -27,9 +27,7 @@ const CryptoNewsCom = () => {
       {" "}
       {feed &&
         feed.map((elm, ind) => {
-          console.log("Elm", elm)
-          // let item = parse(elm["description"]);
-          // let textToDisplay = item[3]["props"]["children"];
+      
           return (
             <div className="news-item" key={ind.toString()}>
               <div className="left-item">
