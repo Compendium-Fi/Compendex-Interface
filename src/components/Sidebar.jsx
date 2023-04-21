@@ -7,13 +7,12 @@ import Icon from "@mdi/react";
 import CandlestickChart from "@mui/icons-material/CandlestickChart";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { v4 as uuidv4 } from "uuid";
+import { Tooltip } from '@mantine/core';
+import { HelpOutline } from "@material-ui/icons";
 import DataObjectIcon from "@mui/icons-material/DataObject";
-import { mdiPalette } from "@mdi/js";
-import { useSideBar } from '../context/SideBar';
 import Link from "next/link";
-import { Tooltip } from '@mantine/core'
-import { DockOutlined, HelpOutline } from "@material-ui/icons";
+import { v4 as uuidv4 } from "uuid";
+import { useSideBar } from '../context/SideBar';
 const Sidebar = () => {
   const { isOpen, openSidebar, closeSidebar } = useSideBar();
 

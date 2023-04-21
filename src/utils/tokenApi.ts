@@ -30,12 +30,12 @@ export const getTokenTickers = async () => {
     let result = await axios.get(
       `https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=solana-ecosystem&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h`,
       {
-        headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+        headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
       }
     );
     let { data } = result;
     return data;
-  } catch (err) {}
+  } catch (err) { }
 };
 export const getTrendingTokensCharts = async (chartType: any) => {
   try {
@@ -51,43 +51,43 @@ export const getTrendingTokensCharts = async (chartType: any) => {
       axios.get(
         `https://pro-api.coingecko.com/api/v3/coins/solana/market_chart?vs_currency=usd&days=${chartType}`,
         {
-          headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+          headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
         }
       ),
       axios.get(
         `https://pro-api.coingecko.com/api/v3/coins/msol/market_chart?vs_currency=usd&days=${chartType}`,
         {
-          headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+          headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
         }
       ),
       axios.get(
         `https://pro-api.coingecko.com/api/v3/coins/lido-staked-sol/market_chart?vs_currency=usd&days=${chartType}`,
         {
-          headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+          headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
         }
       ),
       axios.get(
         `https://pro-api.coingecko.com/api/v3/coins/raydium/market_chart?vs_currency=usd&days=${chartType}`,
         {
-          headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+          headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
         }
       ),
       axios.get(
         `https://pro-api.coingecko.com/api/v3/coins/orca/market_chart?vs_currency=usd&days=${chartType}`,
         {
-          headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+          headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
         }
       ),
       axios.get(
         `https://pro-api.coingecko.com/api/v3/coins/bonk/market_chart?vs_currency=usd&days=${chartType}`,
         {
-          headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+          headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
         }
       ),
       axios.get(
         `https://pro-api.coingecko.com/api/v3/coins/compendium-fi/market_chart?vs_currency=usd&days=${chartType}`,
         {
-          headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+          headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
         }
       ),
     ]);
@@ -119,7 +119,7 @@ export const getUsersTokenSolScan = async (address) => {
       {
         headers: {
           token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVkQXQiOjE2NzY1NjczMTg3MzUsImVtYWlsIjoiamFrZUBjb21wZW5kaXVtLmZpbmFuY2UiLCJhY3Rpb24iOiJ0b2tlbi1hcGkiLCJpYXQiOjE2NzY1NjczMTh9.PjkX3fQMZpzVZJ48V6j0E6Ytx09WbkkxiJDGjXPHs8I",
+            process.env.NEXT_PUBLIC_SOLSCAN_TOKEN,
         },
       }
     );
@@ -153,11 +153,11 @@ export const initChartData = async (fromId) => {
     let fromTokenResult = await axios.get(
       `https://pro-api.coingecko.com/api/v3/coins/${fromId}/market_chart?vs_currency=USD&days=7`,
       {
-        headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+        headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_COINGECKO_PRO_KEY },
       }
     );
     console.log("Prices", fromTokenResult);
-   return fromTokenResult.data.prices;
+    return fromTokenResult.data.prices;
   } catch (error) {
     console.log("Error", error.message);
   }
@@ -168,7 +168,7 @@ export const initTokenChartData = async (tokenId) => {
     let fromTokenResult = await axios.get(
       `https://pro-api.coingecko.com/api/v3/coins/${tokenId}/market_chart?vs_currency=USD&days=7`,
       {
-        headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+        headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_COINGECKO_PRO_KEY },
       }
     );
 

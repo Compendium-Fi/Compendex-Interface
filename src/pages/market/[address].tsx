@@ -1169,7 +1169,7 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCha
                                 </Box>
 
                                 <TabPanel value="1" className={classes.root}>
-                                    {/* <TVChartContainer /> */}
+                                    <TVChartContainer />
                                 </TabPanel>
                                 <TabPanel value="2" className={classes.root}>
                                     {" "}

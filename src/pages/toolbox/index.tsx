@@ -102,12 +102,14 @@ function TradePageInner() {
     const { width } = useViewport();
 
     const componentProps = {
-        onChangeOrderRef: (ref) => (changeOrderRef.current = ref),
+        onChangeOrderRef: (ref:any) => (changeOrderRef.current = ref),
         onPrice: useCallback(
+            //@ts-ignore
             (price) => changeOrderRef.current && changeOrderRef.current({ price }),
             []
         ),
         onSize: useCallback(
+            //@ts-ignore
             (size) => changeOrderRef.current && changeOrderRef.current({ size }),
             []
         )

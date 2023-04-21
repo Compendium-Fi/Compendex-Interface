@@ -456,7 +456,7 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
     <>
       <div className={classes.root}>
         <div style={{ position: "relative" }}>
-          <Group my={10} position="apart"
+          <Group my={10} position="apart" noWrap
 
           >
 
