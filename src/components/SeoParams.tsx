@@ -1,23 +1,30 @@
+import { NextSeo } from 'next-seo';
+import Head from 'next/head';
 
-import Head from "next/head"
 type SeoParams = {
     title: string;
     description: string;
     keywords: string;
-}
+};
 
 const SeoParams = ({ title, description, keywords }: SeoParams) => {
     return (
-        <Head>
-            <title>{title}</title>
-            <meta name="description" content={description} />
-            <meta name="keywords" content={keywords} />
-            <meta property="og:title" content={title} />
-            <meta property="og:description" content={description} />
-            {/* <meta property="og:image" content="Your page image URL" /> */}
-            <meta property="og:url" content="sol.compendex.xyz" />
-        </Head>
-    )
-}
+        <>
+            <NextSeo
+                title={title}
+                description={description}
+                openGraph={{
+                    title,
+                    description,
+                    url: 'https://sol.compendex.xyz',
+                    site_name: 'Your Site Name',
+                }}
+            />
+            <Head>
+                <meta name="keywords" content={keywords} />
+            </Head>
+        </>
+    );
+};
 
-export default SeoParams
+export default SeoParams;
