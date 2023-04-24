@@ -153,7 +153,7 @@ export const initChartData = async (fromId) => {
     let fromTokenResult = await axios.get(
       `https://pro-api.coingecko.com/api/v3/coins/${fromId}/market_chart?vs_currency=USD&days=7`,
       {
-        headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_COINGECKO_PRO_KEY },
+        headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
       }
     );
     console.log("Prices", fromTokenResult);
@@ -168,7 +168,7 @@ export const initTokenChartData = async (tokenId) => {
     let fromTokenResult = await axios.get(
       `https://pro-api.coingecko.com/api/v3/coins/${tokenId}/market_chart?vs_currency=USD&days=7`,
       {
-        headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_COINGECKO_PRO_KEY },
+        headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
       }
     );
 
