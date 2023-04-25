@@ -25,62 +25,8 @@ import JupiterForm from "@/components/swap/Jupiter";
 import { Skeleton } from "@mantine/core";
 import SeoParams from "@/components/SeoParams";
 import { Metadata } from "next";
-// export async function generateMetadata({ params }): Promise<Metadata> {
-//   return {
-//     title: "DEX Trading Terminal | Compendex",
-//     description: "Introducing the next generation of trading technology: an open-source, professional-grade trading terminal for Solana. This platform aggregates protocols and analytics across Solana to help improve market efficiency and equalize opportunities for all."
-//   }
-// }
-export const getStaticProps = async () => {
-  return {
-    props: {
-      openGraphData: [
-        {
-          property: "og:image",
-          content:
-            "https://glievsbwngosqvrxtupy.supabase.co/storage/v1/object/public/event-banners/Jul%208%20Darkest%20Hour%20LONG.jpeg?t=2022-06-28T21%3A47%3A43.910Z",
-          key: "ogimage",
-        },
-        {
-          property: "og:image:width",
-          content: "400",
-          key: "ogimagewidth",
-        },
-        {
-          property: "og:image:height",
-          content: "300",
-          key: "ogimageheight",
-        },
-        {
-          property: "og:url",
-          content: `http://foobar.com/events`,
-          key: "ogurl",
-        },
-        {
-          property: "og:image:secure_url",
-          content:
-            "https://glievsbwngosqvrxtupy.supabase.co/storage/v1/object/public/event-banners/Jul%208%20Darkest%20Hour%20LONG.jpeg?t=2022-06-28T21%3A47%3A43.910Z",
-          key: "ogimagesecureurl",
-        },
-        {
-          property: "og:title",
-          content: "Hey hey",
-          key: "ogtitle",
-        },
-        {
-          property: "og:description",
-          content: "Ima description",
-          key: "ogdesc",
-        },
-        {
-          property: "og:type",
-          content: "website",
-          key: "website",
-        },
-      ],
-    },
-  };
-};
+import SeoLayout from "@/components/SeoLayout";
+
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
@@ -148,7 +94,9 @@ export default function Home() {
         description=" Introducing the next generation of trading technology: an open-source, professional-grade trading terminal for Solana. This platform aggregates protocols and analytics across Solana to help improve market efficiency and equalize opportunities for all."
         keywords=""
       /> */}
-      <TradePageInner />
+      <SeoLayout  title="DEX Trading Terminal | Compendex" defaultSEO>
+        <TradePageInner />
+      </SeoLayout>
     </>
   );
 }
