@@ -49,16 +49,17 @@ function AppImpl({ children }: { children: any }) {
       },
       MuiTab: {
         styleOverrides: {
-          root: {
+          "root": {
             "&.Mui-selected": {
               color: "#E2E8F0 !important",
-            },
-          },
-          textColorPrimary: {
-            color: "red",
-          },
+            }
+          }, "textColorPrimary": {
+            color: "red"
+          }
         },
-      },
+
+      }
+
     },
   });
   const queryClient = new QueryClient();
@@ -77,21 +78,15 @@ function AppImpl({ children }: { children: any }) {
     [network]
   );
   return (
-    <MantineProvider
-      theme={{
-        colorScheme: "dark",
-        primaryColor: "dark",
-        fontFamily: "Roboto",
-      }}
-      withGlobalStyles
-      withNormalizeCSS
-    >
+    <MantineProvider theme={{ colorScheme: "dark", primaryColor: "dark", fontFamily: 'Roboto' }} withGlobalStyles withNormalizeCSS>
       <Notifications />
       <ConnectionProvider>
         <ReferrerProvider>
           <WalletProvider wallets={wallets}>
             <WalletModalProvider>
               <SplTokenProvider>
+                {/* <SwapTokenContextProvider> */}
+                {/*@ts-ignore*/}
                 <SnackbarProvider>
                   <JupStatsProvider>
                     <GlobalSwapProvider
@@ -121,6 +116,7 @@ function AppImpl({ children }: { children: any }) {
                     </GlobalSwapProvider>
                   </JupStatsProvider>
                 </SnackbarProvider>
+                {/* </SwapTokenContextProvider> */}
               </SplTokenProvider>
             </WalletModalProvider>
           </WalletProvider>
@@ -137,5 +133,5 @@ const MainLayout = ({ children }: { children: any }) => {
     </ConnectionProvider>
   );
 };
-
+MainLayout.ssr = false;
 export default MainLayout;

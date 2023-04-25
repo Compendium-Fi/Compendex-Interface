@@ -125,10 +125,10 @@ const AppInner = ({ tokenList }) => {
       <>
         <SeoParams
           title={` Smart Swap Aggregator ${!fromTokenData.isLoading &&
-            !fromTokenData.isError &&
-            fromTokenData.data.tokenInfo
-            ? fromTokenData.data.tokenInfo.tokenInfo.name
-            : ""
+              !fromTokenData.isError &&
+              fromTokenData.data.tokenInfo
+              ? fromTokenData.data.tokenInfo.tokenInfo.name
+              : ""
             } - ${!toTokenData.isLoading &&
               !toTokenData.isError &&
               toTokenData.data.tokenInfo
@@ -136,10 +136,10 @@ const AppInner = ({ tokenList }) => {
               : ""
             }  | Compendex`}
           description={` Swap  ${!fromTokenData.isLoading &&
-            !fromTokenData.isError &&
-            fromTokenData.data.tokenInfo
-            ? fromTokenData.data.tokenInfo.tokenInfo.name
-            : ""
+              !fromTokenData.isError &&
+              fromTokenData.data.tokenInfo
+              ? fromTokenData.data.tokenInfo.tokenInfo.name
+              : ""
             }  for ${!toTokenData.isLoading &&
               !toTokenData.isError &&
               toTokenData.data.tokenInfo
@@ -196,20 +196,20 @@ const AppInner = ({ tokenList }) => {
                   >
                     <Tab
                       label={`${!fromTokenData.isLoading &&
-                        !fromTokenData.isError &&
-                        fromTokenData.data.tokenInfo
-                        ? fromTokenData.data.tokenInfo.tokenInfo.name
-                        : ""
+                          !fromTokenData.isError &&
+                          fromTokenData.data.tokenInfo
+                          ? fromTokenData.data.tokenInfo.tokenInfo.name
+                          : ""
                         } Price chart`}
                       value="1"
                     />
                     <Tab
                       label={`${!toTokenData.isLoading &&
-                        !toTokenData.isError &&
-                        toTokenData.data &&
-                        toTokenData.data.tokenInfo
-                        ? toTokenData.data.tokenInfo.tokenInfo.name
-                        : ""
+                          !toTokenData.isError &&
+                          toTokenData.data &&
+                          toTokenData.data.tokenInfo
+                          ? toTokenData.data.tokenInfo.tokenInfo.name
+                          : ""
                         } Price chart`}
                       value="2"
                     />
@@ -312,10 +312,10 @@ const AppInner = ({ tokenList }) => {
       <>
         <SeoParams
           title={` Smart Swap Aggregator ${!fromTokenData.isLoading &&
-            !fromTokenData.isError &&
-            fromTokenData.data.tokenInfo
-            ? fromTokenData.data.tokenInfo.tokenInfo.name
-            : ""
+              !fromTokenData.isError &&
+              fromTokenData.data.tokenInfo
+              ? fromTokenData.data.tokenInfo.tokenInfo.name
+              : ""
             } - ${!toTokenData.isLoading &&
               !toTokenData.isError &&
               toTokenData.data.tokenInfo
@@ -323,10 +323,10 @@ const AppInner = ({ tokenList }) => {
               : ""
             }  | Compendex`}
           description={` Swap  ${!fromTokenData.isLoading &&
-            !fromTokenData.isError &&
-            fromTokenData.data.tokenInfo
-            ? fromTokenData.data.tokenInfo.tokenInfo.name
-            : ""
+              !fromTokenData.isError &&
+              fromTokenData.data.tokenInfo
+              ? fromTokenData.data.tokenInfo.tokenInfo.name
+              : ""
             }  for ${!toTokenData.isLoading &&
               !toTokenData.isError &&
               toTokenData.data.tokenInfo
@@ -383,20 +383,20 @@ const AppInner = ({ tokenList }) => {
                   >
                     <Tab
                       label={`${!fromTokenData.isLoading &&
-                        !fromTokenData.isError &&
-                        fromTokenData.data.tokenInfo
-                        ? fromTokenData.data.tokenInfo.tokenInfo.name
-                        : ""
+                          !fromTokenData.isError &&
+                          fromTokenData.data.tokenInfo
+                          ? fromTokenData.data.tokenInfo.tokenInfo.name
+                          : ""
                         } Price chart`}
                       value="1"
                     />
                     <Tab
                       label={`${!toTokenData.isLoading &&
-                        !toTokenData.isError &&
-                        toTokenData.data &&
-                        toTokenData.data.tokenInfo
-                        ? toTokenData.data.tokenInfo.tokenInfo.name
-                        : ""
+                          !toTokenData.isError &&
+                          toTokenData.data &&
+                          toTokenData.data.tokenInfo
+                          ? toTokenData.data.tokenInfo.tokenInfo.name
+                          : ""
                         } Price chart`}
                       value="2"
                     />
@@ -511,16 +511,15 @@ const AppInner = ({ tokenList }) => {
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-  
 
     return (
       <>
         <SeoParams
           title={` Smart Swap Aggregator ${!fromTokenData.isLoading &&
-            !fromTokenData.isError &&
-            fromTokenData.data.tokenInfo
-            ? fromTokenData.data.tokenInfo.tokenInfo.name
-            : ""
+              !fromTokenData.isError &&
+              fromTokenData.data.tokenInfo
+              ? fromTokenData.data.tokenInfo.tokenInfo.name
+              : ""
             } - ${!toTokenData.isLoading &&
               !toTokenData.isError &&
               toTokenData.data.tokenInfo
@@ -528,10 +527,10 @@ const AppInner = ({ tokenList }) => {
               : ""
             }  | Compendex`}
           description={` Swap  ${!fromTokenData.isLoading &&
-            !fromTokenData.isError &&
-            fromTokenData.data.tokenInfo
-            ? fromTokenData.data.tokenInfo.tokenInfo.name
-            : ""
+              !fromTokenData.isError &&
+              fromTokenData.data.tokenInfo
+              ? fromTokenData.data.tokenInfo.tokenInfo.name
+              : ""
             }  for ${!toTokenData.isLoading &&
               !toTokenData.isError &&
               toTokenData.data.tokenInfo
@@ -548,7 +547,11 @@ const AppInner = ({ tokenList }) => {
         >
           <Col flex="auto">
             <Row
-              style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
             >
               <Col flex={"auto"}>
                 <div className=" data-card-container">
@@ -574,7 +577,11 @@ const AppInner = ({ tokenList }) => {
               </Col>
             </Row>
             <Row
-              style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
             >
               <Col flex={"auto"}>
                 <div className="swap-token-chart-card">
@@ -587,20 +594,20 @@ const AppInner = ({ tokenList }) => {
                       >
                         <Tab
                           label={`${!fromTokenData.isLoading &&
-                            !fromTokenData.isError &&
-                            fromTokenData.data.tokenInfo
-                            ? fromTokenData.data.tokenInfo.tokenInfo.name
-                            : ""
+                              !fromTokenData.isError &&
+                              fromTokenData.data.tokenInfo
+                              ? fromTokenData.data.tokenInfo.tokenInfo.name
+                              : ""
                             } Price chart`}
                           value="1"
                         />
                         <Tab
                           label={`${!toTokenData.isLoading &&
-                            !toTokenData.isError &&
-                            toTokenData.data &&
-                            toTokenData.data.tokenInfo
-                            ? toTokenData.data.tokenInfo.tokenInfo.name
-                            : ""
+                              !toTokenData.isError &&
+                              toTokenData.data &&
+                              toTokenData.data.tokenInfo
+                              ? toTokenData.data.tokenInfo.tokenInfo.name
+                              : ""
                             } Price chart`}
                           value="2"
                         />
@@ -633,14 +640,22 @@ const AppInner = ({ tokenList }) => {
             </Row>
 
             <Row
-              style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
             >
               <Col flex={"auto"}>
                 <BuySellCard />
               </Col>
             </Row>
             <Row
-              style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
             >
               <Col flex={"auto"}>
                 <TokenSmallCard
@@ -655,7 +670,11 @@ const AppInner = ({ tokenList }) => {
               </Col>
             </Row>
             <Row
-              style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
             >
               <Col flex={"auto"}>
                 <TokenSmallCard
@@ -670,7 +689,11 @@ const AppInner = ({ tokenList }) => {
               </Col>
             </Row>
             <Row
-              style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
             >
               <Col flex={"auto"}>
                 <SwapBottomTab />
@@ -872,5 +895,35 @@ const AppInner = ({ tokenList }) => {
     </>
   );
 };
+// export async function getServerSideProps() {
+//   const { fromMint, toMint } = useGlobalSwap();
+//   const fromTokenData = await useTokenInfoQuery(`tokenInfo-from`, fromMint);
+//   const toTokenData = await useTokenInfoQuery(`tokenInfo-to`, toMint);
+//   const title: string = ` Smart Swap Aggregator ${!fromTokenData.isLoading &&
+//       !fromTokenData.isError &&
+//       fromTokenData.data.tokenInfo
+//       ? fromTokenData.data.tokenInfo.tokenInfo.name
+//       : ""
+//     } - ${!toTokenData.isLoading && !toTokenData.isError && toTokenData.data.tokenInfo
+//       ? toTokenData.data.tokenInfo.tokenInfo.name
+//       : ""
+//     }  | Compendex`;
+
+//   const description: string = ` Swap  ${!fromTokenData.isLoading &&
+//       !fromTokenData.isError &&
+//       fromTokenData.data.tokenInfo
+//       ? fromTokenData.data.tokenInfo.tokenInfo.name
+//       : ""
+//     }  for ${!toTokenData.isLoading && !toTokenData.isError && toTokenData.data.tokenInfo
+//       ? toTokenData.data.tokenInfo.tokenInfo.name
+//       : ""
+//     } on the smartest swap aggregator on Solana. Make intelligent decisions with the latest analytics, smart order routing, data, and charts, for all supported markets.`;
+//   return {
+//     props: {
+//       title,
+//       description,
+//     },
+//   };
+// }
 
 export default Swap;

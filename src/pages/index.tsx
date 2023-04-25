@@ -83,15 +83,21 @@ const useStyles = makeStyles({
     },
   },
 });
-
+export async function getStaticProps(context) {
+  return {
+    props: {
+      name: "DEX Trading Terminal | Compendex",
+      description:
+        "Introducing the next generation of trading technology: an open-source, professional-grade trading terminal for Solana. This platform aggregates protocols and analytics across Solana to help improve market efficiency and equalize opportunities for all.",
+    }, // will be passed to the page component as props
+  };
+}
 export default function Home() {
   return (
     <>
-
       {/* <SeoLayout title="DEX Trading Terminal | Compendex" > */}
       <TradePageInner />
       {/* </SeoLayout> */}
-
     </>
   );
 }
@@ -110,7 +116,7 @@ function TradePageInner() {
 
   useEffect(() => {
     initTickers();
-    const handleResize = () => { };
+    const handleResize = () => {};
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

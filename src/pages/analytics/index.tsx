@@ -77,6 +77,15 @@ const useStyles = makeStyles({
 export default function AnalyticsMain() {
   return <TradePageInner />;
 }
+export async function getStaticProps(context) {
+  return {
+    props: {
+      name: "Solana TVL & Protocol Data | Compendex",
+      description:
+        "Compendex aggregates accurate analytics, TVL information, prices, and more from several reputable sources for protocols on Solana.",
+    }, // will be passed to the page component as props
+  };
+}
 
 function TradePageInner() {
   const [tokenTickers, setTokenTickers] = useState([]);

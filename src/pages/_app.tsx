@@ -1,7 +1,6 @@
 import MainHeader from "@/components/Header";
 import MainLayout from "@/components/MainLayout";
 import SEO from "@/components/SEO";
-import SeoParams from "@/components/SeoParams";
 import { GlobalStyle } from "@/components/global_style";
 import "@/styles/App.less";
 import "@/styles/globals.css";
@@ -11,12 +10,12 @@ import Head from "next/head";
 import React from "react";
 if (!process.browser) React.useLayoutEffect = React.useEffect;
 export default function App({ Component, pageProps }: AppProps) {
-  const { openGraphData = [] } = pageProps;
+  const { name, description } = pageProps;
   return (
     <SSRProvider>
       <SEO
-        name="DEX Trading Terminal | Compendex"
-        description="Introducing the next generation of trading technology: an open-source, professional-grade trading terminal for Solana. This platform aggregates protocols and analytics across Solana to help improve market efficiency and equalize opportunities for all."
+        name={name}
+        description={description}
       />
       <MainLayout>
         <Head>
