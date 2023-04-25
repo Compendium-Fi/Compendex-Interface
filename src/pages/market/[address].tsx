@@ -35,6 +35,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { useViewportSize } from "@mantine/hooks";
 import SeoParams from "@/components/SeoParams";
+import { getCookie, setCookie } from "cookies-next";
 const TVChartContainer = dynamic(
   () => import("../../components/TradingView/index"),
   {
@@ -155,8 +156,8 @@ function TradePageInner() {
 
   const { splTokenList } = useTokenList();
 
-
   useMemo(() => {
+    setCookie('marketName', marketName); 
     //@ts-ignore
     let token = marketName?.substring(0, marketName?.indexOf("/"));
     let selectedToken: any = splTokenList.find(
@@ -243,11 +244,11 @@ function TradePageInner() {
         open={showSettingsDialog}
         onClose={() => setShowSettingsDialog(false)}
       /> */}
-      <SeoParams
+      {/* <SeoParams
         title={`Trade ${marketName} on Openbook | Compendex`}
         description={`Trade ${marketName} on Compendex using OpenBook CLOB smart contracts and TradingView integrations. Combine the advantages of order books with the trustless nature of DeFi on Solana for enhanced liquidity and opportunities.`}
         keywords=""
-      />
+      /> */}
       <div className="page__row">
         <div
           className="page__col"
@@ -1353,6 +1354,9 @@ const RenderSmall = ({
 
 export async function getServerSideProps(context: any) {
   const { query } = context;
+  const marketName = getCookie("marketName");
+  const title = `Trade ${marketName} on Openbook | Compendex`;
+  const description = `Trade ${marketName} on Compendex using OpenBook CLOB smart contracts and TradingView integrations. Combine the advantages of order books with the trustless nature of DeFi on Solana for enhanced liquidity and opportunities.`;
   context.address = query.address;
 
   // Your code here...
@@ -1360,6 +1364,9 @@ export async function getServerSideProps(context: any) {
   return {
     props: {
       marketAddress: context.address,
+      marketName,
+      title,
+      description,
       // Your props here...
     },
   };

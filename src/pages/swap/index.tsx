@@ -24,6 +24,7 @@ import CustomTicker from "../../components/CustomTicker";
 import TickerItem from "../../components/TickerItem";
 import { getTokenTickers } from "../../utils/tokenApi";
 import SeoParams from "@/components/SeoParams";
+import { getCookie } from "cookies-next";
 let { Option } = AutoComplete;
 const Wrapper = styled.div`
   height: 100%;
@@ -106,7 +107,7 @@ const AppInner = ({ tokenList }) => {
 
     const fromTokenData = useTokenInfoQuery(`tokenInfo-from`, fromMint);
     const toTokenData = useTokenInfoQuery(`tokenInfo-to`, toMint);
-    useMemo(() => { }, [fromTokenData, toTokenData]);
+    useMemo(() => {}, [fromTokenData, toTokenData]);
     const [value, setValue] = React.useState("1");
     const [swapValue, setSwapValue] = useState("1");
     const handleSwapChange = (event, newValue) => {
@@ -123,31 +124,7 @@ const AppInner = ({ tokenList }) => {
 
     return (
       <>
-        <SeoParams
-          title={` Smart Swap Aggregator ${!fromTokenData.isLoading &&
-              !fromTokenData.isError &&
-              fromTokenData.data.tokenInfo
-              ? fromTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            } - ${!toTokenData.isLoading &&
-              !toTokenData.isError &&
-              toTokenData.data.tokenInfo
-              ? toTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            }  | Compendex`}
-          description={` Swap  ${!fromTokenData.isLoading &&
-              !fromTokenData.isError &&
-              fromTokenData.data.tokenInfo
-              ? fromTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            }  for ${!toTokenData.isLoading &&
-              !toTokenData.isError &&
-              toTokenData.data.tokenInfo
-              ? toTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            } on the smartest swap aggregator on Solana. Make intelligent decisions with the latest analytics, smart order routing, data, and charts, for all supported markets.`}
-          keywords={""}
-        />
+       
         <Row
           style={{
             justifyContent: "center",
@@ -195,22 +172,24 @@ const AppInner = ({ tokenList }) => {
                     className={classes.root}
                   >
                     <Tab
-                      label={`${!fromTokenData.isLoading &&
-                          !fromTokenData.isError &&
-                          fromTokenData.data.tokenInfo
+                      label={`${
+                        !fromTokenData.isLoading &&
+                        !fromTokenData.isError &&
+                        fromTokenData.data.tokenInfo
                           ? fromTokenData.data.tokenInfo.tokenInfo.name
                           : ""
-                        } Price chart`}
+                      } Price chart`}
                       value="1"
                     />
                     <Tab
-                      label={`${!toTokenData.isLoading &&
-                          !toTokenData.isError &&
-                          toTokenData.data &&
-                          toTokenData.data.tokenInfo
+                      label={`${
+                        !toTokenData.isLoading &&
+                        !toTokenData.isError &&
+                        toTokenData.data &&
+                        toTokenData.data.tokenInfo
                           ? toTokenData.data.tokenInfo.tokenInfo.name
                           : ""
-                        } Price chart`}
+                      } Price chart`}
                       value="2"
                     />
                   </TabList>
@@ -303,38 +282,14 @@ const AppInner = ({ tokenList }) => {
         setSwapValue(newValue);
       }
     };
-    useMemo(() => { }, [fromTokenData, toTokenData]);
+    useMemo(() => {}, [fromTokenData, toTokenData]);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
     const customClasses = useStyles({});
     return (
       <>
-        <SeoParams
-          title={` Smart Swap Aggregator ${!fromTokenData.isLoading &&
-              !fromTokenData.isError &&
-              fromTokenData.data.tokenInfo
-              ? fromTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            } - ${!toTokenData.isLoading &&
-              !toTokenData.isError &&
-              toTokenData.data.tokenInfo
-              ? toTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            }  | Compendex`}
-          description={` Swap  ${!fromTokenData.isLoading &&
-              !fromTokenData.isError &&
-              fromTokenData.data.tokenInfo
-              ? fromTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            }  for ${!toTokenData.isLoading &&
-              !toTokenData.isError &&
-              toTokenData.data.tokenInfo
-              ? toTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            } on the smartest swap aggregator on Solana. Make intelligent decisions with the latest analytics, smart order routing, data, and charts, for all supported markets.`}
-          keywords={""}
-        />
+    
         <Row
           style={{
             justifyContent: "center",
@@ -382,22 +337,24 @@ const AppInner = ({ tokenList }) => {
                     className={classes.root}
                   >
                     <Tab
-                      label={`${!fromTokenData.isLoading &&
-                          !fromTokenData.isError &&
-                          fromTokenData.data.tokenInfo
+                      label={`${
+                        !fromTokenData.isLoading &&
+                        !fromTokenData.isError &&
+                        fromTokenData.data.tokenInfo
                           ? fromTokenData.data.tokenInfo.tokenInfo.name
                           : ""
-                        } Price chart`}
+                      } Price chart`}
                       value="1"
                     />
                     <Tab
-                      label={`${!toTokenData.isLoading &&
-                          !toTokenData.isError &&
-                          toTokenData.data &&
-                          toTokenData.data.tokenInfo
+                      label={`${
+                        !toTokenData.isLoading &&
+                        !toTokenData.isError &&
+                        toTokenData.data &&
+                        toTokenData.data.tokenInfo
                           ? toTokenData.data.tokenInfo.tokenInfo.name
                           : ""
-                        } Price chart`}
+                      } Price chart`}
                       value="2"
                     />
                   </TabList>
@@ -506,7 +463,7 @@ const AppInner = ({ tokenList }) => {
         setSwapValue(newValue);
       }
     };
-    useMemo(() => { }, [fromTokenData, toTokenData]);
+    useMemo(() => {}, [fromTokenData, toTokenData]);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -514,31 +471,7 @@ const AppInner = ({ tokenList }) => {
 
     return (
       <>
-        <SeoParams
-          title={` Smart Swap Aggregator ${!fromTokenData.isLoading &&
-              !fromTokenData.isError &&
-              fromTokenData.data.tokenInfo
-              ? fromTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            } - ${!toTokenData.isLoading &&
-              !toTokenData.isError &&
-              toTokenData.data.tokenInfo
-              ? toTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            }  | Compendex`}
-          description={` Swap  ${!fromTokenData.isLoading &&
-              !fromTokenData.isError &&
-              fromTokenData.data.tokenInfo
-              ? fromTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            }  for ${!toTokenData.isLoading &&
-              !toTokenData.isError &&
-              toTokenData.data.tokenInfo
-              ? toTokenData.data.tokenInfo.tokenInfo.name
-              : ""
-            } on the smartest swap aggregator on Solana. Make intelligent decisions with the latest analytics, smart order routing, data, and charts, for all supported markets.`}
-          keywords={""}
-        />
+     
         <Row
           style={{
             minHeight: "400px",
@@ -593,22 +526,24 @@ const AppInner = ({ tokenList }) => {
                         className={classes.root}
                       >
                         <Tab
-                          label={`${!fromTokenData.isLoading &&
-                              !fromTokenData.isError &&
-                              fromTokenData.data.tokenInfo
+                          label={`${
+                            !fromTokenData.isLoading &&
+                            !fromTokenData.isError &&
+                            fromTokenData.data.tokenInfo
                               ? fromTokenData.data.tokenInfo.tokenInfo.name
                               : ""
-                            } Price chart`}
+                          } Price chart`}
                           value="1"
                         />
                         <Tab
-                          label={`${!toTokenData.isLoading &&
-                              !toTokenData.isError &&
-                              toTokenData.data &&
-                              toTokenData.data.tokenInfo
+                          label={`${
+                            !toTokenData.isLoading &&
+                            !toTokenData.isError &&
+                            toTokenData.data &&
+                            toTokenData.data.tokenInfo
                               ? toTokenData.data.tokenInfo.tokenInfo.name
                               : ""
-                            } Price chart`}
+                          } Price chart`}
                           value="2"
                         />
                       </TabList>
@@ -744,7 +679,7 @@ const AppInner = ({ tokenList }) => {
 
     useEffect(() => {
       initTickers();
-      return () => { };
+      return () => {};
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const { width } = useViewport();
@@ -895,35 +830,18 @@ const AppInner = ({ tokenList }) => {
     </>
   );
 };
-// export async function getServerSideProps() {
-//   const { fromMint, toMint } = useGlobalSwap();
-//   const fromTokenData = await useTokenInfoQuery(`tokenInfo-from`, fromMint);
-//   const toTokenData = await useTokenInfoQuery(`tokenInfo-to`, toMint);
-//   const title: string = ` Smart Swap Aggregator ${!fromTokenData.isLoading &&
-//       !fromTokenData.isError &&
-//       fromTokenData.data.tokenInfo
-//       ? fromTokenData.data.tokenInfo.tokenInfo.name
-//       : ""
-//     } - ${!toTokenData.isLoading && !toTokenData.isError && toTokenData.data.tokenInfo
-//       ? toTokenData.data.tokenInfo.tokenInfo.name
-//       : ""
-//     }  | Compendex`;
+export async function getServerSideProps() {
+  const fromToken = getCookie("fromToken");
+  const toToken = getCookie("toToken");
+  const title: string = ` Smart Swap Aggregator ${fromToken} - ${toToken}  | Compendex`;
 
-//   const description: string = ` Swap  ${!fromTokenData.isLoading &&
-//       !fromTokenData.isError &&
-//       fromTokenData.data.tokenInfo
-//       ? fromTokenData.data.tokenInfo.tokenInfo.name
-//       : ""
-//     }  for ${!toTokenData.isLoading && !toTokenData.isError && toTokenData.data.tokenInfo
-//       ? toTokenData.data.tokenInfo.tokenInfo.name
-//       : ""
-//     } on the smartest swap aggregator on Solana. Make intelligent decisions with the latest analytics, smart order routing, data, and charts, for all supported markets.`;
-//   return {
-//     props: {
-//       title,
-//       description,
-//     },
-//   };
-// }
+  const description: string = ` Swap  ${fromToken}  for ${toToken} on the smartest swap aggregator on Solana. Make intelligent decisions with the latest analytics, smart order routing, data, and charts, for all supported markets.`;
+  return {
+    props: {
+      title,
+      description,
+    },
+  };
+}
 
 export default Swap;

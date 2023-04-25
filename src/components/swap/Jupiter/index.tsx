@@ -32,17 +32,17 @@ export const OUTPUT_MINT_ADDRESS =
 import WalletConnect from "@/components/WalletConnect";
 import { useSwapStyles } from "@/components/styles";
 import { useGlobalSwap } from "@/context/GlobalSwap";
+import { useTokenList } from "@/context/tokenList";
 import { useConnection } from "@/utils/connection";
 import { Button, Group, Loader, UnstyledButton } from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
 import { Refresh } from "@mui/icons-material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
 import { useJupiterApiContext } from "../../../context/jupiter";
 import { Slippage } from "./Slippage";
-import { useRouter } from "next/router";
-import { useTokenList } from "@/context/tokenList";
-import { useWalletTokenBalance } from '@lndgalante/solutils';
-import { showNotification } from "@mantine/notifications";
+import { setCookie } from "cookies-next";
 interface IJupiterFormProps { fromMint?: string, toMint?: string }
 
 const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
@@ -92,6 +92,8 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
       if (fromTokenInfo && toTokenInfo) {
         setInputTokenInfo(tokenMap.get(fromTokenInfo.address) as TokenInfo);
         setOutputTokenInfo(tokenMap.get(toTokenInfo.address) as TokenInfo);
+        setCookie('fromToken', fromTokenInfo.symbol);
+        setCookie('toToken', toTokenInfo.symbol); 
         setFromMint(fromTokenInfo.address);
         setToMint(toTokenInfo.address);
         queryClient.refetchQueries([`tokenInfo-from`, fromTokenInfo.address]);

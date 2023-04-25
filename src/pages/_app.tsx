@@ -1,6 +1,7 @@
 import MainHeader from "@/components/Header";
 import MainLayout from "@/components/MainLayout";
 import SEO from "@/components/SEO";
+
 import { GlobalStyle } from "@/components/global_style";
 import "@/styles/App.less";
 import "@/styles/globals.css";
