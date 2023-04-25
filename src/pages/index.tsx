@@ -23,8 +23,7 @@ import { useCommonStyles } from "@/components/styles";
 
 import JupiterForm from "@/components/swap/Jupiter";
 import { Skeleton } from "@mantine/core";
-import SeoParams from "@/components/SeoParams";
-import SeoLayout from "@/components/SeoLayout";
+
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
