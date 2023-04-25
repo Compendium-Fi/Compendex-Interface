@@ -35,6 +35,8 @@ import { useViewportSize } from "@mantine/hooks";
 import { getCookie, setCookie } from "cookies-next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { useIsClient } from "@/hooks/useIsClient";
+import { Skeleton } from "@mantine/core";
 const TVChartContainer = dynamic(
   () => import("../../components/TradingView/index"),
   {
@@ -115,6 +117,7 @@ const TradePage = ({ marketAddress }: TradePageProps) => {
 
   const marketList = useMarketsList();
   const [headersList, setHeaders] = useState<any[]>([]);
+
 
   useEffect(() => {
     if (marketAddress && typeof window !== "undefined") {
@@ -687,7 +690,7 @@ const RenderNormal = ({
   );
   const [orderValue, setOrderValue] = useState("1");
   const { splTokenList } = useTokenList();
-
+  const isClient = useIsClient();
   const { marketName } = useMarket();
   const { connected } = useWallet();
   const [selectedFirstTokenInfo, setSelectedFirstTokenInfo] = useState<any>({
@@ -788,7 +791,12 @@ const RenderNormal = ({
                 </TabList>
               </Box>
               <TabPanel value="1" className={classes.root}>
-                <TVChartContainer />
+                {
+                  isClient ? <TVChartContainer /> : <Skeleton w={"100%"} h={"100%"} sx={{
+                    "&::before": { background: "#0f172a" },
+                    "&::after": { background: "#17264a" },
+                  }} />
+                }
               </TabPanel>
 
               <TabPanel value="2" className={classes.root}>
@@ -909,7 +917,7 @@ const RenderMedium = ({
   const { splTokenList } = useTokenList();
   // const history = useHistory();
   const { marketName } = useMarket();
-  const { connected } = useWallet();
+  const isClient = useIsClient();
   const [selectedFirstTokenInfo, setSelectedFirstTokenInfo] = useState<any>({
     tokenId: "solana",
     name: "Solana",
@@ -1005,7 +1013,12 @@ const RenderMedium = ({
               </Box>
 
               <TabPanel value="1" className={classes.root}>
-                <TVChartContainer />
+                {
+                  isClient ? <TVChartContainer /> : <Skeleton w={"100%"} h={"100%"} sx={{
+                    "&::before": { background: "#0f172a" },
+                    "&::after": { background: "#17264a" },
+                  }} />
+                }
               </TabPanel>
               <TabPanel value="2" className={classes.root}>
                 {" "}
@@ -1138,6 +1151,7 @@ const RenderSmall = ({
   screenWidth: any;
 }) => {
   const [chartValue, setChartValue] = useState("1");
+  const isClient = useIsClient();
   const [tvChartValue, setTVChartValue] = useState(
     process.env.NEXT_PUBLIC_DISPLAY_TRADING_VIEW
   );
@@ -1145,7 +1159,7 @@ const RenderSmall = ({
   const { splTokenList } = useTokenList();
 
   const { marketName } = useMarket();
-  const { connected } = useWallet();
+
   const [selectedFirstTokenInfo, setSelectedFirstTokenInfo] = useState<any>({
     tokenId: "solana",
     name: "Solana",
@@ -1209,7 +1223,12 @@ const RenderSmall = ({
                 </Box>
 
                 <TabPanel value="1" className={classes.root}>
-                  <TVChartContainer />
+                  {
+                    isClient ? <TVChartContainer /> : <Skeleton w={"100%"} h={"100%"} sx={{
+                      "&::before": { background: "#0f172a" },
+                      "&::after": { background: "#17264a" },
+                    }} />
+                  }
                 </TabPanel>
                 <TabPanel value="2" className={classes.root}>
                   {" "}
