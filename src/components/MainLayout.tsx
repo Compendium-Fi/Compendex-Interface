@@ -30,6 +30,7 @@ import { useViewportSize } from "@mantine/hooks";
 import { QueryClient, QueryClientProvider } from "react-query";
 import SidebBar from "../components/Sidebar";
 import SplTokenProvider from "../context/tokenList";
+import SEO from "./SEO";
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 function AppImpl({ children }: { children: any }) {
@@ -132,9 +133,9 @@ function AppImpl({ children }: { children: any }) {
 
 const MainLayout = ({ children }: { children: any }) => {
   return (
-    <ConnectionProvider>
-      <AppImpl>{children}</AppImpl>
-    </ConnectionProvider>
+  <>
+  <SEO />
+  </>
   );
 };
 MainLayout.ssr = false;

@@ -86,11 +86,11 @@ const useStyles = makeStyles({
 export default function Home() {
   return (
     <>
-      <SeoParams
+      {/* <SeoParams
         title="DEX Trading Terminal | Compendex"
         description=" Introducing the next generation of trading technology: an open-source, professional-grade trading terminal for Solana. This platform aggregates protocols and analytics across Solana to help improve market efficiency and equalize opportunities for all."
         keywords=""
-      />
+      /> */}
       <TradePageInner />
     </>
   );
