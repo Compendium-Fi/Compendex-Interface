@@ -37,6 +37,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useIsClient } from "@/hooks/useIsClient";
 import { Skeleton } from "@mantine/core";
+import { customMarketsList } from "@/utils/customMarkets";
 const TVChartContainer = dynamic(
   () => import("../../components/TradingView/index"),
   {
@@ -118,7 +119,6 @@ const TradePage = ({ marketAddress }: TradePageProps) => {
   const marketList = useMarketsList();
   const [headersList, setHeaders] = useState<any[]>([]);
 
-
   useEffect(() => {
     if (marketAddress && typeof window !== "undefined") {
       localStorage.setItem("marketAddress", JSON.stringify(marketAddress));
@@ -159,7 +159,7 @@ function TradePageInner() {
   const { splTokenList } = useTokenList();
 
   useMemo(() => {
-    setCookie('marketName', marketName);
+    setCookie("marketName", marketName);
     //@ts-ignore
     let token = marketName?.substring(0, marketName?.indexOf("/"));
     let selectedToken: any = splTokenList.find(
@@ -791,12 +791,20 @@ const RenderNormal = ({
                 </TabList>
               </Box>
               <TabPanel value="1" className={classes.root}>
-                {
-                  isClient ? <TVChartContainer /> : <Skeleton w={"100%"} h={"100%"} sx={{
-                    "&::before": { background: "#0f172a" },
-                    "&::after": { background: "#17264a" },
-                  }} />
-                }
+                {isClient ? (
+                  <TVChartContainer />
+                ) : (
+                  <div className="inner-tab" style={{ padding: "0.7em" }}>
+                    <Skeleton
+                      w={"100%"}
+                      h={"100%"}
+                      sx={{
+                        "&::before": { background: "#0f172a" },
+                        "&::after": { background: "#17264a" },
+                      }}
+                    />
+                  </div>
+                )}
               </TabPanel>
 
               <TabPanel value="2" className={classes.root}>
@@ -1013,12 +1021,20 @@ const RenderMedium = ({
               </Box>
 
               <TabPanel value="1" className={classes.root}>
-                {
-                  isClient ? <TVChartContainer /> : <Skeleton w={"100%"} h={"100%"} sx={{
-                    "&::before": { background: "#0f172a" },
-                    "&::after": { background: "#17264a" },
-                  }} />
-                }
+                {isClient ? (
+                  <TVChartContainer />
+                ) : (
+                  <div className="inner-tab" style={{ padding: "0.7em" }}>
+                    <Skeleton
+                      w={"100%"}
+                      h={"100%"}
+                      sx={{
+                        "&::before": { background: "#0f172a" },
+                        "&::after": { background: "#17264a" },
+                      }}
+                    />
+                  </div>
+                )}
               </TabPanel>
               <TabPanel value="2" className={classes.root}>
                 {" "}
@@ -1223,12 +1239,20 @@ const RenderSmall = ({
                 </Box>
 
                 <TabPanel value="1" className={classes.root}>
-                  {
-                    isClient ? <TVChartContainer /> : <Skeleton w={"100%"} h={"100%"} sx={{
-                      "&::before": { background: "#0f172a" },
-                      "&::after": { background: "#17264a" },
-                    }} />
-                  }
+                  {isClient ? (
+                    <TVChartContainer />
+                  ) : (
+                    <div className="inner-tab" style={{ padding: "0.7em" }}>
+                      <Skeleton
+                        w={"100%"}
+                        h={"100%"}
+                        sx={{
+                          "&::before": { background: "#0f172a" },
+                          "&::after": { background: "#17264a" },
+                        }}
+                      />
+                    </div>
+                  )}
                 </TabPanel>
                 <TabPanel value="2" className={classes.root}>
                   {" "}
@@ -1372,7 +1396,10 @@ const RenderSmall = ({
 
 export async function getServerSideProps(context: any) {
   const { query } = context;
-  const marketName = getCookie("marketName") || 'SOL/USDC';
+
+  const marketName = customMarketsList.find(
+    (market) => market.address === query.address
+  );
   const name = `Trade ${marketName} on Openbook | Compendex`;
   const description = `Trade ${marketName} on Compendex using OpenBook CLOB smart contracts and TradingView integrations. Combine the advantages of order books with the trustless nature of DeFi on Solana for enhanced liquidity and opportunities.`;
   context.address = query.address;
