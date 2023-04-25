@@ -3,9 +3,7 @@ import { Notifications } from "@mantine/notifications";
 import { SnackbarProvider } from "notistack";
 import { useMemo } from "react";
 
-import { ConnectionProvider, useConnectionConfig } from "../utils/connection";
-import { ReferrerProvider } from "../utils/referrer";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { BitpieWalletAdapter } from "@solana/wallet-adapter-bitpie";
 import { BloctoWalletAdapter } from "@solana/wallet-adapter-blocto";
@@ -20,16 +18,18 @@ import {
   SolletExtensionWalletAdapter,
   SolletWalletAdapter,
 } from "@solana/wallet-adapter-sollet";
+import { ConnectionProvider, useConnectionConfig } from "../utils/connection";
+import { ReferrerProvider } from "../utils/referrer";
 
-import SplTokenProvider from "../context/tokenList";
-import { JupStatsProvider } from "@/context/jupStat";
-import { ViewportProvider, useViewport } from "@/context/viewPort";
-import { JupiterApiProvider } from "@/context/jupiter";
 import { GlobalSwapProvider } from "@/context/GlobalSwap";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { SideBarProvider } from "@/context/SideBar";
-import SidebBar from "../components/Sidebar";
+import { JupStatsProvider } from "@/context/jupStat";
+import { JupiterApiProvider } from "@/context/jupiter";
+import { ViewportProvider } from "@/context/viewPort";
 import { useViewportSize } from "@mantine/hooks";
+import { QueryClient, QueryClientProvider } from "react-query";
+import SidebBar from "../components/Sidebar";
+import SplTokenProvider from "../context/tokenList";
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 function AppImpl({ children }: { children: any }) {
