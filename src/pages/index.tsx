@@ -24,6 +24,13 @@ import { useCommonStyles } from "@/components/styles";
 import JupiterForm from "@/components/swap/Jupiter";
 import { Skeleton } from "@mantine/core";
 import SeoParams from "@/components/SeoParams";
+import { Metadata } from "next";
+export async function generateMetadata({ params }): Promise<Metadata> {
+  return {
+    title: "DEX Trading Terminal | Compendex",
+    description: "Introducing the next generation of trading technology: an open-source, professional-grade trading terminal for Solana. This platform aggregates protocols and analytics across Solana to help improve market efficiency and equalize opportunities for all."
+  }
+}
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
@@ -86,15 +93,16 @@ const useStyles = makeStyles({
 export default function Home() {
   return (
     <>
-      <SeoParams
+      {/* <SeoParams
         title="DEX Trading Terminal | Compendex"
         description=" Introducing the next generation of trading technology: an open-source, professional-grade trading terminal for Solana. This platform aggregates protocols and analytics across Solana to help improve market efficiency and equalize opportunities for all."
         keywords=""
-      />
+      /> */}
       <TradePageInner />
     </>
   );
 }
+
 
 function TradePageInner() {
   const [handleDeprecated, setHandleDeprecated] = useState(false);
