@@ -5,6 +5,7 @@ type SeoParams = {
     title: string;
     description: string;
     keywords: string;
+    image?: string;
 };
 
 const SeoParams = ({ title, description, keywords }: SeoParams) => {
@@ -18,6 +19,16 @@ const SeoParams = ({ title, description, keywords }: SeoParams) => {
                     description,
                     url: 'https://sol.compendex.xyz',
                     site_name: 'Your Site Name',
+                    images: [
+                        {
+                            url: "https://res.cloudinary.com/doohfu9i4/image/upload/v1631305017/Compendiumfi_pigseo_banner_n6iauy.png",
+                            width: 1200,
+                            height: 630,
+                            alt: title,
+                        },
+                    ],
+                    type: 'website',
+                    locale: 'en_US',
                 }}
             />
             <Head>

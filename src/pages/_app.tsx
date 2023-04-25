@@ -1,6 +1,7 @@
 import MainHeader from "@/components/Header";
 import MainLayout from "@/components/MainLayout";
 import SEO from "@/components/SEO";
+import SeoParams from "@/components/SeoParams";
 import { GlobalStyle } from "@/components/global_style";
 import "@/styles/App.less";
 import "@/styles/globals.css";
@@ -13,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <SSRProvider>
       <MainLayout>
-        <SEO />
+        
         <Head>
           <script src="/static/datafeeds/udf/dist/bundle.js" />
           <link rel="shortcut icon" href="/static/imgs/favicon.ico" />
