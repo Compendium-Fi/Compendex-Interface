@@ -107,7 +107,7 @@ const AppInner = ({ tokenList }) => {
 
     const fromTokenData = useTokenInfoQuery(`tokenInfo-from`, fromMint);
     const toTokenData = useTokenInfoQuery(`tokenInfo-to`, toMint);
-    useMemo(() => {}, [fromTokenData, toTokenData]);
+    useMemo(() => { }, [fromTokenData, toTokenData]);
     const [value, setValue] = React.useState("1");
     const [swapValue, setSwapValue] = useState("1");
     const handleSwapChange = (event, newValue) => {
@@ -124,7 +124,7 @@ const AppInner = ({ tokenList }) => {
 
     return (
       <>
-       
+
         <Row
           style={{
             justifyContent: "center",
@@ -172,24 +172,22 @@ const AppInner = ({ tokenList }) => {
                     className={classes.root}
                   >
                     <Tab
-                      label={`${
-                        !fromTokenData.isLoading &&
+                      label={`${!fromTokenData.isLoading &&
                         !fromTokenData.isError &&
                         fromTokenData.data.tokenInfo
-                          ? fromTokenData.data.tokenInfo.tokenInfo.name
-                          : ""
-                      } Price chart`}
+                        ? fromTokenData.data.tokenInfo.tokenInfo.name
+                        : ""
+                        } Price chart`}
                       value="1"
                     />
                     <Tab
-                      label={`${
-                        !toTokenData.isLoading &&
+                      label={`${!toTokenData.isLoading &&
                         !toTokenData.isError &&
                         toTokenData.data &&
                         toTokenData.data.tokenInfo
-                          ? toTokenData.data.tokenInfo.tokenInfo.name
-                          : ""
-                      } Price chart`}
+                        ? toTokenData.data.tokenInfo.tokenInfo.name
+                        : ""
+                        } Price chart`}
                       value="2"
                     />
                   </TabList>
@@ -282,14 +280,14 @@ const AppInner = ({ tokenList }) => {
         setSwapValue(newValue);
       }
     };
-    useMemo(() => {}, [fromTokenData, toTokenData]);
+    useMemo(() => { }, [fromTokenData, toTokenData]);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
     const customClasses = useStyles({});
     return (
       <>
-    
+
         <Row
           style={{
             justifyContent: "center",
@@ -337,24 +335,22 @@ const AppInner = ({ tokenList }) => {
                     className={classes.root}
                   >
                     <Tab
-                      label={`${
-                        !fromTokenData.isLoading &&
+                      label={`${!fromTokenData.isLoading &&
                         !fromTokenData.isError &&
                         fromTokenData.data.tokenInfo
-                          ? fromTokenData.data.tokenInfo.tokenInfo.name
-                          : ""
-                      } Price chart`}
+                        ? fromTokenData.data.tokenInfo.tokenInfo.name
+                        : ""
+                        } Price chart`}
                       value="1"
                     />
                     <Tab
-                      label={`${
-                        !toTokenData.isLoading &&
+                      label={`${!toTokenData.isLoading &&
                         !toTokenData.isError &&
                         toTokenData.data &&
                         toTokenData.data.tokenInfo
-                          ? toTokenData.data.tokenInfo.tokenInfo.name
-                          : ""
-                      } Price chart`}
+                        ? toTokenData.data.tokenInfo.tokenInfo.name
+                        : ""
+                        } Price chart`}
                       value="2"
                     />
                   </TabList>
@@ -463,7 +459,7 @@ const AppInner = ({ tokenList }) => {
         setSwapValue(newValue);
       }
     };
-    useMemo(() => {}, [fromTokenData, toTokenData]);
+    useMemo(() => { }, [fromTokenData, toTokenData]);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -471,7 +467,7 @@ const AppInner = ({ tokenList }) => {
 
     return (
       <>
-     
+
         <Row
           style={{
             minHeight: "400px",
@@ -526,24 +522,22 @@ const AppInner = ({ tokenList }) => {
                         className={classes.root}
                       >
                         <Tab
-                          label={`${
-                            !fromTokenData.isLoading &&
+                          label={`${!fromTokenData.isLoading &&
                             !fromTokenData.isError &&
                             fromTokenData.data.tokenInfo
-                              ? fromTokenData.data.tokenInfo.tokenInfo.name
-                              : ""
-                          } Price chart`}
+                            ? fromTokenData.data.tokenInfo.tokenInfo.name
+                            : ""
+                            } Price chart`}
                           value="1"
                         />
                         <Tab
-                          label={`${
-                            !toTokenData.isLoading &&
+                          label={`${!toTokenData.isLoading &&
                             !toTokenData.isError &&
                             toTokenData.data &&
                             toTokenData.data.tokenInfo
-                              ? toTokenData.data.tokenInfo.tokenInfo.name
-                              : ""
-                          } Price chart`}
+                            ? toTokenData.data.tokenInfo.tokenInfo.name
+                            : ""
+                            } Price chart`}
                           value="2"
                         />
                       </TabList>
@@ -679,7 +673,7 @@ const AppInner = ({ tokenList }) => {
 
     useEffect(() => {
       initTickers();
-      return () => {};
+      return () => { };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const { width } = useViewport();
@@ -830,15 +824,23 @@ const AppInner = ({ tokenList }) => {
     </>
   );
 };
-export async function getServerSideProps() {
-  const fromToken = getCookie("fromToken");
-  const toToken = getCookie("toToken");
-  const title: string = ` Smart Swap Aggregator ${fromToken} - ${toToken}  | Compendex`;
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { tokens } = params;
+  let fromToken = 'SOL';
+  let toToken = 'USDC';
+  if (tokens) {
+    let items = tokens.split('-');
+    fromToken = items[0];
+    toToken = items[1]
+  }
+
+  const name: string = ` Smart Swap Aggregator ${fromToken} - ${toToken}  | Compendex`;
 
   const description: string = ` Swap  ${fromToken}  for ${toToken} on the smartest swap aggregator on Solana. Make intelligent decisions with the latest analytics, smart order routing, data, and charts, for all supported markets.`;
   return {
     props: {
-      title,
+      name,
       description,
     },
   };
