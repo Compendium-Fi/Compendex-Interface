@@ -48,6 +48,7 @@ interface IJupiterFormProps { fromMint?: string, toMint?: string }
 const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
   const { classes, cx } = useSwapStyles();
   const { query } = useRouter();
+  const router = useRouter();
   const toastId = useRef(nanoid());
   const { splTokenList } = useTokenList();
   const [firstLoad, setFirstLoad] = useState(false);
@@ -462,7 +463,7 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
 
 
             <Slippage slippage={slippage} setSlippage={setSlippage} />
-            {location.pathname === "/" ? (
+            {router.pathname === "/" ? (
               <Link href={"/swap"} className="swap-link-btn">
                 Click Here For Full Smart Swap Functionality 👆
               </Link>
@@ -558,7 +559,7 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
                 alignItems: "center",
               }}
             >
-              <Loader variant="bars"  />
+              <Loader variant="bars" />
             </div>
           )}
           {!hasRoute && !loadingRoute && (

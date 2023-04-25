@@ -3,7 +3,9 @@ import { Notifications } from "@mantine/notifications";
 import { SnackbarProvider } from "notistack";
 import { useMemo } from "react";
 
-import { ThemeProvider, createTheme } from "@mui/material";
+import { ConnectionProvider, useConnectionConfig } from "../utils/connection";
+import { ReferrerProvider } from "../utils/referrer";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { BitpieWalletAdapter } from "@solana/wallet-adapter-bitpie";
 import { BloctoWalletAdapter } from "@solana/wallet-adapter-blocto";
@@ -18,19 +20,16 @@ import {
   SolletExtensionWalletAdapter,
   SolletWalletAdapter,
 } from "@solana/wallet-adapter-sollet";
-import { ConnectionProvider, useConnectionConfig } from "../utils/connection";
-import { ReferrerProvider } from "../utils/referrer";
 
-import { GlobalSwapProvider } from "@/context/GlobalSwap";
-import { SideBarProvider } from "@/context/SideBar";
-import { JupStatsProvider } from "@/context/jupStat";
-import { JupiterApiProvider } from "@/context/jupiter";
-import { ViewportProvider } from "@/context/viewPort";
-import { useViewportSize } from "@mantine/hooks";
-import { QueryClient, QueryClientProvider } from "react-query";
-import SidebBar from "../components/Sidebar";
 import SplTokenProvider from "../context/tokenList";
-import SEO from "./SEO";
+import { JupStatsProvider } from "@/context/jupStat";
+import { ViewportProvider, useViewport } from "@/context/viewPort";
+import { JupiterApiProvider } from "@/context/jupiter";
+import { GlobalSwapProvider } from "@/context/GlobalSwap";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { SideBarProvider } from "@/context/SideBar";
+import SidebBar from "../components/Sidebar";
+import { useViewportSize } from "@mantine/hooks";
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 function AppImpl({ children }: { children: any }) {
@@ -50,16 +49,17 @@ function AppImpl({ children }: { children: any }) {
       },
       MuiTab: {
         styleOverrides: {
-          root: {
+          "root": {
             "&.Mui-selected": {
               color: "#E2E8F0 !important",
-            },
-          },
-          textColorPrimary: {
-            color: "red",
-          },
+            }
+          }, "textColorPrimary": {
+            color: "red"
+          }
         },
-      },
+
+      }
+
     },
   });
   const queryClient = new QueryClient();
@@ -78,21 +78,15 @@ function AppImpl({ children }: { children: any }) {
     [network]
   );
   return (
-    <MantineProvider
-      theme={{
-        colorScheme: "dark",
-        primaryColor: "dark",
-        fontFamily: "Roboto",
-      }}
-      withGlobalStyles
-      withNormalizeCSS
-    >
+    <MantineProvider theme={{ colorScheme: "dark", primaryColor: "dark", fontFamily: 'Roboto' }} withGlobalStyles withNormalizeCSS>
       <Notifications />
       <ConnectionProvider>
         <ReferrerProvider>
           <WalletProvider wallets={wallets}>
             <WalletModalProvider>
               <SplTokenProvider>
+                {/* <SwapTokenContextProvider> */}
+                {/*@ts-ignore*/}
                 <SnackbarProvider>
                   <JupStatsProvider>
                     <GlobalSwapProvider
@@ -122,6 +116,7 @@ function AppImpl({ children }: { children: any }) {
                     </GlobalSwapProvider>
                   </JupStatsProvider>
                 </SnackbarProvider>
+                {/* </SwapTokenContextProvider> */}
               </SplTokenProvider>
             </WalletModalProvider>
           </WalletProvider>
@@ -133,10 +128,10 @@ function AppImpl({ children }: { children: any }) {
 
 const MainLayout = ({ children }: { children: any }) => {
   return (
-  <>
-  <SEO />
-  </>
+    <ConnectionProvider>
+      <AppImpl>{children}</AppImpl>
+    </ConnectionProvider>
   );
 };
-MainLayout.ssr = false;
+MainLayout.ssr = true;
 export default MainLayout;

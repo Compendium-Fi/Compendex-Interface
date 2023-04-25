@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import Link from "next/link";
 import WalletConnect from "./WalletConnect";
 import { useSideBar } from "@/context/SideBar";
+import { useRouter } from "next/router";
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -19,6 +20,7 @@ function useWindowSize() {
 }
 const MainHeader = () => {
   const [width] = useWindowSize();
+  const router = useRouter();
   const [tokenPrice, setTokenPrice] = useState(null);
   const { isOpen, openSidebar, closeSidebar } = useSideBar();
   const toggleSideBar = () => {
@@ -73,7 +75,7 @@ const MainHeader = () => {
           </button>
           <div className="navbar-menu">
             <Link
-              className={`${location.pathname === "/"
+              className={`${router.pathname === "/"
                 ? "header-link-btn-selected"
                 : "header-link-btn"
                 } `}
@@ -82,7 +84,7 @@ const MainHeader = () => {
               <span>Overview</span>
             </Link>
             <Link
-              className={`${location.pathname.includes("/swap")
+              className={`${router.pathname.includes("/swap")
                 ? "header-link-btn-selected"
                 : "header-link-btn"
                 } `}
@@ -91,7 +93,7 @@ const MainHeader = () => {
               <span>Swap</span>
             </Link>
             <Link
-              className={`${location.pathname.includes("/serum")
+              className={`${router.pathname.includes("/serum")
                 ? "header-link-btn-selected"
                 : "header-link-btn"
                 } `}
@@ -102,7 +104,7 @@ const MainHeader = () => {
 
 
             <Link
-              className={`${location.pathname.includes("/analytics")
+              className={`${router.pathname.includes("/analytics")
                 ? "header-link-btn-selected"
                 : "header-link-btn"
                 } `}
@@ -122,7 +124,7 @@ const MainHeader = () => {
             </Link>
             <Link
               href={"/toolbox"}
-              className={`${location.pathname.includes("/toolbox")
+              className={`${router.pathname.includes("/toolbox")
                 ? "header-link-btn-selected"
                 : "header-link-btn"
                 } `}
