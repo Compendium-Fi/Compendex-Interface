@@ -14,12 +14,12 @@ export default function App({ Component, pageProps }: AppProps) {
   const { openGraphData = [] } = pageProps;
   return (
     <SSRProvider>
+      <SEO
+        name="DEX Trading Terminal | Compendex"
+        description="Introducing the next generation of trading technology: an open-source, professional-grade trading terminal for Solana. This platform aggregates protocols and analytics across Solana to help improve market efficiency and equalize opportunities for all."
+      />
       <MainLayout>
-
         <Head>
-          {openGraphData.map((og) => (
-            <meta {...og} />
-          ))}
           <script src="/static/datafeeds/udf/dist/bundle.js" />
           <link rel="shortcut icon" href="/static/imgs/favicon.ico" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
