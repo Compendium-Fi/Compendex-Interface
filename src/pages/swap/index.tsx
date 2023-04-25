@@ -825,8 +825,9 @@ const AppInner = ({ tokenList }) => {
   );
 };
 export async function getServerSideProps(context) {
-  const { params } = context;
-  const { tokens } = params;
+  console.log("COntext", context)
+   const { query } = context;
+   const { tokens } = query;
   let fromToken = 'SOL';
   let toToken = 'USDC';
   if (tokens) {

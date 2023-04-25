@@ -31,11 +31,10 @@ import {
 import { notify } from "../../utils/notifications";
 import { fetchTokenPrice } from "../../utils/tokenApi";
 
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import { useViewportSize } from "@mantine/hooks";
-import SeoParams from "@/components/SeoParams";
 import { getCookie, setCookie } from "cookies-next";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 const TVChartContainer = dynamic(
   () => import("../../components/TradingView/index"),
   {
