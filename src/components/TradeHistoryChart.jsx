@@ -276,5 +276,5 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
     </>
   );
 };
-TradeHistoryChart.ssr = false;
+// TradeHistoryChart.ssr = false;
 export default TradeHistoryChart;

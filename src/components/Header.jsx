@@ -219,5 +219,5 @@ const MainHeader = () => {
     </div>
   );
 };
-MainHeader.ssr = false;
+
 export default MainHeader;

@@ -133,5 +133,5 @@ const MainLayout = ({ children }: { children: any }) => {
     </ConnectionProvider>
   );
 };
-MainLayout.ssr = true;
+// MainLayout.ssr = true;
 export default MainLayout;

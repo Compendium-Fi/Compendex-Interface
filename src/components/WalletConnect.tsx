@@ -118,5 +118,5 @@ const WalletConnect = () => {
     </>
   );
 }
-WalletConnect.ssr = false;
+// WalletConnect.ssr = false;
 export default WalletConnect; 
