@@ -11,11 +11,15 @@ import Head from "next/head";
 import React from "react";
 if (!process.browser) React.useLayoutEffect = React.useEffect;
 export default function App({ Component, pageProps }: AppProps) {
+  const { openGraphData = [] } = pageProps;
   return (
     <SSRProvider>
       <MainLayout>
-        
+
         <Head>
+          {openGraphData.map((og) => (
+            <meta {...og} />
+          ))}
           <script src="/static/datafeeds/udf/dist/bundle.js" />
           <link rel="shortcut icon" href="/static/imgs/favicon.ico" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />

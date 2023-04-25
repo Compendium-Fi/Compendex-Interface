@@ -154,10 +154,7 @@ function TradePageInner() {
   const [selectedToken, setSelectedToken] = useState<any>(null);
 
   const { splTokenList } = useTokenList();
-  const [dimensions, setDimensions] = useState({
-    height: typeof window !== "undefined" ? window.innerHeight : "100%",
-    width: typeof window !== "undefined" ? window.innerWidth : "100%",
-  });
+
 
   useMemo(() => {
     //@ts-ignore
@@ -594,15 +591,15 @@ function MarketSelector({
               ? -1
               : extractQuote(a.name) !== "USDT" &&
                 extractQuote(b.name) === "USDT"
-              ? 1
-              : 0
+                ? 1
+                : 0
           )
           .sort((a: any, b: any) =>
             extractBase(a.name) < extractBase(b.name)
               ? -1
               : extractBase(a.name) > extractBase(b.name)
-              ? 1
-              : 0
+                ? 1
+                : 0
           )
           .map(({ address, name, deprecated }: any, i: number) => {
             return (
