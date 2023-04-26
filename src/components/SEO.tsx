@@ -22,7 +22,7 @@ const SEO = ({ name, description }: SEOProps) => {
             <meta property="og:title" content={name} />
             <meta property="og:type" content="website" />
             <meta property="og:url" content={windowURL} />
-            <meta property="og:site_name" content="Compendex Open Book" />
+            <meta property="og:site_name" content="Compedex Trading Terminal" />
             <meta
                 property="og:description"
                 content={description}

@@ -7,6 +7,14 @@ const nextConfig = {
     // Ignore TypeScript errors during the build process
     ignoreBuildErrors: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: "/api/sitemap",
+      },
+    ];
+  },
   reactStrictMode: true,
   webpack: (config, options) => {
     // Important: return the modified config
