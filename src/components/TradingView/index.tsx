@@ -10,6 +10,7 @@ import { convertResolutionToApi, useTvDataFeed } from "@/utils/Datafeed";
 import React from "react";
 import { useMarket } from "../../utils/markets";
 import { flatten } from "../../utils/utils";
+import { useIsClient } from "@/hooks/useIsClient";
 
 export interface ChartContainerProps {
   symbol: ChartingLibraryWidgetOptions["symbol"];
@@ -35,7 +36,8 @@ export interface ChartContainerState { }
 
 const TVChartContainer = () => {
   let datafeed = useTvDataFeed();
-  let resolution = window.localStorage.getItem("resolution") ?? "60";
+  const isClient = useIsClient();
+  let resolution = isClient ? window.localStorage.getItem("resolution") ?? "60" : "60";
 
   try {
     convertResolutionToApi(resolution);
@@ -51,8 +53,8 @@ const TVChartContainer = () => {
     theme: "Dark",
     containerId: "tv_chart_container",
     libraryPath: "/static/charting_library/",
-  
-    datafeedUrl:process.env.NEXT_PUBLIC_DATA_FEED_ENDPOINT,
+
+    datafeedUrl: process.env.NEXT_PUBLIC_DATA_FEED_ENDPOINT,
     chartsStorageApiVersion: "1.1",
     clientId: "tradingview.com",
     userId: "public_user_id",
@@ -77,9 +79,9 @@ const TVChartContainer = () => {
     const widgetOptions: ChartingLibraryWidgetOptions = {
       symbol: marketName as string,
       //datafeed: datafeed,
-      datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(
+      datafeed: isClient ? new (window as any).Datafeeds.UDFCompatibleDatafeed(
         defaultProps.datafeedUrl
-      ),
+      ) : null,
       interval:
         defaultProps.interval as ChartingLibraryWidgetOptions["interval"],
       container_id:
@@ -149,8 +151,9 @@ const TVChartContainer = () => {
         // @ts-ignore
         .subscribe("onAutoSaveNeeded", () => tvWidget.saveChartToServer());
     });
-  }, [marketName]);
+  }, [marketName, isClient]);
   return <div id={defaultProps.containerId} className={"TVChartContainer"} />;
 };
+TVChartContainer.ssr = false;
 
 export default TVChartContainer;
