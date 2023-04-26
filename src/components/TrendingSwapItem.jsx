@@ -40,7 +40,7 @@ const TrendingSwapItem = ({ sellTokenSymbol, buyTokenSymbol, volume }) => {
       <button
         className="trade-btn"
         onClick={() => {
-          history.push(`/swap?tokens=${sellTokenSymbol}-${buyTokenSymbol}`);
+          history.push(`/swap?tokens=${findTokenSymbolByAddress(sellTokenSymbol)}-${findTokenSymbolByAddress(buyTokenSymbol)}`);
         }}
       >
         Trade
