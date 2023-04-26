@@ -82,6 +82,7 @@ export async function getStaticProps(context) {
       name: "Solana TVL & Protocol Data | Compendex",
       description:
         "Compendex aggregates accurate analytics, TVL information, prices, and more from several reputable sources for protocols on Solana.",
+      image: "https://res.cloudinary.com/doohfu9i4/image/upload/v1682543816/Compendex_-_Solana_Data_Image_gjxcyu.png"
     }, // will be passed to the page component as props
   };
 }

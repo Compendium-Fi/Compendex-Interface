@@ -11,12 +11,13 @@ import Head from "next/head";
 import React from "react";
 if (!process.browser) React.useLayoutEffect = React.useEffect;
 export default function App({ Component, pageProps }: AppProps) {
-  const { name, description } = pageProps;
+  const { name, description,image } = pageProps;
   return (
     <SSRProvider>
       <SEO
         name={name}
         description={description}
+        image={image}
       />
       <MainLayout>
         <Head>

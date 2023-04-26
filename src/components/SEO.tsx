@@ -6,9 +6,10 @@ import Head from "next/head";
 interface SEOProps {
     name: string;
     description: string;
+    image?: string;
 }
 
-const SEO = ({ name, description }: SEOProps) => {
+const SEO = ({ name, description, image }: SEOProps) => {
     const isClient = useIsClient();
 
     const windowURL =
@@ -30,7 +31,7 @@ const SEO = ({ name, description }: SEOProps) => {
             <meta
                 property="og:image"
                 content={
-                    "https://res.cloudinary.com/doohfu9i4/image/upload/v1682441159/FtnP_p5XgAcdpMX_nd1emm.jpg"
+                    image ?? "https://res.cloudinary.com/doohfu9i4/image/upload/v1682441159/FtnP_p5XgAcdpMX_nd1emm.jpg"
                 }
             />
 
@@ -43,7 +44,7 @@ const SEO = ({ name, description }: SEOProps) => {
             <meta name="twitter:description" content={description} />
             <meta
                 name="twitter:image"
-                content={
+                content={image ??
                     "https://res.cloudinary.com/doohfu9i4/image/upload/v1682441159/FtnP_p5XgAcdpMX_nd1emm.jpg"
                 }
             />
