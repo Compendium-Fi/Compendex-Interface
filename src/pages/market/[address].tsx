@@ -1397,11 +1397,12 @@ const RenderSmall = ({
 export async function getServerSideProps(context: any) {
   const { query } = context;
 
-  const marketName = customMarketsList.find(
+  const market = customMarketsList.find(
     (market) => market.address === query.address
   );
-  const name = `Trade ${marketName} on Openbook | Compendex`;
-  const description = `Trade ${marketName} on Compendex using OpenBook CLOB smart contracts and TradingView integrations. Combine the advantages of order books with the trustless nature of DeFi on Solana for enhanced liquidity and opportunities.`;
+
+  const name = `Trade ${market.name} on Openbook | Compendex`;
+  const description = `Trade ${market.name} on Compendex using OpenBook CLOB smart contracts and TradingView integrations. Combine the advantages of order books with the trustless nature of DeFi on Solana for enhanced liquidity and opportunities.`;
   context.address = query.address;
 
   // Your code here...
@@ -1409,7 +1410,7 @@ export async function getServerSideProps(context: any) {
   return {
     props: {
       marketAddress: context.address,
-      marketName,
+      marketName: market.name,
       name,
       description,
       // Your props here...
