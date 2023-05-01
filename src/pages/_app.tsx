@@ -1,7 +1,7 @@
 import MainHeader from "@/components/Header";
 import MainLayout from "@/components/MainLayout";
 import SEO from "@/components/SEO";
-
+import NextNProgress from 'nextjs-progressbar';
 import { GlobalStyle } from "@/components/global_style";
 import "@/styles/App.less";
 import "@/styles/globals.css";
@@ -11,7 +11,7 @@ import Head from "next/head";
 import React from "react";
 if (!process.browser) React.useLayoutEffect = React.useEffect;
 export default function App({ Component, pageProps }: AppProps) {
-  const { name, description,image } = pageProps;
+  const { name, description, image } = pageProps;
   return (
     <SSRProvider>
       <SEO
@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
         description={description}
         image={image}
       />
+       <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={200} height={3} showOnShallow={true} />
       <MainLayout>
         <Head>
           <script src="/static/datafeeds/udf/dist/bundle.js" />
@@ -30,6 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
             rel="stylesheet"
           ></link>
         </Head>
+       
         <GlobalStyle />
         <MainHeader />
         <Component {...pageProps} />

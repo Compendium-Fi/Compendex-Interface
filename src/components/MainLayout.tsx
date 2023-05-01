@@ -15,9 +15,9 @@ import {
   SolletExtensionWalletAdapter,
   SolletWalletAdapter,
 } from "@solana/wallet-adapter-sollet";
-import { hasCookie, setCookie, setCookies } from 'cookies-next';
+import { hasCookie, setCookie } from 'cookies-next';
 import { SnackbarProvider } from "notistack";
-import { useEffect, useMemo } from "react";
+import { Suspense, useEffect, useMemo } from "react";
 import { ConnectionProvider, useConnectionConfig } from "../utils/connection";
 import { ReferrerProvider } from "../utils/referrer";
 
@@ -30,6 +30,7 @@ import { useViewportSize } from "@mantine/hooks";
 import { QueryClient, QueryClientProvider } from "react-query";
 import SidebBar from "../components/Sidebar";
 import SplTokenProvider from "../context/tokenList";
+import Loading from "./Loading";
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 function AppImpl({ children }: { children: any }) {
