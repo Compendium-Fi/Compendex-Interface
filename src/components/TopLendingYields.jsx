@@ -86,7 +86,10 @@ const TopLendingYields = () => {
           .sort((a, b) => b.apy - a.apy)
           .map((elm) => <PoolItem poolInfo={elm} />)
       ) : (
-        <Skeleton></Skeleton>
+        <Skeleton sx={{
+          "&::before": { background: "#0f172a" },
+          "&::after": { background: "#17264a" },
+        }}></Skeleton>
       )}
     </div>
   );

@@ -7,9 +7,14 @@ import { useRouter } from "next/router";
 const TrendingSwapItem = ({ sellTokenSymbol, buyTokenSymbol, volume }) => {
   const { splTokenList } = useTokenList();
   const findTokenIconBySymbol = (symbol) => {
-    let token = splTokenList.find((elm) => elm.symbol === symbol);
+    let token = splTokenList.find((elm) => elm.address === symbol);
 
     return token ? token.logoURI : "";
+  };
+  const findTokenSymbolByAddress = (symbol) => {
+    let token = splTokenList.find((elm) => elm.address === symbol);
+
+    return token ? token.symbol : "";
   };
   const history = useRouter();
   return (
@@ -27,7 +32,7 @@ const TrendingSwapItem = ({ sellTokenSymbol, buyTokenSymbol, volume }) => {
         />
         <div className="token-pricing">
           <span className="name">
-            {sellTokenSymbol}/{buyTokenSymbol}
+            {findTokenSymbolByAddress(sellTokenSymbol)}/{findTokenSymbolByAddress(buyTokenSymbol)}
           </span>
           <span className="price">${numeral(volume).format("0,0.000")}</span>
         </div>
@@ -35,7 +40,7 @@ const TrendingSwapItem = ({ sellTokenSymbol, buyTokenSymbol, volume }) => {
       <button
         className="trade-btn"
         onClick={() => {
-          history.push(`/swap?tokens=${sellTokenSymbol}-${buyTokenSymbol}`);
+          history.push(`/swap?tokens=${findTokenSymbolByAddress(sellTokenSymbol)}-${findTokenSymbolByAddress(buyTokenSymbol)}`);
         }}
       >
         Trade

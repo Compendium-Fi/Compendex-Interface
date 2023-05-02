@@ -50,7 +50,7 @@ const TVLItem = ({ elm }) => {
                   elm.chainTvls.Solana.tvlPrevWeek
                 ) > 0
                   ? ""
-                  : classes.volumeDecrease
+                  : 'volume-decrease'
                   }`}
               >
                 {relDiff(
@@ -102,25 +102,25 @@ const TVLItem = ({ elm }) => {
                   <span className={popoverClasses.popoverDataListItemTitle}>Category:</span>
                   <span className={popoverClasses.popoverDataListItemValue} >{elm.category}</span>
                 </li>
-                <li  className={popoverClasses.popoverDataListItem}>
+                <li className={popoverClasses.popoverDataListItem}>
                   <span className={popoverClasses.popoverDataListItemTitle}>Current TVL:</span>
                   <span className={popoverClasses.popoverDataListItemValue}>
                     ${numeral(elm.chainTvls.Solana.tvl).format("0,0.000")}
                   </span>
                 </li>
-                <li  className={popoverClasses.popoverDataListItem}>
+                <li className={popoverClasses.popoverDataListItem}>
                   <span className={popoverClasses.popoverDataListItemTitle}>Prev Day TVL:</span>
                   <span className={popoverClasses.popoverDataListItemValue}>
                     ${numeral(elm.chainTvls.Solana.tvlPrevDay).format("0,0.000")}
                   </span>
                 </li>
-                <li  className={popoverClasses.popoverDataListItem}>
+                <li className={popoverClasses.popoverDataListItem}>
                   <span className={popoverClasses.popoverDataListItemTitle}>Prev Week TVL:</span>
                   <span className={popoverClasses.popoverDataListItemValue}>
                     ${numeral(elm.chainTvls.Solana.tvlPrevWeek).format("0,0.000")}
                   </span>
                 </li>
-                <li  className={popoverClasses.popoverDataListItem}>
+                <li className={popoverClasses.popoverDataListItem}>
                   <span className={popoverClasses.popoverDataListItemTitle}>Prev Month TVL:</span>
                   <span className={popoverClasses.popoverDataListItemValue}>
                     ${numeral(elm.chainTvls.Solana.tvlPrevMonth).format("0,0.000")}

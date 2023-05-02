@@ -1,40 +1,30 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, makeStyles, Tab } from "@material-ui/core";
-import { SnackbarProvider, useSnackbar } from "notistack";
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { SnackbarProvider } from "notistack";
+import React, { useEffect, useMemo, useState } from "react";
 // @ts-ignore
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { AutoComplete, Col, Row } from "antd";
-import SwapTokenHistoryChart from "../../components/SwapTokenHistoryChart";
 import styled from "styled-components";
 import BuySellCard from "../../components/BuySellCard";
-import SwapBottomTab from "../../components/SwapBottomTab";
-import TokenSmallCard from "../../components/TokenSmallCard";
-import { TokenInfo } from "@solana/spl-token-registry";
 import FloatingNavBar from "../../components/layout/FloatingNavbar";
+import SwapBottomTab from "../../components/SwapBottomTab";
+import SwapTokenHistoryChart from "../../components/SwapTokenHistoryChart";
+import TokenSmallCard from "../../components/TokenSmallCard";
 
 import JupiterForm from "@/components/swap/Jupiter";
 
+import { useGlobalSwap } from "@/context/GlobalSwap";
 import { useTokenList } from "@/context/tokenList";
 import { useViewport } from "@/context/viewPort";
+import useTokenInfoQuery from "@/hooks/useTokenInfoQuery";
 import { useRouter } from "next/router";
 import CustomTicker from "../../components/CustomTicker";
 import TickerItem from "../../components/TickerItem";
-import {
-  getTokenTickers,
-  initChartData,
-  initTokenInfo,
-} from "../../utils/tokenApi";
-import { useQueryClient } from "react-query";
-import useTokenInfoQuery from "@/hooks/useTokenInfoQuery";
-import { useGlobalSwap } from "@/context/GlobalSwap";
+import { getTokenTickers } from "../../utils/tokenApi";
+import SeoParams from "@/components/SeoParams";
+import { getCookie } from "cookies-next";
 let { Option } = AutoComplete;
 const Wrapper = styled.div`
   height: 100%;
@@ -55,9 +45,11 @@ const Wrapper = styled.div`
 
 function Swap({ tokenList }) {
   return (
-    <SnackbarProvider maxSnack={5} autoHideDuration={8000}>
-      <AppInner tokenList={tokenList} />
-    </SnackbarProvider>
+    <>
+      <SnackbarProvider maxSnack={5} autoHideDuration={8000}>
+        <AppInner tokenList={tokenList} />
+      </SnackbarProvider>
+    </>
   );
 }
 
@@ -115,12 +107,12 @@ const AppInner = ({ tokenList }) => {
 
     const fromTokenData = useTokenInfoQuery(`tokenInfo-from`, fromMint);
     const toTokenData = useTokenInfoQuery(`tokenInfo-to`, toMint);
-
+    useMemo(() => { }, [fromTokenData, toTokenData]);
     const [value, setValue] = React.useState("1");
     const [swapValue, setSwapValue] = useState("1");
     const handleSwapChange = (event, newValue) => {
-      if (newValue === "2") {
-        history.push("/serum");
+      if (newValue == "2") {
+        history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
       } else {
         setSwapValue(newValue);
       }
@@ -132,6 +124,7 @@ const AppInner = ({ tokenList }) => {
 
     return (
       <>
+
         <Row
           style={{
             justifyContent: "center",
@@ -147,7 +140,7 @@ const AppInner = ({ tokenList }) => {
           }}
         >
           <Col flex={"360px"}>
-            <div className="home-card-container">
+            <div className=" data-card-container">
               <TabContext value={swapValue}>
                 <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                   <TabList
@@ -189,7 +182,8 @@ const AppInner = ({ tokenList }) => {
                     />
                     <Tab
                       label={`${!toTokenData.isLoading &&
-                        !toTokenData.isError && toTokenData.data &&
+                        !toTokenData.isError &&
+                        toTokenData.data &&
                         toTokenData.data.tokenInfo
                         ? toTokenData.data.tokenInfo.tokenInfo.name
                         : ""
@@ -212,7 +206,8 @@ const AppInner = ({ tokenList }) => {
                   <SwapTokenHistoryChart
                     tokenHistory={
                       !toTokenData.isLoading &&
-                      !toTokenData.isError && toTokenData.data &&
+                      !toTokenData.isError &&
+                      toTokenData.data &&
                       toTokenData.data.tokenHistory &&
                       toTokenData.data.tokenHistory
                     }
@@ -255,7 +250,8 @@ const AppInner = ({ tokenList }) => {
               mint={toMint}
               tokenInfo={
                 !fromTokenData.isLoading &&
-                !toTokenData.isError && toTokenData.data &&
+                !toTokenData.isError &&
+                toTokenData.data &&
                 toTokenData.data.tokenInfo &&
                 toTokenData.data.tokenInfo
               }
@@ -272,13 +268,26 @@ const AppInner = ({ tokenList }) => {
     const classes = useStyles();
 
     const [value, setValue] = React.useState("1");
+    const { fromMint, toMint } = useGlobalSwap();
 
+    const fromTokenData = useTokenInfoQuery(`tokenInfo-from`, fromMint);
+    const toTokenData = useTokenInfoQuery(`tokenInfo-to`, toMint);
+    const [swapValue, setSwapValue] = useState("1");
+    const handleSwapChange = (event, newValue) => {
+      if (newValue == "2") {
+        history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
+      } else {
+        setSwapValue(newValue);
+      }
+    };
+    useMemo(() => { }, [fromTokenData, toTokenData]);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
     const customClasses = useStyles({});
     return (
       <>
+
         <Row
           style={{
             justifyContent: "center",
@@ -295,13 +304,14 @@ const AppInner = ({ tokenList }) => {
           }}
         >
           <Col flex={"360px"}>
-            <div className="home-card-container">
-              <TabContext value={value}>
+            <div className=" data-card-container">
+              <TabContext value={swapValue}>
                 <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                   <TabList
                     className={classes.root}
                     scrollButtons="auto"
                     TabIndicatorProps={{ style: { minWidth: "auto" } }}
+                    onChange={handleSwapChange}
                   >
                     <Tab label={`Smart Swap`} value="1" />
                     {/* <Tab label={`Limit Order`} value="2" /> */}
@@ -324,32 +334,47 @@ const AppInner = ({ tokenList }) => {
                     aria-label="Token History Chart"
                     className={classes.root}
                   >
-                    {/* <Tab
-                                            label={`${fromTokenData ? fromTokenData.tokenInfo.symbol : ""
-                                                } Price chart`}
-                                            value="1"
-                                        />
-                                        <Tab
-                                            label={`${toTokenData ? toTokenData.tokenInfo.symbol : ""
-                                                } Price chart`}
-                                            value="2"
-                                        /> */}
+                    <Tab
+                      label={`${!fromTokenData.isLoading &&
+                        !fromTokenData.isError &&
+                        fromTokenData.data.tokenInfo
+                        ? fromTokenData.data.tokenInfo.tokenInfo.name
+                        : ""
+                        } Price chart`}
+                      value="1"
+                    />
+                    <Tab
+                      label={`${!toTokenData.isLoading &&
+                        !toTokenData.isError &&
+                        toTokenData.data &&
+                        toTokenData.data.tokenInfo
+                        ? toTokenData.data.tokenInfo.tokenInfo.name
+                        : ""
+                        } Price chart`}
+                      value="2"
+                    />
                   </TabList>
                 </Box>
                 <TabPanel value="1">
-                  {/* <SwapTokenHistoryChart
-                                        firstToken={!selectedFirst}
-                                        setFirstToken={setSelectedFirst}
-                                        tokenHistory={fromTokenHistory}
-                                    /> */}
+                  <SwapTokenHistoryChart
+                    tokenHistory={
+                      !fromTokenData.isLoading &&
+                      !fromTokenData.isError &&
+                      fromTokenData.data.tokenHistory &&
+                      fromTokenData.data.tokenHistory
+                    }
+                  />
                 </TabPanel>
                 <TabPanel value="2">
-                  {" "}
-                  {/* <SwapTokenHistoryChart
-                                        firstToken={selectedFirst}
-                                        setFirstToken={setSelectedFirst}
-                                        tokenHistory={toTokenHistory}
-                                    /> */}
+                  <SwapTokenHistoryChart
+                    tokenHistory={
+                      !toTokenData.isLoading &&
+                      !toTokenData.isError &&
+                      toTokenData.data &&
+                      toTokenData.data.tokenHistory &&
+                      toTokenData.data.tokenHistory
+                    }
+                  />
                 </TabPanel>
               </TabContext>
             </div>
@@ -374,16 +399,26 @@ const AppInner = ({ tokenList }) => {
             <BuySellCard />
           </Col>
           <Col flex={"auto"}>
-            {/* <TokenSmallCard
-                            mint={fromGlobalMint.toBase58()}
-                            tokenInfo={fromTokenData}
-                        /> */}
+            <TokenSmallCard
+              mint={fromMint}
+              tokenInfo={
+                !fromTokenData.isLoading &&
+                !fromTokenData.isError &&
+                fromTokenData.data.tokenInfo &&
+                fromTokenData.data.tokenInfo
+              }
+            />
           </Col>
           <Col flex={"auto"}>
-            {/* <TokenSmallCard
-                            mint={toGlobalMint.toBase58()}
-                            tokenInfo={toTokenData}
-                        /> */}
+            <TokenSmallCard
+              mint={fromMint}
+              tokenInfo={
+                !toTokenData.isLoading &&
+                !toTokenData.isError &&
+                toTokenData.data.tokenInfo &&
+                toTokenData.data.tokenInfo
+              }
+            />
           </Col>
         </Row>
         <Row
@@ -412,125 +447,190 @@ const AppInner = ({ tokenList }) => {
     const classes = useStyles();
 
     const [value, setValue] = React.useState("1");
+    const { fromMint, toMint } = useGlobalSwap();
+
+    const fromTokenData = useTokenInfoQuery(`tokenInfo-from`, fromMint);
+    const toTokenData = useTokenInfoQuery(`tokenInfo-to`, toMint);
+    const [swapValue, setSwapValue] = useState("1");
+    const handleSwapChange = (event, newValue) => {
+      if (newValue == "2") {
+        history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
+      } else {
+        setSwapValue(newValue);
+      }
+    };
+    useMemo(() => { }, [fromTokenData, toTokenData]);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-    const customClasses = useStyles({});
 
     return (
-      <Row
-        style={{
-          minHeight: "400px",
-          flexWrap: "nowrap",
-        }}
-      >
-        <Col flex="auto">
-          <Row
-            style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
-          >
-            <Col flex={"auto"}>
-              <div className="home-card-container">
-                <TabContext value={value}>
-                  <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
-                    <TabList
-                      className={classes.root}
-                      scrollButtons="auto"
-                      TabIndicatorProps={{ style: { minWidth: "auto" } }}
-                    >
-                      <Tab label={`Smart Swap`} value="1" />
-                      {/* <Tab label={`Limit Order`} value="2" /> */}
-                      <Tab label={`Open Book`} value="2" />
-                    </TabList>
-                  </Box>
+      <>
 
-                  <TabPanel value="1">
-                    <JupiterForm />
-                  </TabPanel>
-                </TabContext>
-              </div>
-            </Col>
-          </Row>
-          <Row
-            style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
-          >
-            <Col flex={"auto"}>
-              <div className="swap-token-chart-card">
-                <TabContext value={value}>
-                  <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
-                    <TabList
-                      onChange={handleChange}
-                      aria-label="Token History Chart"
-                      className={classes.root}
-                    >
-                      {/* <Tab
-                                                label={`${fromTokenData ? fromTokenData.tokenInfo.symbol : ""
-                                                    } Price chart`}
-                                                value="1"
-                                            />
-                                            <Tab
-                                                label={`${toTokenData ? toTokenData.tokenInfo.symbol : ""
-                                                    } Price chart`}
-                                                value="2"
-                                            /> */}
-                    </TabList>
-                  </Box>
-                  <TabPanel value="1">
-                    {/* <SwapTokenHistoryChart
-                                            firstToken={!selectedFirst}
-                                            setFirstToken={setSelectedFirst}
-                                            tokenHistory={fromTokenHistory}
-                                        /> */}
-                  </TabPanel>
-                  <TabPanel value="2">
-                    {" "}
-                    {/* <SwapTokenHistoryChart
-                                            firstToken={selectedFirst}
-                                            setFirstToken={setSelectedFirst}
-                                            tokenHistory={toTokenHistory}
-                                        /> */}
-                  </TabPanel>
-                </TabContext>
-              </div>
-            </Col>
-          </Row>
+        <Row
+          style={{
+            minHeight: "400px",
+            flexWrap: "nowrap",
+          }}
+        >
+          <Col flex="auto">
+            <Row
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
+            >
+              <Col flex={"auto"}>
+                <div className=" data-card-container">
+                  <TabContext value={value}>
+                    <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
+                      <TabList
+                        className={classes.root}
+                        scrollButtons="auto"
+                        TabIndicatorProps={{ style: { minWidth: "auto" } }}
+                        onChange={handleSwapChange}
+                      >
+                        <Tab label={`Smart Swap`} value="1" />
 
-          <Row
-            style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
-          >
-            <Col flex={"auto"}>
-              <BuySellCard />
-            </Col>
-          </Row>
-          <Row
-            style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
-          >
-            <Col flex={"auto"}>
-              {/* <TokenSmallCard
-                                mint={fromGlobalMint.toBase58()}
-                                tokenInfo={fromTokenData}
-                            /> */}
-            </Col>
-          </Row>
-          <Row
-            style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
-          >
-            <Col flex={"auto"}>
-              {/* <TokenSmallCard
-                                mint={toGlobalMint.toBase58()}
-                                tokenInfo={toTokenData}
-                            /> */}
-            </Col>
-          </Row>
-          <Row
-            style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
-          >
-            <Col flex={"auto"}>
-              <SwapBottomTab />
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+                        <Tab label={`Open Book`} value="2" />
+                      </TabList>
+                    </Box>
+
+                    <TabPanel value="1">
+                      <JupiterForm />
+                    </TabPanel>
+                  </TabContext>
+                </div>
+              </Col>
+            </Row>
+            <Row
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
+            >
+              <Col flex={"auto"}>
+                <div className="swap-token-chart-card">
+                  <TabContext value={value}>
+                    <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
+                      <TabList
+                        onChange={handleChange}
+                        aria-label="Token History Chart"
+                        className={classes.root}
+                      >
+                        <Tab
+                          label={`${!fromTokenData.isLoading &&
+                            !fromTokenData.isError &&
+                            fromTokenData.data.tokenInfo
+                            ? fromTokenData.data.tokenInfo.tokenInfo.name
+                            : ""
+                            } Price chart`}
+                          value="1"
+                        />
+                        <Tab
+                          label={`${!toTokenData.isLoading &&
+                            !toTokenData.isError &&
+                            toTokenData.data &&
+                            toTokenData.data.tokenInfo
+                            ? toTokenData.data.tokenInfo.tokenInfo.name
+                            : ""
+                            } Price chart`}
+                          value="2"
+                        />
+                      </TabList>
+                    </Box>
+                    <TabPanel value="1">
+                      <SwapTokenHistoryChart
+                        tokenHistory={
+                          !fromTokenData.isLoading &&
+                          !fromTokenData.isError &&
+                          fromTokenData.data.tokenHistory &&
+                          fromTokenData.data.tokenHistory
+                        }
+                      />
+                    </TabPanel>
+                    <TabPanel value="2">
+                      <SwapTokenHistoryChart
+                        tokenHistory={
+                          !toTokenData.isLoading &&
+                          !toTokenData.isError &&
+                          toTokenData.data &&
+                          toTokenData.data.tokenHistory &&
+                          toTokenData.data.tokenHistory
+                        }
+                      />
+                    </TabPanel>
+                  </TabContext>
+                </div>
+              </Col>
+            </Row>
+
+            <Row
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
+            >
+              <Col flex={"auto"}>
+                <BuySellCard />
+              </Col>
+            </Row>
+            <Row
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
+            >
+              <Col flex={"auto"}>
+                <TokenSmallCard
+                  mint={fromMint}
+                  tokenInfo={
+                    !fromTokenData.isLoading &&
+                    !fromTokenData.isError &&
+                    fromTokenData.data.tokenInfo &&
+                    fromTokenData.data.tokenInfo
+                  }
+                />
+              </Col>
+            </Row>
+            <Row
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
+            >
+              <Col flex={"auto"}>
+                <TokenSmallCard
+                  mint={fromMint}
+                  tokenInfo={
+                    !toTokenData.isLoading &&
+                    !toTokenData.isError &&
+                    toTokenData.data.tokenInfo &&
+                    toTokenData.data.tokenInfo
+                  }
+                />
+              </Col>
+            </Row>
+            <Row
+              style={{
+                marginTop: "20px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
+            >
+              <Col flex={"auto"}>
+                <SwapBottomTab />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </>
     );
   };
 
@@ -615,7 +715,7 @@ const AppInner = ({ tokenList }) => {
                 gap: "5px",
               }}
             >
-              {/* <img src={pricingIcon} alt="" /> */}
+              <img src={"/assets/img/pricing.png"} alt="" />
               <span>Price Movements</span>
             </div>
           </Col>
@@ -668,7 +768,7 @@ const AppInner = ({ tokenList }) => {
                 gap: "5px",
               }}
             >
-              {/* <img src={pricingIcon} alt="" /> */}
+              <img src={"/assets/img/pricing.png"} alt="" />
               <span>Price Movements</span>
             </div>
           </Col>
@@ -701,23 +801,49 @@ const AppInner = ({ tokenList }) => {
     );
   };
   return (
-    <div className="page__row">
-      <div
-        className="page__col"
-        style={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Wrapper>
-          <SwapHeader coingeckoId={initTokenId} selectedFirst={selectedFirst} />
-          {component}
-        </Wrapper>
+    <>
+      <div className="page__row">
+        <div
+          className="page__col"
+          style={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Wrapper>
+            <SwapHeader
+              coingeckoId={initTokenId}
+              selectedFirst={selectedFirst}
+            />
+            {component}
+          </Wrapper>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
+export async function getServerSideProps(context) {
+  const { query } = context;
+  const { tokens } = query;
+  let fromToken = 'USDC';
+  let toToken = 'CMFI';
+  if (tokens) {
+    let items = tokens.split('-');
+    fromToken = items[0];
+    toToken = items[1]
+  }
+
+  const name: string = ` Smart Swap Aggregator ${fromToken} - ${toToken}  | Compendex`;
+
+  const description: string = ` Swap  ${fromToken}  for ${toToken} on the smartest swap aggregator on Solana. Make intelligent decisions with the latest analytics, smart order routing, data, and charts, for all supported markets.`;
+  return {
+    props: {
+      name,
+      description,
+    },
+  };
+}
 
 export default Swap;

@@ -70,7 +70,7 @@ const TickerItem = ({ elm }) => {
   };
   return (
     <>
-      <Modal yOffset={20}
+      <Modal yOffset={70}
         centered
         withCloseButton={false}
         title={false}

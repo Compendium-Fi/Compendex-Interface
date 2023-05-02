@@ -3,12 +3,9 @@ import dynamic from 'next/dynamic'
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 import numeral from "numeral";
-// import coingeckoIcon from "../assets/img/coingecko.webp";
-// import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-// import "react-loading-skeleton/dist/skeleton.css";
+
 import { Skeleton, } from '@mantine/core';
 import { initTokenChartData } from "@/utils/tokenApi";
-//import { initTokenChartData } from "../redux/actions/swap.actions";
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
   useLayoutEffect(() => {
@@ -257,7 +254,10 @@ const ModalTickerHistoryChart = ({ tokenId }) => {
           />
         </div>
       ) : (
-        <Skeleton visible={true}>
+        <Skeleton visible={true} sx={{
+          "&::before": { background: "#0f172a" },
+          "&::after": { background: "#17264a" },
+        }}>
         </Skeleton>
       )}
     </>

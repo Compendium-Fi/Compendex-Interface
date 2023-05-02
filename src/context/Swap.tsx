@@ -4,7 +4,7 @@ import {
   Token,
   TOKEN_PROGRAM_ID,
   //@ts-ignore
-} from "@solana/spl-token-v1";
+} from "@solana/spl-token";
 import { PublicKey } from "@solana/web3.js";
 import * as assert from "assert";
 import React, { useContext, useState } from "react";

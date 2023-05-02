@@ -108,7 +108,7 @@ const HomeTokenCard = ({
       let result = await axios.get(
         `https://pro-api.coingecko.com/api/v3/coins/${symbol}`,
         {
-          headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+          headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
         }
       );
 
@@ -120,7 +120,7 @@ const HomeTokenCard = ({
       let result = await axios.get(
         `https://pro-api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=USD&days=1`,
         {
-          headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+          headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
         }
       );
 

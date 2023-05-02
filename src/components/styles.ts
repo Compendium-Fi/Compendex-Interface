@@ -22,6 +22,10 @@ const useTvlStyles = createStyles((theme) => ({
       backgroundColor: "rgba(44, 69, 102, 1)",
     },
   },
+  volumeDecrease: {
+    color: "red",
+    borderColor: "red",
+  },
   tvlInfo: {
     display: "flex",
     justifyContent: "center",
@@ -306,7 +310,7 @@ const useSwapStyles = createStyles((theme) => ({
     justifyContent: "center",
 
     width: "100%",
-    maxWidth: 450,
+    // maxWidth: 450,
     borderRadius: 15,
     padding: "10px",
     paddingBottom: 10,
@@ -359,6 +363,14 @@ const useSwapStyles = createStyles((theme) => ({
     alignItems: "flex-start",
     width: "100%",
   },
+  infoIcon: {
+    height: "15px",
+    marginRight: 2,
+  },
+  slippageText: {
+    fontSize: "12px",
+    color: "#FFF",
+  },
   youPayStyle: {
     marginLeft: theme.spacing.xs,
     fontWeight: "bold",
@@ -372,12 +384,13 @@ const useSwapStyles = createStyles((theme) => ({
     flexDirection: "row",
     alignItems: "center",
     marginRight: theme.spacing.xs,
+    padding: "8px",
   },
   balanceLabel: {
     marginRight: theme.spacing.xs,
-    fontSize: theme.fontSizes.sm,
-    fontWeight: "bold",
-    color: theme.colors.white,
+    color: "rgb(226, 232, 240)",
+    fontSize: "12px",
+    fontWeight: 400,
   },
   balanceValue: {
     color: "rgb(226, 232, 240)",
@@ -541,6 +554,7 @@ const useSwapStyles = createStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: theme.spacing.md,
+    marginBottom: theme.spacing.md,
   },
   slippageInnerButton: {
     backgroundColor: "black",
@@ -553,14 +567,18 @@ const useSwapStyles = createStyles((theme) => ({
   btnContainer: {
     width: "33.3333%",
     margin: "0 0.5rem",
+    background: "rgba(19, 34, 53, 0.5)",
+    border: "1px solid #32cd99",
+    bordeRadius: "5px",
+    color: "#32cd99"
   },
   switchIcon: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     width: "100%",
-    marginTop: "10px",
-    marginBottom: "10px",
+    marginTop: "5px",
+    marginBottom: "5px",
   },
   receiveContainer: {
     display: "flex",
@@ -634,8 +652,9 @@ const useSwapStyles = createStyles((theme) => ({
   slippageError: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "flex-start",
     marginTop: 5,
+    gap: 10
   },
   slippageErrorInner: {
     display: "flex",
@@ -713,11 +732,11 @@ const useSwapStyles = createStyles((theme) => ({
     borderRadius: 5,
     width: "100%",
     height: 70,
-    margin: "0.2em",
+    marginTop: "0.2em",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "0.2em",
+    padding: "1em",
     cursor: "pointer",
     marginBottom: "10px !important",
     position: "relative",
@@ -730,11 +749,11 @@ const useSwapStyles = createStyles((theme) => ({
     borderRadius: 5,
     width: "100%",
     height: 70,
-    margin: "0.2em",
+    padding: "1em",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "0.2em",
+    marginTop: "0.2em",
     cursor: "pointer",
     marginBottom: "10px !important",
     minWidth: "100%",
@@ -775,7 +794,7 @@ const useSwapStyles = createStyles((theme) => ({
     lineHeight: 1,
     borderRadius: "5px",
     marginTop: "0.8em",
-    height: "48px",
+    height: "38px",
     transition:
       "color 300ms ease 0s, border-color 300ms ease 0s, background 300ms ease 0s",
     boxShadow: "none",
@@ -936,22 +955,23 @@ const useStableTokenStyles = createStyles((theme) => ({
       color: theme.colors.white,
     },
 
-    "& #volume": {
-      overflow: "visible",
-      fontFamily: "Poppins",
-      fontSize: 12,
-      fontWeight: 400,
-      color: theme.colors.gray[5],
-      textAlign: "right",
-      lineHeight: 1,
-      padding: "0px 5px",
-      borderStyle: "solid",
-      borderWidth: 1,
-      borderColor: theme.colors.dark[3],
-      borderRadius: 2,
-      minWidth: 32,
-      height: "max-content",
-    },
+    "& #volume": {},
+  },
+  volumeItem: {
+    overflow: "visible",
+    fontFamily: "Poppins",
+    fontSize: 12,
+    fontWeight: 400,
+    color: theme.colors.gray[5],
+    textAlign: "right",
+    lineHeight: 1,
+    padding: "5px",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: theme.colors.dark[3],
+    borderRadius: 2,
+    minWidth: 32,
+    height: "max-content",
   },
 }));
 const useNewsStyles = createStyles((theme) => ({
@@ -1091,12 +1111,13 @@ const usePopOverStyles = createStyles((theme) => ({
     fontSize: 12,
     fontWeight: 400,
     color: theme.colors.white,
-  }, pricing: {
+  },
+  pricing: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-end",
-    gap:"5px"
+    gap: "5px",
   },
   poolPrice: {
     fontFamily: "Poppins",
@@ -1174,8 +1195,8 @@ const usePopOverStyles = createStyles((theme) => ({
     // borderStyle: "solid",
     // borderWidth: "1px",
     // borderColor: "rgb(50, 205, 153)",
-    borderRadius: "2px"
-  }
+    borderRadius: "2px",
+  },
 }));
 const usePopStyles = createStyles((theme) => ({
   tokenPopHeader: {
@@ -1283,8 +1304,8 @@ const usePopStyles = createStyles((theme) => ({
     borderStyle: "solid",
     borderWidth: 1,
     borderColor: "rgb(119, 145, 224)",
-    backgroundColor: "transparent", borderRadius: "5px",
-
+    backgroundColor: "transparent",
+    borderRadius: "5px",
   },
   tokenDescription: {
     fontFamily: "Poppins",
@@ -1292,7 +1313,7 @@ const usePopStyles = createStyles((theme) => ({
     fontWeight: 400,
     color: "rgb(181, 181, 181)",
     lineHeight: 1.5,
-    marginTop: "1.2em"
+    marginTop: "1.2em",
   },
   modalTokenFooter: {
     display: "flex",
@@ -1346,7 +1367,6 @@ const usePopStyles = createStyles((theme) => ({
     borderRadius: "5px",
     background: "none transparent",
   },
-
 }));
 export {
   useTvlStyles,

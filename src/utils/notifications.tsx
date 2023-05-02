@@ -83,7 +83,7 @@ export function notify({
     if (!wallet) {
       description = (
         <Link
-
+          target="_blank"
           href={"https://solscan.io/tx/" + txid}
           style={{ color: "#31C440" }}
         >
@@ -97,6 +97,7 @@ export function notify({
         <Link
 
           href={"https://solscan.io/account/" + txid}
+          target="_blank"
           style={{ color: "#31C440" }}
         >
           {/* View transaction  {txid.slice(0, 8)}...{txid.slice(txid.length - 8)} */}

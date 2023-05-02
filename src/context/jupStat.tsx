@@ -6,6 +6,7 @@ import React, {
     useState,
 } from "react";
 import axios from "axios";
+import { useTokenList } from "./tokenList";
 interface JupStatsContextProps {
     volumeByPairs: any[];
     topTokens: any[];
@@ -24,6 +25,7 @@ const JupStatsProvider = ({ children }: { children: any }) => {
     const [topTokens, setTopTokens] = useState([]);
     const [topBuys, setTopBuys] = useState([]);
     const [topSells, setTopSells] = useState([]);
+    const {splTokenList} = useTokenList(); 
     const convertObjectToArray = (obj: any) => {
         const array = Object.keys(obj).map((key) => ({
             value: obj[key],
@@ -37,9 +39,10 @@ const JupStatsProvider = ({ children }: { children: any }) => {
                 "https://tradingview.compendex.xyz/caching/"
             );
             if (data && data.success) {
-                let { lastXVolumeByPairs, lastXTopTokens, lastXTopBuy, lastXTopSell } =
+                let { lastXVolumeByAddresses, lastXTopTokens, lastXTopBuy, lastXTopSell } =
                     data.result;
-                setVolumesByPairs(convertObjectToArray(lastXVolumeByPairs));
+                const pairs = 
+                setVolumesByPairs(convertObjectToArray(lastXVolumeByAddresses));
                 setTopTokens(lastXTopTokens);
                 setTopBuys(lastXTopBuy);
                 setTopSells(lastXTopSell);

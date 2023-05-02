@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   root: {
     "& .Mui-selected": {
       backgroundColor: "#132235",
-      color: "#E2E8F0",
+      color: "#E2E8F0 !important",
       fontFamily: "Poppins",
       fontStyle: "normal",
       fontWeight: "400",
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
       borderBottom: "none"
     },
     "& .MuiTab-root": {
-      color: "#E2E8F0",
+      color: "#E2E8F0 !important",
       fontFamily: "Poppins",
       fontStyle: "normal",
       fontWeight: "400",
@@ -55,7 +55,7 @@ const BuySellCard = () => {
     setValue(newValue);
   };
   return (
-    <div className="home-card-container">
+    <div className=" data-card-container">
       {" "}
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>

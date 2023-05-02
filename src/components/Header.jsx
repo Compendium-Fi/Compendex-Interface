@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import Link from "next/link";
 import WalletConnect from "./WalletConnect";
 import { useSideBar } from "@/context/SideBar";
+import { useRouter } from "next/router";
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -19,6 +20,7 @@ function useWindowSize() {
 }
 const MainHeader = () => {
   const [width] = useWindowSize();
+  const router = useRouter();
   const [tokenPrice, setTokenPrice] = useState(null);
   const { isOpen, openSidebar, closeSidebar } = useSideBar();
   const toggleSideBar = () => {
@@ -28,8 +30,7 @@ const MainHeader = () => {
       openSidebar();
     }
   }
-  // const history = useHistory();
-  // const location = useLocation();
+
 
   const getTokenPrice = async () => {
     try {
@@ -74,7 +75,7 @@ const MainHeader = () => {
           </button>
           <div className="navbar-menu">
             <Link
-              className={`${location.pathname === "/"
+              className={`${router.pathname === "/"
                 ? "header-link-btn-selected"
                 : "header-link-btn"
                 } `}
@@ -83,7 +84,7 @@ const MainHeader = () => {
               <span>Overview</span>
             </Link>
             <Link
-              className={`${location.pathname.includes("/swap")
+              className={`${router.pathname.includes("/swap")
                 ? "header-link-btn-selected"
                 : "header-link-btn"
                 } `}
@@ -92,7 +93,7 @@ const MainHeader = () => {
               <span>Swap</span>
             </Link>
             <Link
-              className={`${location.pathname.includes("/serum")
+              className={`${router.pathname.includes("/serum")
                 ? "header-link-btn-selected"
                 : "header-link-btn"
                 } `}
@@ -100,18 +101,10 @@ const MainHeader = () => {
             >
               <span>Trade</span>
             </Link>
-            <Link
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-              className="header-link-btn"
-              href={"/nft"}
-            >
-              <span>NFT</span>
-            </Link>
+
 
             <Link
-              className={`${location.pathname.includes("/analytics")
+              className={`${router.pathname.includes("/analytics")
                 ? "header-link-btn-selected"
                 : "header-link-btn"
                 } `}
@@ -131,7 +124,7 @@ const MainHeader = () => {
             </Link>
             <Link
               href={"/toolbox"}
-              className={`${location.pathname.includes("/toolbox")
+              className={`${router.pathname.includes("/toolbox")
                 ? "header-link-btn-selected"
                 : "header-link-btn"
                 } `}
@@ -150,6 +143,15 @@ const MainHeader = () => {
                 </div>
               </div>
             </Link>
+            <a
+
+              className="header-link-btn"
+              href="docs.compendex.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Docs</span>
+            </a>
           </div>
         </div>
         <div className="header-content-mobile">
@@ -217,5 +219,5 @@ const MainHeader = () => {
     </div>
   );
 };
-MainHeader.ssr = false;
+
 export default MainHeader;

@@ -193,6 +193,7 @@ const MarketPulseChart = () => {
           justifyContent: "space-between",
           alignItems: "center",
           padding: "10px",
+          height:"100%"
         }}
       >
         <h1
@@ -260,7 +261,7 @@ const MarketPulseChart = () => {
             };
           })}
           type="line"
-          height={530}
+          height={480}
         />
       </div>
     </>

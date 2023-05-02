@@ -17,7 +17,7 @@ import {
   Token,
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID
-} from '@solana/spl-token';
+} from '@solana/spl-token-v1';
 import BN from "bn.js";
 import {
   DexInstructions,
@@ -766,7 +766,7 @@ export async function sendSignedTransaction({
     if (err.timeout) {
       throw new Error("Timed out awaiting confirmation on transaction");
     }
-    let simulateResult: SimulatedTransactionResponse | null = null;
+    let simulateResult: any | null = null;
     try {
       simulateResult = (
         await simulateTransaction(connection, signedTransaction, "single")

@@ -6,7 +6,7 @@ import {
   TOKEN_MINTS,
   TokenInstructions
 } from "@project-serum/serum";
-import { PublicKey } from "@solana/web3.js";
+import { Connection, PublicKey } from "@solana/web3.js";
 import React, { useContext, useEffect, useState } from "react";
 import {
   divideBnToNumber,
@@ -24,7 +24,9 @@ import { notify } from "./notifications";
 import BN from "bn.js";
 import {
 
+  getOwnedTokenAccounts,
   parseTokenAccountData,
+  useMintInfos,
 
 } from "./tokens";
 import {

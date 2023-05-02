@@ -241,7 +241,7 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
       let result = await axios.get(
         `https://pro-api.coingecko.com/api/v3/coins/${coingeckoId}/market_chart?vs_currency=USD&days=7`,
         {
-          headers: { "X-Cg-Pro-Api-Key": "CG-eyLBTfUJaAWUd1URUWNZ2vtc" },
+          headers: { "X-Cg-Pro-Api-Key": process.env.NEXT_PUBLIC_COINGECKO_PRO_KEY },
         }
       );
 
@@ -276,5 +276,5 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
     </>
   );
 };
-TradeHistoryChart.ssr = false;
+// TradeHistoryChart.ssr = false;
 export default TradeHistoryChart;

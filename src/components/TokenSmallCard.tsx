@@ -96,7 +96,7 @@ const TokenSmallCard = (props: {
   };
   const displayName = (elm) => {
     let token = splTokenList.find((tkn) => tkn.symbol === elm);
-    console.log("TOken",token)
+    console.log("TOken", token)
 
     if (token) {
       return elm;
@@ -382,11 +382,7 @@ const TokenSmallCard = (props: {
                 >
                   {tokenInfo &&
                     tokenInfo.coingecko.tickers
-                      .filter(
-                        (elm) =>
-                          elm.market.name.toUpperCase() !==
-                          "Jupiter".toUpperCase()
-                      )
+
                       .sort((a, b) => {
                         if (a.volume > b.volume) {
                           return -1;

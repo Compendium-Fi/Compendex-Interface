@@ -5,17 +5,14 @@ import { setCache, useAsyncData } from "./fetch-loop";
 //@ts-ignore
 import tuple from "immutable-tuple";
 import { ConnectionContextValues, EndpointInfo } from "./types";
-console.log(
-  "process.env.SOLANA_RPC_ENDPOINT",
-  process.env.NEXT_PUBLIC_SOLANA_RPC_ENDPOINT
-);
+
 
 export const ENDPOINTS: EndpointInfo[] = [
   {
     name: "mainnet-beta",
 
     endpoint: process.env.NEXT_PUBLIC_SOLANA_RPC_ENDPOINT
-      ? "https://radial-delicate-layer.solana-mainnet.discover.quiknode.pro/124d30642a313843475e1ac3f67e59d11d55d943"
+      ? process.env.NEXT_PUBLIC_SOLANA_RPC_ENDPOINT
       : "https://api.mainnet-beta.solana.com",
 
     custom: false,
@@ -55,7 +52,7 @@ export function ConnectionProvider({ children }: { children: any }) {
   // is empty after opening its first time, preventing subsequent subscriptions from receiving responses.
   // This is a hack to prevent the list from every getting empty
   useEffect(() => {
-    const id = connection.onAccountChange(new Account().publicKey, () => {});
+    const id = connection.onAccountChange(new Account().publicKey, () => { });
     return () => {
       connection.removeAccountChangeListener(id);
     };
@@ -71,7 +68,7 @@ export function ConnectionProvider({ children }: { children: any }) {
   useEffect(() => {
     const id = sendConnection.onAccountChange(
       new Account().publicKey,
-      () => {}
+      () => { }
     );
     return () => {
       sendConnection.removeAccountChangeListener(id);

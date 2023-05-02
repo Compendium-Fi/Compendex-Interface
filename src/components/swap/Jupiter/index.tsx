@@ -32,21 +32,23 @@ export const OUTPUT_MINT_ADDRESS =
 import WalletConnect from "@/components/WalletConnect";
 import { useSwapStyles } from "@/components/styles";
 import { useGlobalSwap } from "@/context/GlobalSwap";
+import { useTokenList } from "@/context/tokenList";
 import { useConnection } from "@/utils/connection";
-import { Button, Loader, UnstyledButton } from "@mantine/core";
+import { Button, Group, Loader, UnstyledButton } from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
 import { Refresh } from "@mui/icons-material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
 import { useJupiterApiContext } from "../../../context/jupiter";
 import { Slippage } from "./Slippage";
-import { useRouter } from "next/router";
-import { useTokenList } from "@/context/tokenList";
-
+import { setCookie } from "cookies-next";
 interface IJupiterFormProps { fromMint?: string, toMint?: string }
 
 const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
   const { classes, cx } = useSwapStyles();
   const { query } = useRouter();
+  const router = useRouter();
   const toastId = useRef(nanoid());
   const { splTokenList } = useTokenList();
   const [firstLoad, setFirstLoad] = useState(false);
@@ -90,6 +92,8 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
       if (fromTokenInfo && toTokenInfo) {
         setInputTokenInfo(tokenMap.get(fromTokenInfo.address) as TokenInfo);
         setOutputTokenInfo(tokenMap.get(toTokenInfo.address) as TokenInfo);
+        setCookie('fromToken', fromTokenInfo.symbol);
+        setCookie('toToken', toTokenInfo.symbol); 
         setFromMint(fromTokenInfo.address);
         setToMint(toTokenInfo.address);
         queryClient.refetchQueries([`tokenInfo-from`, fromTokenInfo.address]);
@@ -184,6 +188,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
       !isFinite(parsedAmount) ||
       !inputTokenInfo?.address
     ) {
+      showNotification({
+        title: <span>Error</span>,
+        message: <span>Invalid amount</span>,
+        color: 'red',
+
+        loading: false,
+      });
       // return toast.info(<p className="text-xs font-bold">Invalid amount</p>);
     }
 
@@ -200,13 +211,28 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
           : null;
 
     if (!userBalances) {
+      showNotification({
+        title: <span>Error</span>,
+        message: <span>Could not find user balances</span>,
+        color: 'red',
+
+        loading: false,
+      });
       // return toast.info(
       //   <p className="text-xs font-bold">Could not find user balances</p>
       // );
     }
 
     if (userBalances < parsedAmount) {
-      return <div></div>;
+      showNotification({
+        title: <span>Error</span>,
+        message: <span> Not enough balances (only have {userBalances.toFixed(2)})
+          {inputTokenInfo.symbol})</span>,
+        color: 'red',
+
+        loading: false,
+      });
+      //return <div></div>;
       // return toast.info(
       //   <p className="text-xs font-bold">
       //     Not enough balances (only have {round(userBalances, 2)}
@@ -219,6 +245,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
     try {
       if (!loadingRoute && selectedRoute && publicKey && signAllTransactions) {
         setSwapping(true);
+        showNotification({
+          title: <span>Info</span>,
+          message: <span>Preparing Transaction</span>,
+          color: 'blue',
+
+          loading: false,
+        });
         // toast(<RenderUpdate updateText="Preparing transaction" load={true} />, {
         //   type: toast.TYPE.INFO,
         //   autoClose: false,
@@ -264,7 +297,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
         //   ),
         //   toastId: toastId.current,
         // });
+        showNotification({
+          title: <span>Info</span>,
+          message: <span>Sending transaction</span>,
+          color: 'blue',
 
+          loading: true,
+        });
         await signAllTransactions([transaction]);
         const rawTransaction = transaction.serialize();
         const txid = await retry(async () => {
@@ -276,7 +315,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
           console.log(`https://solscan.io/tx/${tx}`);
           return tx;
         });
+        showNotification({
+          title: <span>Transaction confirmed 👌</span>,
+          message: <span>View Transaction on {<Link href={`https://solscan.io/tx/${txid}`} target="_blank">Solscan</Link>}</span>,
+          color: 'green',
 
+          loading: false,
+        });
         // let c = 1;
         // const len = transactions.length;
         // for (let transaction of transactions) {
@@ -311,6 +356,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
       console.error("Error", e);
       const isError = e instanceof Error;
       if (isError && e.message.includes("Transaction simulation")) {
+        showNotification({
+          title: <span>Transaction Failed </span>,
+          message: <span>Transaction simulation failed</span>,
+          color: 'red',
+
+          loading: false,
+        });
         // toast.update(toastId.current, {
         //   type: toast.TYPE.INFO,
         //   autoClose: 5_000,
@@ -322,6 +374,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
         //   ),
         // });
       } else if (isError && e.message.includes("blockhash")) {
+        showNotification({
+          title: <span>Transaction Failed </span>,
+          message: <span>Blockhash not found</span>,
+          color: 'red',
+
+          loading: false,
+        });
         // toast.update(toastId.current, {
         //   type: toast.TYPE.INFO,
         //   autoClose: 5_000,
@@ -400,18 +459,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
     <>
       <div className={classes.root}>
         <div style={{ position: "relative" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "20px",
-            }}
+          <Group my={10} position="apart" noWrap
+
           >
-            {/* <InfoLabel /> */}
+
 
             <Slippage slippage={slippage} setSlippage={setSlippage} />
-            {location.pathname === "/" ? (
+            {router.pathname === "/" ? (
               <Link href={"/swap"} className="swap-link-btn">
                 Click Here For Full Smart Swap Functionality 👆
               </Link>
@@ -419,7 +473,7 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
               <a
                 style={{
                   whiteSpace: "pre-wrap",
-                  fontFamily: "Poppins",
+                  fontFamily: "Roboto",
                   fontSize: "10px",
                   color: "rgba(226, 232, 240, 0.51)",
                   textAlign: "center",
@@ -435,7 +489,7 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
             <UnstyledButton onClick={() => { }}>
               <Refresh style={{ color: "#7791E0" }} />
             </UnstyledButton>
-          </div>
+          </Group>
         </div>
 
         <div className={classes.header}>
@@ -477,14 +531,8 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
             </UnstyledButton>
           </div>
 
-          <div className={classes.swapForm} style={{ marginBottom: "0.2em" }}>
-            <div>
-              <Balance
-                tokenAccounts={tokenAccounts}
-                token={outputTokenInfo}
-                solBalance={solBalance}
-              />
-            </div>
+          <div className={classes.swapForm}>
+
             <div className={classes.inputContainer}>
               <div>
                 <SelectCoin
@@ -494,6 +542,13 @@ const JupiterForm: FunctionComponent<IJupiterFormProps> = (props) => {
                 />
               </div>
               <div className={classes.outputDisplay}>{outputAmount}</div>
+            </div>
+            <div>
+              <Balance
+                tokenAccounts={tokenAccounts}
+                token={outputTokenInfo}
+                solBalance={solBalance}
+              />
             </div>
           </div>
 

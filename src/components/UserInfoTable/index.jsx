@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     minHeight: 0,
     "& .Mui-selected": {
       backgroundColor: "#132235",
-      color: "#E2E8F0",
+      color: "#E2E8F0 !important",
       fontFamily: "Poppins",
       fontStyle: "normal",
       fontWeight: "400",

@@ -45,7 +45,7 @@ export const Balance = ({
     <div className={classes.balanceContainer}>
       <span className={classes.balanceLabel}>Balance: </span>
       <span className={classes.balanceValue}>
-        {" "}
+
         {round(wSol ? solBalance?.uiAmount || 0 : balance, 2)}
       </span>
 

@@ -6,11 +6,11 @@ import {
   ChartingLibraryWidgetOptions, IChartingLibraryWidget, widget
 } from "../../../public/static/charting_library";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { convertResolutionToApi, useTvDataFeed } from "@/utils/Datafeed";
+import React from "react";
 import { useMarket } from "../../utils/markets";
 import { flatten } from "../../utils/utils";
-import React from "react";
-import { convertResolutionToApi, useTvDataFeed } from "@/utils/Datafeed";
+import { useIsClient } from "@/hooks/useIsClient";
 
 export interface ChartContainerProps {
   symbol: ChartingLibraryWidgetOptions["symbol"];
@@ -36,7 +36,8 @@ export interface ChartContainerState { }
 
 const TVChartContainer = () => {
   let datafeed = useTvDataFeed();
-  let resolution = window.localStorage.getItem("resolution") ?? "60";
+  const isClient = useIsClient();
+  let resolution = isClient ? window.localStorage.getItem("resolution") ?? "60" : "60";
 
   try {
     convertResolutionToApi(resolution);
@@ -52,8 +53,8 @@ const TVChartContainer = () => {
     theme: "Dark",
     containerId: "tv_chart_container",
     libraryPath: "/static/charting_library/",
-  
-    datafeedUrl:"https://tradingview.compendex.xyz",
+
+    datafeedUrl: process.env.NEXT_PUBLIC_DATA_FEED_ENDPOINT,
     chartsStorageApiVersion: "1.1",
     clientId: "tradingview.com",
     userId: "public_user_id",
@@ -71,87 +72,90 @@ const TVChartContainer = () => {
   );
 
   React.useEffect(() => {
-    const savedProperties = flatten(chartProperties, {
-      restrictTo: ["scalesProperties", "paneProperties", "tradingProperties"],
-    });
+    if (isClient) {
+      const savedProperties = flatten(chartProperties, {
+        restrictTo: ["scalesProperties", "paneProperties", "tradingProperties"],
+      });
 
-    const widgetOptions: ChartingLibraryWidgetOptions = {
-      symbol: marketName as string,
-      //datafeed: datafeed,
-      datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(
-        defaultProps.datafeedUrl
-      ),
-      interval:
-        defaultProps.interval as ChartingLibraryWidgetOptions["interval"],
-      container_id:
-        defaultProps.containerId as ChartingLibraryWidgetOptions["container_id"],
-      library_path: defaultProps.libraryPath as string,
-      auto_save_delay: 5,
+      const widgetOptions: ChartingLibraryWidgetOptions = {
+        symbol: marketName as string,
+        //datafeed: datafeed,
+        datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(
+          defaultProps.datafeedUrl
+        ),
+        interval:
+          defaultProps.interval as ChartingLibraryWidgetOptions["interval"],
+        container_id:
+          defaultProps.containerId as ChartingLibraryWidgetOptions["container_id"],
+        library_path: defaultProps.libraryPath as string,
+        auto_save_delay: 5,
 
-      locale: "en",
-      disabled_features: ["use_localstorage_for_settings"],
-      enabled_features: ["study_templates"],
-      load_last_chart: true,
-      client_id: defaultProps.clientId,
-      user_id: defaultProps.userId,
-      fullscreen: defaultProps.fullscreen,
-      autosize: defaultProps.autosize,
-      studies_overrides: defaultProps.studiesOverrides,
-      theme: defaultProps.theme === "Dark" ? "Dark" : "Dark",
-      overrides: {
-        ...savedProperties,
-        "mainSeriesProperties.candleStyle.upColor": "#32CD99",
-        "mainSeriesProperties.candleStyle.downColor": "#F23B69",
-        "mainSeriesProperties.candleStyle.borderUpColor": "#32CD99",
-        "mainSeriesProperties.candleStyle.borderDownColor": "#F23B69",
-        "mainSeriesProperties.candleStyle.wickUpColor": "#32CD99",
-        "mainSeriesProperties.candleStyle.wickDownColor": "#F23B69",
-        "paneProperties.background": "rgba(0,0,0,0)",
-        "paneProperties.backgroundType": "solid",
-      },
-      // @ts-ignore
-      save_load_adapter: saveLoadAdapter,
-      settings_adapter: {
-        initialSettings: {
-          "trading.orderPanelSettingsBroker": JSON.stringify({
-            showRelativePriceControl: false,
-            showCurrencyRiskInQty: false,
-            showPercentRiskInQty: false,
-            showBracketsInCurrency: false,
-            showBracketsInPercent: false,
-          }),
-          // "proterty"
-          "trading.chart.proterty":
-            localStorage.getItem("trading.chart.proterty") ||
-            JSON.stringify({
-              hideFloatingPanel: 1,
-            }),
-          "chart.favoriteDrawings":
-            localStorage.getItem("chart.favoriteDrawings") ||
-            JSON.stringify([]),
-          "chart.favoriteDrawingsPosition":
-            localStorage.getItem("chart.favoriteDrawingsPosition") ||
-            JSON.stringify({}),
+        locale: "en",
+        disabled_features: ["use_localstorage_for_settings"],
+        enabled_features: ["study_templates"],
+        load_last_chart: true,
+        client_id: defaultProps.clientId,
+        user_id: defaultProps.userId,
+        fullscreen: defaultProps.fullscreen,
+        autosize: defaultProps.autosize,
+        studies_overrides: defaultProps.studiesOverrides,
+        theme: defaultProps.theme === "Dark" ? "Dark" : "Dark",
+        overrides: {
+          ...savedProperties,
+          "mainSeriesProperties.candleStyle.upColor": "#32CD99",
+          "mainSeriesProperties.candleStyle.downColor": "#F23B69",
+          "mainSeriesProperties.candleStyle.borderUpColor": "#32CD99",
+          "mainSeriesProperties.candleStyle.borderDownColor": "#F23B69",
+          "mainSeriesProperties.candleStyle.wickUpColor": "#32CD99",
+          "mainSeriesProperties.candleStyle.wickDownColor": "#F23B69",
+          "paneProperties.background": "rgba(0,0,0,0)",
+          "paneProperties.backgroundType": "solid",
         },
-        setValue: (key, value) => {
-          localStorage.setItem(key, value);
-        },
-        removeValue: (key) => {
-          localStorage.removeItem(key);
-        },
-      },
-    };
-
-    const tvWidget = new widget(widgetOptions);
-
-    tvWidget.onChartReady(() => {
-      tvWidgetRef.current = tvWidget;
-      tvWidget
         // @ts-ignore
-        .subscribe("onAutoSaveNeeded", () => tvWidget.saveChartToServer());
-    });
-  }, [marketName]);
+        save_load_adapter: saveLoadAdapter,
+        settings_adapter: {
+          initialSettings: {
+            "trading.orderPanelSettingsBroker": JSON.stringify({
+              showRelativePriceControl: false,
+              showCurrencyRiskInQty: false,
+              showPercentRiskInQty: false,
+              showBracketsInCurrency: false,
+              showBracketsInPercent: false,
+            }),
+            // "proterty"
+            "trading.chart.proterty":
+              localStorage.getItem("trading.chart.proterty") ||
+              JSON.stringify({
+                hideFloatingPanel: 1,
+              }),
+            "chart.favoriteDrawings":
+              localStorage.getItem("chart.favoriteDrawings") ||
+              JSON.stringify([]),
+            "chart.favoriteDrawingsPosition":
+              localStorage.getItem("chart.favoriteDrawingsPosition") ||
+              JSON.stringify({}),
+          },
+          setValue: (key, value) => {
+            localStorage.setItem(key, value);
+          },
+          removeValue: (key) => {
+            localStorage.removeItem(key);
+          },
+        },
+      };
+
+      const tvWidget = new widget(widgetOptions);
+
+      tvWidget.onChartReady(() => {
+        tvWidgetRef.current = tvWidget;
+        tvWidget
+          // @ts-ignore
+          .subscribe("onAutoSaveNeeded", () => tvWidget.saveChartToServer());
+      });
+    }
+  }, [marketName, isClient]);
   return <div id={defaultProps.containerId} className={"TVChartContainer"} />;
 };
+TVChartContainer.ssr = false;
 
 export default TVChartContainer;

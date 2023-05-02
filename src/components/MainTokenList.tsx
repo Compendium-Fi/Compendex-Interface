@@ -1,7 +1,8 @@
 import { TokenInfo } from "@solana/spl-token-registry";
 import React, { useContext, useMemo } from "react";
-import { SOL_MINT } from "../swap-ui/utils/pubkeys";
-
+//import {  } from "../swap-ui/utils/pubkeys";
+import { PublicKey } from "@solana/web3.js";
+const SOL_MINT=new PublicKey('So11111111111111111111111111111111111111112')
 type TokenListContext = {
   tokenMap: Map<string, TokenInfo>;
   wormholeMap: Map<string, TokenInfo>;

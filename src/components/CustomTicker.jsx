@@ -4,7 +4,7 @@ const CustomTicker = ({ children }) => {
   const tickerRef = useRef(null);
 
   const handleMouseEnter = () => {
-    console.log("entred");
+   
     setIsPaused(true);
   };
 

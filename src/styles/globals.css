@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@500&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@500&display=swap');
+.MuiTab-textColorPrimary.Mui-selected{
+  color:#E2E8F0 !important;
+}
 @media screen and (max-width: 1850px) {
   .tradePage {
     height: 100% !important;
@@ -11573,13 +11576,6 @@ code {
   .info_btn {
     display: none !important;
   }
-  .sidebar_color {
-    /* background: linear-gradient(
-      180deg,
-      rgba(45, 45, 50, 0.9) 50%,
-      rgba(27, 27, 31, 0.8) 75.17%
-    ) !important;  */
-  }
 
   .sidebar__head .sidebar__close {
     font-size: 17px !important;
@@ -11587,8 +11583,7 @@ code {
 }
 
 .new-background {
-  /* background-color: rgb(255, 255, 255);
-  box-shadow: rgb(128 128 128 / 30%) 0px 4px 16px 2px; */
+
   border-radius: 5px !important;
 }
 .card_activities {
@@ -11646,9 +11641,7 @@ code {
   padding: 16px;
   margin-bottom: 0.7em;
 
-  /* or 133% */
 
-  /* State/Bold (White) */
 
   color: #ffffff;
 }
@@ -12445,6 +12438,7 @@ code {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
+  font-size: 12px !important;
 }
 .news-info #news-title {
   white-space: pre-wrap;
@@ -14053,6 +14047,11 @@ code {
 }
 #chart-btns {
   padding: 0.3em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 5px;
+  flex-wrap: wrap;
 }
 .MuiTab-textColorPrimary-2693 {
   font-family: "Poppins" !important;
@@ -14462,13 +14461,6 @@ code {
   .info_btn {
     display: none !important;
   }
-  .sidebar_color {
-    /* background: linear-gradient(
-      180deg,
-      rgba(45, 45, 50, 0.9) 50%,
-      rgba(27, 27, 31, 0.8) 75.17%
-    ) !important;  */
-  }
 
   .sidebar__head .sidebar__close {
     font-size: 17px !important;
@@ -14584,10 +14576,6 @@ code {
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  /* identical to box height, or 133% */
-
-  /* State/Bold (White) */
-
   color: #ffffff;
 }
 .small-search-bar {
@@ -14596,9 +14584,7 @@ code {
   background: rgb(241, 241, 241) !important;
   border-radius: 20px !important;
 }
-/* .small-search-bar:focus-visible{
-  border: none !important;
-} */
+
 .market-link {
   font-family: Inter;
   font-style: normal;
@@ -15334,6 +15320,7 @@ code {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
+  font-size: 12px !important;
 }
 .news-info #news-title {
   white-space: pre-wrap;
@@ -15642,7 +15629,7 @@ input[type="number"] {
   padding: 5px !important;
   text-align: center;
   align-items: center;
-  border: 1px solid rgb(19, 34, 53);
+
   background-color: rgba(19, 34, 53, 0.5);
   height: 30px;
 }
@@ -15768,6 +15755,19 @@ input[type="number"] {
   grid-gap: 5px;
   gap: 5px;
 }
+.price-title img {
+  width: 30px;
+  height: 30px;
+}
+.price-title span {
+  white-space: pre-wrap;
+  overflow: visible;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(226, 232, 240);
+  line-height: 1;
+}
 .ticker-container {
   width: 100%; /* width of the ticker container */
   overflow: hidden; /* hide the text that goes out of the container */
@@ -15809,4 +15809,24 @@ input[type="number"] {
   color: rgb(50, 205, 153) !important;
   text-align: right;
   line-height: 1;
+}
+.card-label {
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(181, 181, 181);
+  text-align: center;
+  line-height: 1;
+  align-self: center;
+  margin-left: 25px;
+}
+@media screen and (max-width: 530px) {
+  .text-connect {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  .news-info #news-description{
+    display: none !important;
+    visibility: hidden !important;
+  }
 }

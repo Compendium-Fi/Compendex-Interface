@@ -3,16 +3,15 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import pricingIcon from "../../assets/img/pricing.png";
 import AnalyticsChart from "../../components/AnalyticsChart";
 import CustomTicker from "../../components/CustomTicker";
+import FloatingNavBar from "../../components/layout/FloatingNavbar";
 import OpenBookMarkets from "../../components/OpenBookMarkets";
 import PoolYields from "../../components/PoolYields";
 import StableCoins from "../../components/StableCoins";
 import TickerItem from "../../components/TickerItem";
 import TopLendingYields from "../../components/TopLendingYields";
 import TopTVLComp from "../../components/TopTVLComp";
-import FloatingNavBar from "../../components/layout/FloatingNavbar";
 import { getTokenTickers } from "../../utils/tokenApi";
 //import PoolItem from "../../components/PoolItem";
 // import "../home.css";
@@ -76,6 +75,16 @@ const useStyles = makeStyles({
 });
 export default function AnalyticsMain() {
   return <TradePageInner />;
+}
+export async function getStaticProps(context) {
+  return {
+    props: {
+      name: "Solana TVL & Protocol Data | Compendex",
+      description:
+        "Compendex aggregates accurate analytics, TVL information, prices, and more from several reputable sources for protocols on Solana.",
+      image: "https://res.cloudinary.com/doohfu9i4/image/upload/v1682543816/Compendex_-_Solana_Data_Image_gjxcyu.png"
+    }, // will be passed to the page component as props
+  };
 }
 
 function TradePageInner() {
@@ -165,7 +174,7 @@ function TradePageInner() {
                           gap: "5px",
                         }}
                       >
-                        {/* <img src={pricingIcon} alt="" /> */}
+                        <img src={"/assets/img/pricing.png"} alt="" />
                         <span>Price Movements</span>
                       </div>
                     </Col>
@@ -219,7 +228,7 @@ function TradePageInner() {
                           gap: "5px",
                         }}
                       >
-                        {/* <img src={pricingIcon} alt="" /> */}
+                        <img src={"/assets/img/pricing.png"} alt="" />
                         <span>Price Movements</span>
                       </div>
                     </Col>
@@ -288,7 +297,7 @@ const RenderNormal = ({ screenWidth }) => {
         }}
       >
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={statsTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -339,7 +348,7 @@ const RenderNormal = ({ screenWidth }) => {
         </Col>
 
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -381,7 +390,7 @@ const RenderNormal = ({ screenWidth }) => {
         }}
       >
         <Col flex={"436px"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -408,7 +417,7 @@ const RenderNormal = ({ screenWidth }) => {
           </div>
         </Col>
         <Col flex={"436px"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -624,7 +633,7 @@ const RenderMedium = ({ screenWidth }) => {
         }}
       >
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={statsTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -688,7 +697,7 @@ const RenderMedium = ({ screenWidth }) => {
         }}
       >
         <Col flex={"auto"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -716,7 +725,7 @@ const RenderMedium = ({ screenWidth }) => {
         </Col>
 
         <Col flex={"auto"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -743,7 +752,7 @@ const RenderMedium = ({ screenWidth }) => {
           </div>
         </Col>
         <Col flex={"auto"}>
-          <div className="home-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -856,7 +865,7 @@ const RenderSmall = ({ screenWidth }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={statsTab}>
                 <Box
                   sx={{
@@ -917,7 +926,7 @@ const RenderSmall = ({ screenWidth }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={nftTab}>
                 <Box
                   sx={{
@@ -952,7 +961,7 @@ const RenderSmall = ({ screenWidth }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={nftTab}>
                 <Box
                   sx={{
@@ -993,7 +1002,7 @@ const RenderSmall = ({ screenWidth }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={nftTab}>
                 <Box
                   sx={{

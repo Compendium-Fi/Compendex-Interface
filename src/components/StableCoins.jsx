@@ -28,18 +28,9 @@ const StableCoins = () => {
       let assetList = data.peggedAssets.filter((elm) =>
         elm.chains.includes("Solana")
       );
-      //console.log("Asset list", assetList);
+
       let mappedData = assetList.map((elm) => {
         try {
-          //   let { data } = await axios.get(
-          //     `https://stablecoins.llama.fi/stablecoincharts/Solana?stablecoin=${elm.id}`
-          //   );
-
-          //   let tokenInfo = await fetchTokenPrice(elm.gecko_id);
-          //   let marketInfo = await getTokenInfoCoinGecko(elm.gecko_id);
-          //   let maxPriceList = marketInfo.prices.map((elm) => elm[1]);
-          //   const max = Math.max(...maxPriceList);
-          //console.log("Max Price", max);
 
           let splInfo = splTokenList.find(
             (tkn) => tkn.symbol.toUpperCase() === elm.symbol.toUpperCase()
@@ -65,12 +56,6 @@ const StableCoins = () => {
 
       setProtocolList(mappedData);
 
-      //   let totalData = await axios.get(
-      //     `https://stablecoins.llama.fi/stablecoinchains`
-      //   );
-      //   let solanaData = totalData.data.find((elm) => elm.tokenSymbol === "SOL");
-
-      //   setTotalMarketCap(solanaData.totalCirculatingUSD.peggedUSD);
     } catch (error) {
       console.log("Error", error.message);
     }
@@ -103,10 +88,10 @@ const StableCoins = () => {
                   />
                 }
                 <div className={classes.stableCoinName}>
-                  <span id="stable-coin-name">
+                  <span id="stable-coin-name" style={{ fontSize: "12px" }}>
                     {elm.name} ({elm.symbol})
                   </span>
-                  <div id="stable-coin-price">
+                  <div id="stable-coin-price"  style={{ fontSize: "12px" }}>
                     Peg:{" "}
                     <span
                       className={`${relDiff(
@@ -133,14 +118,14 @@ const StableCoins = () => {
                   </div>
                 </div>
               </div>
-              <div className={classes.stableCoinPricing}>
+              <div className={classes.stableCoinPricing}  style={{ fontSize: "12px" }}>
                 <span id="usd-price">
                   $
                   {numeral(
                     elm.chainCirculating.Solana.current.peggedUSD
                   ).format("0,0.000")}
                 </span>
-                <span id="volume">Total Marketcap</span>
+                <span className={classes.volumeItem} style={{ fontSize: "12px" }}>Total Marketcap</span>
               </div>
             </div>
           );

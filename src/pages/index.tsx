@@ -22,6 +22,8 @@ import { useViewport } from "@/context/viewPort";
 import { useCommonStyles } from "@/components/styles";
 
 import JupiterForm from "@/components/swap/Jupiter";
+import { Skeleton } from "@mantine/core";
+
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
@@ -54,7 +56,8 @@ const useStyles = makeStyles({
       border: "1px solid #132235",
 
       borderTopRadius: "5px",
-      borderBottom: "none", minWith: "150px",
+      borderBottom: "none",
+      minWith: "150px",
     },
     "& .MuiTab-root": {
       color: "#E2E8F0",
@@ -80,10 +83,26 @@ const useStyles = makeStyles({
     },
   },
 });
-export default function Home() {
-  return <TradePageInner />;
+export async function getStaticProps(context) {
+  return {
+    props: {
+      name: "DEX Trading Terminal | Compendex",
+      description:
+        "Introducing the next generation of trading technology: an open-source, professional-grade trading terminal for Solana. This platform aggregates protocols and analytics across Solana to help improve market efficiency and equalize opportunities for all.",
+      image: "https://res.cloudinary.com/doohfu9i4/image/upload/v1682543816/Compendex_-_Solana_Terminal_Overview_Image_tl8h2s.png"
+    }, // will be passed to the page component as props
+  };
 }
-
+export default function Home() {
+  return (
+    <>
+      {/* <SeoLayout title="DEX Trading Terminal | Compendex" > */}
+      <TradePageInner />
+      {/* </SeoLayout> */}
+    </>
+  );
+}
+// description=" Introducing the next generation of trading technology: an open-source, professional-grade trading terminal for Solana. This platform aggregates protocols and analytics across Solana to help improve market efficiency and equalize opportunities for all."
 function TradePageInner() {
   const [handleDeprecated, setHandleDeprecated] = useState(false);
   const [tokenTickers, setTokenTickers] = useState([]);
@@ -98,21 +117,19 @@ function TradePageInner() {
 
   useEffect(() => {
     initTickers();
-    const handleResize = () => {
-
-    };
+    const handleResize = () => { };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-
-
   const componentProps = {
     onChangeOrderRef: (ref: any) => (changeOrderRef.current = ref),
     onPrice: useCallback(
       //@ts-ignore
-      (price: any) => changeOrderRef.current && changeOrderRef.current({ price }),
+      (price: any) =>
+        //@ts-ignore
+        changeOrderRef.current && changeOrderRef.current({ price }),
       []
     ),
     onSize: useCallback(
@@ -195,7 +212,7 @@ function TradePageInner() {
                       </div>
                     </Col>
                     <Col flex={"auto"}>
-                      <div className={'parent-container'}>
+                      <div className={"parent-container"}>
                         <CustomTicker>
                           {tokenTickers &&
                             tokenTickers.map((elm) => <TickerItem elm={elm} />)}
@@ -288,7 +305,11 @@ function TradePageInner() {
   );
 }
 
-const DeprecatedMarketsPage = ({ switchToLiveMarkets }: { switchToLiveMarkets: any }) => {
+const DeprecatedMarketsPage = ({
+  switchToLiveMarkets,
+}: {
+  switchToLiveMarkets: any;
+}) => {
   return (
     <>
       <Row>
@@ -298,7 +319,17 @@ const DeprecatedMarketsPage = ({ switchToLiveMarkets }: { switchToLiveMarkets: a
   );
 };
 
-const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onChangeOrderRef: any, onPrice: any, onSize: any, screenWidth: any }) => {
+const RenderNormal = ({
+  onChangeOrderRef,
+  onPrice,
+  onSize,
+  screenWidth,
+}: {
+  onChangeOrderRef: any;
+  onPrice: any;
+  onSize: any;
+  screenWidth: any;
+}) => {
   const { classes: commonClasses } = useCommonStyles();
   const [chartValue, setChartValue] = useState("1");
   const [oderValue, setOrderValue] = useState("1");
@@ -321,7 +352,6 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
     setStatsTab(newValue);
   };
   const handleOrderChange = (event: any, newValue: string) => {
-    console.log("New Value", newValue);
     if (newValue === "2") {
       history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
     } else {
@@ -351,7 +381,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         }}
       >
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={oderValue}>
               <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                 <TabList
@@ -400,7 +430,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         </Col>
 
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             {" "}
             <TabContext value={trendingSwapView}>
               <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
@@ -416,40 +446,64 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
               </Box>
               <TabPanel value="1">
                 <div className="inner-tab" style={{ padding: "0.7em" }}>
-                  {volumeByPairs.slice(0, 10).map((elm, ind) => (
-                    <TrendingSwapItem
-                      sellTokenSymbol={elm.name.split("/")[0]}
-                      buyTokenSymbol={elm.name.split("/")[1]}
-                      key={ind.toString()}
-                      volume={elm.value}
-                    />
-                  ))}
+                  <Skeleton
+                    visible={volumeByPairs.length == 0}
+                    sx={{
+                      "&::before": { background: "#0f172a" },
+                      "&::after": { background: "#17264a" },
+                    }}
+                  >
+                    {volumeByPairs.slice(0, 10).map((elm, ind) => (
+                      <TrendingSwapItem
+                        sellTokenSymbol={elm.name.split("/")[0]}
+                        buyTokenSymbol={elm.name.split("/")[1]}
+                        key={ind.toString()}
+                        volume={elm.value}
+                      />
+                    ))}
+                  </Skeleton>
                 </div>
               </TabPanel>
               <TabPanel value="2">
                 {" "}
                 <div className="inner-tab" style={{ padding: "0.7em" }}>
-                  {topBuys.slice(0, 10).map((elm, ind) => (
-                    <SellBuyItem
-                      key={ind.toString()}
-                      tokenSymbol={elm.symbol}
-                      volume={elm.amount}
-                      side={"buy"}
-                    />
-                  ))}
+                  <Skeleton
+                    visible={volumeByPairs.length == 0}
+                    sx={{
+                      "&::before": { background: "#0f172a" },
+                      "&::after": { background: "#17264a" },
+                    }}
+                  >
+                    {topBuys.slice(0, 10).map((elm, ind) => (
+                      <SellBuyItem
+                        key={ind.toString()}
+                        tokenSymbol={elm.symbol}
+                        volume={elm.amount}
+                        side={"buy"}
+                      />
+                    ))}
+                  </Skeleton>
                 </div>
               </TabPanel>
               <TabPanel value="3">
                 {" "}
                 <div className="inner-tab" style={{ padding: "0.7em" }}>
-                  {topSells.slice(0, 10).map((elm, ind) => (
-                    <SellBuyItem
-                      key={ind.toString()}
-                      tokenSymbol={elm.symbol}
-                      volume={elm.amount}
-                      side={"sell"}
-                    />
-                  ))}
+                  <Skeleton
+                    visible={volumeByPairs.length == 0}
+                    sx={{
+                      "&::before": { background: "#0f172a" },
+                      "&::after": { background: "#17264a" },
+                    }}
+                  >
+                    {topSells.slice(0, 10).map((elm, ind) => (
+                      <SellBuyItem
+                        key={ind.toString()}
+                        tokenSymbol={elm.symbol}
+                        volume={elm.amount}
+                        side={"sell"}
+                      />
+                    ))}
+                  </Skeleton>
                 </div>
               </TabPanel>
             </TabContext>
@@ -474,7 +528,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         }}
       >
         <Col flex={"436px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -513,7 +567,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
           </div>
         </Col>
         <Col flex={"436px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={statsTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -584,7 +638,17 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
     </>
   );
 };
-const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onChangeOrderRef: any, onPrice: any, onSize: any, screenWidth: any }) => {
+const RenderMedium = ({
+  onChangeOrderRef,
+  onPrice,
+  onSize,
+  screenWidth,
+}: {
+  onChangeOrderRef: any;
+  onPrice: any;
+  onSize: any;
+  screenWidth: any;
+}) => {
   const { classes: commonClasses } = useCommonStyles();
   const [chartValue, setChartValue] = useState("1");
   const [oderValue, setOrderValue] = useState("1");
@@ -607,9 +671,8 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
     setStatsTab(newValue);
   };
   const handleOrderChange = (event: any, newValue: string) => {
-    console.log("New Value", newValue);
     if (newValue === "2") {
-      history.push("/serum");
+      history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
     } else {
       setOrderValue(newValue);
     }
@@ -637,7 +700,7 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         }}
       >
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={oderValue}>
               <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                 <TabList
@@ -656,7 +719,6 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
                 <JupiterForm />
               </TabPanel>
               <TabPanel value="2"></TabPanel>
-
             </TabContext>
           </div>
         </Col>
@@ -678,7 +740,10 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
               <TabPanel value="1">
                 <MarketPulseChart />
               </TabPanel>
-              <TabPanel value="2"> <AnalyticsChart /></TabPanel>
+              <TabPanel value="2">
+                {" "}
+                <AnalyticsChart />
+              </TabPanel>
             </TabContext>
           </div>
         </Col>
@@ -699,7 +764,7 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         }}
       >
         <Col flex={"360px"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             {" "}
             <TabContext value={trendingSwapView}>
               <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
@@ -715,27 +780,43 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
               </Box>
               <TabPanel value="1">
                 <div className="inner-tab" style={{ padding: "0.7em" }}>
-                  {volumeByPairs.slice(0, 10).map((elm, ind) => (
-                    <TrendingSwapItem
-                      sellTokenSymbol={elm.name.split("/")[0]}
-                      buyTokenSymbol={elm.name.split("/")[1]}
-                      key={ind.toString()}
-                      volume={elm.value}
-                    />
-                  ))}
+                  <Skeleton
+                    visible={volumeByPairs.length == 0}
+                    sx={{
+                      "&::before": { background: "#0f172a" },
+                      "&::after": { background: "#17264a" },
+                    }}
+                  >
+                    {volumeByPairs.slice(0, 10).map((elm, ind) => (
+                      <TrendingSwapItem
+                        sellTokenSymbol={elm.name.split("/")[0]}
+                        buyTokenSymbol={elm.name.split("/")[1]}
+                        key={ind.toString()}
+                        volume={elm.value}
+                      />
+                    ))}
+                  </Skeleton>
                 </div>
               </TabPanel>
               <TabPanel value="2">
                 {" "}
                 <div className="inner-tab" style={{ padding: "0.7em" }}>
-                  {topBuys.slice(0, 10).map((elm, ind) => (
-                    <SellBuyItem
-                      key={ind.toString()}
-                      tokenSymbol={elm.symbol}
-                      volume={elm.amount}
-                      side={"buy"}
-                    />
-                  ))}
+                  <Skeleton
+                    visible={volumeByPairs.length == 0}
+                    sx={{
+                      "&::before": { background: "#0f172a" },
+                      "&::after": { background: "#17264a" },
+                    }}
+                  >
+                    {topBuys.slice(0, 10).map((elm, ind) => (
+                      <SellBuyItem
+                        key={ind.toString()}
+                        tokenSymbol={elm.symbol}
+                        volume={elm.amount}
+                        side={"buy"}
+                      />
+                    ))}
+                  </Skeleton>
                 </div>
               </TabPanel>
               <TabPanel value="3">
@@ -759,7 +840,7 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
         </Col>
 
         <Col flex={"auto"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -798,7 +879,7 @@ const RenderMedium = ({ onChangeOrderRef, onPrice, onSize, screenWidth }: { onCh
           </div>
         </Col>
         <Col flex={"auto"}>
-          <div className="home-card-container">
+          <div className=" data-card-container">
             <TabContext value={statsTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}
@@ -909,7 +990,7 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
   };
   const handleOrderChange = (event: any, newValue: string) => {
     if (newValue === "2") {
-      history.push("/serum");
+      history.push("/market/8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
     } else {
       setOrderValue(newValue);
     }
@@ -930,7 +1011,7 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={oderValue}>
                 <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
                   <TabList
@@ -975,7 +1056,10 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
                 <TabPanel value="1">
                   <MarketPulseChart />
                 </TabPanel>
-                <TabPanel value="2"> <AnalyticsChart /></TabPanel>
+                <TabPanel value="2">
+                  {" "}
+                  <AnalyticsChart />
+                </TabPanel>
               </TabContext>
             </div>
           </Col>
@@ -985,7 +1069,7 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               {" "}
               <TabContext value={trendingSwapView}>
                 <Box sx={{ borderBottom: 1, borderColor: "#132235" }}>
@@ -1048,7 +1132,7 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={nftTab}>
                 <Box
                   sx={{
@@ -1095,7 +1179,7 @@ const RenderSmall = ({ screenWidth }: { screenWidth: any }) => {
           style={{ marginTop: "20px", marginLeft: "5px", marginRight: "5px" }}
         >
           <Col flex={"auto"}>
-            <div className="home-card-container">
+            <div className="data-card-container">
               <TabContext value={statsTab}>
                 <Box
                   sx={{
