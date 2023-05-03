@@ -14047,8 +14047,9 @@ code {
 }
 #chart-btns {
   padding: 0.3em;
+  margin: 0.3em;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: flex-start;
   gap: 5px;
   flex-wrap: wrap;
