@@ -840,7 +840,7 @@ const RenderMedium = ({
         </Col>
 
         <Col flex={"auto"}>
-          <div className=" data-card-container">
+          <div className="data-card-container">
             <TabContext value={nftTab}>
               <Box
                 sx={{ borderBottom: 1, borderColor: "#132235", height: "30px" }}

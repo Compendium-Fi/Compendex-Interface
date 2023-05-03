@@ -1,19 +1,17 @@
-import { Box, Button, makeStyles, Tab } from "@material-ui/core";
-import { MoreVertOutlined } from "@material-ui/icons";
-import { NewspaperSharp } from "@mui/icons-material";
+import { Box, makeStyles, Tab } from "@material-ui/core";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Col, Row } from "antd";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import styled from "styled-components";
 
 
-import FloatingNavBar from "../../components/layout/FloatingNavbar";
-import { getTokenTickers } from "../../utils/tokenApi";
-import axios from "axios";
-import ToolBoxItem from "../../components/ToolBoxItem";
-import { useRouter } from "next/router";
 import { useViewport } from "@/context/viewPort";
+import axios from "axios";
+import { useRouter } from "next/router";
+import FloatingNavBar from "../../components/layout/FloatingNavbar";
+import ToolBoxItem from "../../components/ToolBoxItem";
+import { getTokenTickers } from "../../utils/tokenApi";
 const instance = axios.create({
     maxRedirects: 10, // Set the maximum number of redirects to follow
     validateStatus: function (status) {
