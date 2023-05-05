@@ -716,7 +716,7 @@ const RenderNormal = ({
       );
       if (token) {
         return {
-          tokenId: token.extensions.coingeckoId,
+          tokenId: token.extensions && token.extensions ? token.extensions.coingeckoId : "",
           name: token.name,
         };
       } else {
