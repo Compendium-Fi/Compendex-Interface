@@ -38,6 +38,7 @@ import { useRouter } from "next/router";
 import { useIsClient } from "@/hooks/useIsClient";
 import { Skeleton } from "@mantine/core";
 import { customMarketsList } from "@/utils/customMarkets";
+import { isScientificNotation } from "@/utils/tokens-utils";
 const TVChartContainer = dynamic(
   () => import("../../components/TradingView/index"),
   {
@@ -171,8 +172,10 @@ function TradePageInner() {
       selectedToken.extensions &&
       selectedToken.extensions.coingeckoId
     ) {
+      console.log("Selected Token", selectedToken);
       fetchTokenPrice(selectedToken.extensions.coingeckoId).then(
         (tokenData) => {
+          console.log("Token DATA", tokenData);
           //@ts-ignore
           setSelectedToken(tokenData);
         }
@@ -370,10 +373,10 @@ function TradePageInner() {
                             <span>
                               $
                               {selectedToken &&
-                                selectedToken.marketData &&
-                                numeral(
-                                  selectedToken.marketData.current_price.usd
-                                ).format("0,0.0000")}
+                                (selectedToken.marketData && isScientificNotation(selectedToken.marketData.current_price.usd) ? selectedToken.marketData.current_price.usd :
+                                  numeral(
+                                    selectedToken.marketData.current_price.usd
+                                  ).format("0,0.0000"))}
                             </span>
                           </div>
                           <div
@@ -716,7 +719,10 @@ const RenderNormal = ({
       );
       if (token) {
         return {
-          tokenId: token.extensions && token.extensions ? token.extensions.coingeckoId : "",
+          tokenId:
+            token.extensions && token.extensions
+              ? token.extensions.coingeckoId
+              : "",
           name: token.name,
         };
       } else {

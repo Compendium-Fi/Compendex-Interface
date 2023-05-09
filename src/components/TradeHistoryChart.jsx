@@ -25,6 +25,20 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
     },
   ]);
   const [options, setOptions] = useState({
+    plotOptions: {
+      scatter: {
+        markers: {
+          states: {
+            hover: {
+              fillColors: ['#00bfff'], // Set background color on hover
+            },
+            normal: {
+              fillColors: ['#ff0000'], // Set background color
+            }
+          },
+        },
+      },
+    },
     chart: {
       type: "area",
       height: 500,
@@ -115,6 +129,7 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
     legend: {
       position: "top",
       horizontalAlign: "left",
+      color:"#000"
     },
     fill: {
       type: "gradient",
@@ -131,6 +146,20 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
     let maxNumber = Math.max.apply(Math, filtredPrices);
     let minNumber = Math.min.apply(Math, filtredPrices);
     setOptions({
+      plotOptions: {
+        scatter: {
+          markers: {
+            states: {
+              hover: {
+                fillColors: ['#00bfff'], // Set background color on hover
+              },
+              normal: {
+                fillColors: ['#ff0000'], // Set background color
+              }
+            },
+          },
+        },
+      },
       chart: {
         type: "area",
         height: 300,
@@ -222,7 +251,7 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
       },
       legend: {
         position: "top",
-        horizontalAlign: "left",
+        horizontalAlign: "left", color:"#000"
       },
       fill: {
         type: "gradient",

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const fetchTokenPrice = async (tokenId: string) => {
+  console.log("Tken ID",tokenId)
   try {
     let res = await axios.get(
       "https://api.coingecko.com/api/v3/coins/" + tokenId

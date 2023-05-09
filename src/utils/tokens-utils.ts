@@ -91,3 +91,6 @@ function getOwnedAccountsFilters(publicKey: PublicKey) {
     },
   ];
 }
+export function isScientificNotation(num:number) {
+  return num.toString().includes('e');
+}

@@ -15831,3 +15831,8 @@ input[type="number"] {
     visibility: hidden !important;
   }
 }
+.apexcharts-tooltip {
+  background: #f3f3f3;
+  color: black;
+
+}
