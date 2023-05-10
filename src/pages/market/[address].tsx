@@ -373,10 +373,16 @@ function TradePageInner() {
                             <span>
                               $
                               {selectedToken &&
-                                (selectedToken.marketData && isScientificNotation(selectedToken.marketData.current_price.usd) ? selectedToken.marketData.current_price.usd :
-                                  numeral(
-                                    selectedToken.marketData.current_price.usd
-                                  ).format("0,0.0000"))}
+                                (selectedToken.marketData &&
+                                isScientificNotation(
+                                  selectedToken.marketData.current_price.usd
+                                )
+                                  ? selectedToken.marketData.current_price.usd.toFixed(
+                                      10
+                                    )
+                                  : numeral(
+                                      selectedToken.marketData.current_price.usd
+                                    ).format("0,0.0000"))}
                             </span>
                           </div>
                           <div
@@ -597,15 +603,15 @@ function MarketSelector({
               ? -1
               : extractQuote(a.name) !== "USDT" &&
                 extractQuote(b.name) === "USDT"
-                ? 1
-                : 0
+              ? 1
+              : 0
           )
           .sort((a: any, b: any) =>
             extractBase(a.name) < extractBase(b.name)
               ? -1
               : extractBase(a.name) > extractBase(b.name)
-                ? 1
-                : 0
+              ? 1
+              : 0
           )
           .map(({ address, name, deprecated }: any, i: number) => {
             return (

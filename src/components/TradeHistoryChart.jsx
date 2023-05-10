@@ -2,6 +2,7 @@ import axios from "axios";
 import numeral from "numeral";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import dynamic from 'next/dynamic'
+import { isScientificNotation } from "@/utils/tokens-utils";
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 function useWindowSize() {
@@ -107,7 +108,8 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
         offsetX: -10,
         offsetY: 0,
         formatter: function (value) {
-          return numeral(value).format("0,0.0000");
+          console.log("Value",value)
+          return isScientificNotation(value) ? value.toFixed(10) : numeral(value).format("0,0.0000");
         },
       },
       tooltip: {
@@ -129,7 +131,7 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
     legend: {
       position: "top",
       horizontalAlign: "left",
-      color:"#000"
+      color: "#000"
     },
     fill: {
       type: "gradient",
@@ -230,7 +232,8 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
           offsetX: -10,
           offsetY: 0,
           formatter: function (value) {
-            return numeral(value).format("0,0.0000");
+            console.log("Value",value)
+            return isScientificNotation(value) ? value.toFixed(10) : numeral(value).format("0,0.0000");
           },
         },
         tooltip: {
@@ -251,7 +254,7 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
       },
       legend: {
         position: "top",
-        horizontalAlign: "left", color:"#000"
+        horizontalAlign: "left", color: "#000"
       },
       fill: {
         type: "gradient",
