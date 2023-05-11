@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 import numeral from "numeral";
-import { isScientificNotation } from "@/utils/tokens-utils";
+import { convert, isScientificNotation } from "@/utils/tokens-utils";
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -79,8 +79,8 @@ const SwapTokenHistoryChart = ({ tokenHistory }) => {
         offsetX: -10,
         offsetY: 0,
         formatter: function (value) {
-          console.log("Value",value)
-          return isScientificNotation(value) ? value.toFixed(10) : numeral(value).format("0,0.0000");
+          console.log("Value", value)
+          return isScientificNotation(value) ? convert(value.toFixed(10)) : numeral(value).format("0,0.0000");
         },
       },
       tooltip: {
@@ -187,8 +187,8 @@ const SwapTokenHistoryChart = ({ tokenHistory }) => {
           offsetX: -10,
           offsetY: 0,
           formatter: function (value) {
-            console.log("Value",value)
-            return isScientificNotation(value) ? value.toFixed(10) : numeral(value).format("0,0.0000");
+            console.log("Value", value)
+            return isScientificNotation(value) ? convert(value.toFixed(10)) : numeral(value).format("0,0.0000");
           },
         },
         tooltip: {

@@ -11,7 +11,7 @@ import styled from "styled-components";
 import TradeHistoryChart from "../../components/TradeHistoryChart";
 
 import { useTokenList } from "../../context/tokenList";
-
+import BigNumber from "bignumber.js";
 import CustomMarketDialog from "../../components/CustomMarketDialog";
 import DeprecatedMarketsInstructions from "../../components/DeprecatedMarketsInstructions";
 import FloatingNavBar from "../../components/layout/FloatingNavbar";
@@ -38,7 +38,14 @@ import { useRouter } from "next/router";
 import { useIsClient } from "@/hooks/useIsClient";
 import { Skeleton } from "@mantine/core";
 import { customMarketsList } from "@/utils/customMarkets";
-import { isScientificNotation } from "@/utils/tokens-utils";
+import {
+  convert,
+  countTrailingZeros,
+  displayTrailingZeros,
+  formatNumber,
+  getExponentiel,
+  isScientificNotation,
+} from "@/utils/tokens-utils";
 const TVChartContainer = dynamic(
   () => import("../../components/TradingView/index"),
   {
@@ -374,15 +381,15 @@ function TradePageInner() {
                               $
                               {selectedToken &&
                                 (selectedToken.marketData &&
-                                isScientificNotation(
-                                  selectedToken.marketData.current_price.usd
-                                )
-                                  ? selectedToken.marketData.current_price.usd.toFixed(
-                                      10
-                                    )
+                                  isScientificNotation(
+                                    selectedToken.marketData.current_price.usd
+                                  )
+                                  ? convert(
+                                    selectedToken.marketData.current_price.usd
+                                  )
                                   : numeral(
-                                      selectedToken.marketData.current_price.usd
-                                    ).format("0,0.0000"))}
+                                    selectedToken.marketData.current_price.usd
+                                  ).format("0,0.0000"))}
                             </span>
                           </div>
                           <div
@@ -603,15 +610,15 @@ function MarketSelector({
               ? -1
               : extractQuote(a.name) !== "USDT" &&
                 extractQuote(b.name) === "USDT"
-              ? 1
-              : 0
+                ? 1
+                : 0
           )
           .sort((a: any, b: any) =>
             extractBase(a.name) < extractBase(b.name)
               ? -1
               : extractBase(a.name) > extractBase(b.name)
-              ? 1
-              : 0
+                ? 1
+                : 0
           )
           .map(({ address, name, deprecated }: any, i: number) => {
             return (

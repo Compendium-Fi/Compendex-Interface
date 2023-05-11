@@ -2,7 +2,7 @@ import axios from "axios";
 import numeral from "numeral";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import dynamic from 'next/dynamic'
-import { isScientificNotation } from "@/utils/tokens-utils";
+import { convert, isScientificNotation } from "@/utils/tokens-utils";
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 function useWindowSize() {
@@ -109,7 +109,7 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
         offsetY: 0,
         formatter: function (value) {
           console.log("Value",value)
-          return isScientificNotation(value) ? value.toFixed(10) : numeral(value).format("0,0.0000");
+          return isScientificNotation(value) ? convert(value.toFixed(10)) : numeral(value).format("0,0.0000");
         },
       },
       tooltip: {
@@ -233,7 +233,7 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
           offsetY: 0,
           formatter: function (value) {
             console.log("Value",value)
-            return isScientificNotation(value) ? value.toFixed(10) : numeral(value).format("0,0.0000");
+            return isScientificNotation(value) ? convert(value.toFixed(10)) : numeral(value).format("0,0.0000");
           },
         },
         tooltip: {
