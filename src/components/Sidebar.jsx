@@ -155,7 +155,7 @@ const Sidebar = () => {
             <a
               className={`sidebar__item ${router.pathname.includes("/nft") ? "active" : ""
                 }`}
-              href="docs.compendex.xyz"
+              href="https://sdocs.compendex.xyz"
               target="_blank"
               rel="noopener noreferrer"
             >

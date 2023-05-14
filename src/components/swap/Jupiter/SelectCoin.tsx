@@ -1,25 +1,22 @@
-import { useRef, useMemo, useState } from "react";
-import { ButtonModal } from "../Buttons";
-import { useJupiterApiContext } from "../../../context/jupiter";
 import { TokenInfo } from "@solana/spl-token-registry";
 import { useVirtualList } from "ahooks";
+import { useMemo, useRef, useState } from "react";
+import { useJupiterApiContext } from "../../../context/jupiter";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 //import { ChevronDownIcon, LinkIcon } from "@heroicons/react/solid";
 //import defaultCoin from "../../assets/default-coin.png";
 //import { Link } from "../Link";
 import { useSwapStyles } from "@/components/styles";
 //import Urls from "../../settings/urls";
-import { useDisclosure } from "@mantine/hooks";
+import { useGlobalSwap } from "@/context/GlobalSwap";
 import {
-  Modal,
-  Button,
   Group,
+  Modal,
   ScrollArea,
   TextInput,
-  UnstyledButton,
+  UnstyledButton
 } from "@mantine/core";
 import { QueryClient } from "react-query";
-import { useQueryClient } from "react-query";
-import { useGlobalSwap } from "@/context/GlobalSwap";
 const Row = ({
   info,
   handleSelect,
@@ -75,6 +72,7 @@ const Coin = ({ tokenInfo }: { tokenInfo: TokenInfo }) => {
       />
       <div className={classes.tokenInner}>
         <span className={classes.tokenContainerSpan}>{tokenInfo.symbol}</span>
+        <KeyboardArrowDownIcon color="#FFF" />
         {/* <ChevronDownIcon className="w-[20px] text-grey ml-2" /> */}
       </div>
     </div>
@@ -238,8 +236,10 @@ export const SelectCoin = ({
       </Modal>
 
       <Group position="center">
-        <UnstyledButton onClick={() => setVisible(true)}>
+        <UnstyledButton onClick={() => setVisible(true)} >
           <Coin tokenInfo={tokenInfo} />
+
+
         </UnstyledButton>
       </Group>
     </>

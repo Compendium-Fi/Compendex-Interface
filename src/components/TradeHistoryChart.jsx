@@ -2,6 +2,7 @@ import axios from "axios";
 import numeral from "numeral";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import dynamic from 'next/dynamic'
+import { convert, isScientificNotation } from "@/utils/tokens-utils";
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 function useWindowSize() {
@@ -25,6 +26,20 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
     },
   ]);
   const [options, setOptions] = useState({
+    plotOptions: {
+      scatter: {
+        markers: {
+          states: {
+            hover: {
+              fillColors: ['#00bfff'], // Set background color on hover
+            },
+            normal: {
+              fillColors: ['#ff0000'], // Set background color
+            }
+          },
+        },
+      },
+    },
     chart: {
       type: "area",
       height: 500,
@@ -93,7 +108,8 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
         offsetX: -10,
         offsetY: 0,
         formatter: function (value) {
-          return numeral(value).format("0,0.0000");
+          console.log("Value",value)
+          return isScientificNotation(value) ? convert(value.toFixed(10)) : numeral(value).format("0,0.0000");
         },
       },
       tooltip: {
@@ -115,6 +131,7 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
     legend: {
       position: "top",
       horizontalAlign: "left",
+      color: "#000"
     },
     fill: {
       type: "gradient",
@@ -131,6 +148,20 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
     let maxNumber = Math.max.apply(Math, filtredPrices);
     let minNumber = Math.min.apply(Math, filtredPrices);
     setOptions({
+      plotOptions: {
+        scatter: {
+          markers: {
+            states: {
+              hover: {
+                fillColors: ['#00bfff'], // Set background color on hover
+              },
+              normal: {
+                fillColors: ['#ff0000'], // Set background color
+              }
+            },
+          },
+        },
+      },
       chart: {
         type: "area",
         height: 300,
@@ -201,7 +232,8 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
           offsetX: -10,
           offsetY: 0,
           formatter: function (value) {
-            return numeral(value).format("0,0.0000");
+            console.log("Value",value)
+            return isScientificNotation(value) ? convert(value.toFixed(10)) : numeral(value).format("0,0.0000");
           },
         },
         tooltip: {
@@ -222,7 +254,7 @@ const TradeHistoryChart = ({ coingeckoId, coinName }) => {
       },
       legend: {
         position: "top",
-        horizontalAlign: "left",
+        horizontalAlign: "left", color: "#000"
       },
       fill: {
         type: "gradient",

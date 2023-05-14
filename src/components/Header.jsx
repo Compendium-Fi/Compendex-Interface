@@ -146,9 +146,10 @@ const MainHeader = () => {
             <a
 
               className="header-link-btn"
-              href="docs.compendex.xyz"
+              href="https://docs.compendex.xyz"
               target="_blank"
               rel="noopener noreferrer"
+             
             >
               <span>Docs</span>
             </a>
