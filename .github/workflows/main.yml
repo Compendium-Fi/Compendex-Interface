@@ -1,7 +1,6 @@
 name: Build and Run Docker Image
 
-on:
-  push
+on: push
 
 jobs:
   build-and-run:
@@ -11,17 +10,34 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: develop
+
+      - name: Add secrets to .env.local file
+        run: |
+          echo "NEXT_PUBLIC_COINGECKO_PRO_KEY=${{ secrets.NEXT_PUBLIC_COINGECKO_PRO_KEY }}" >> .env.local
+          echo "NEXT_PUBLIC_DATA_FEED_ENDPOINT=${{ secrets.NEXT_PUBLIC_DATA_FEED_ENDPOINT }}" >> .env.local
+          echo "NEXT_PUBLIC_DISPLAY_TRADING_VIEW=${{ secrets.NEXT_PUBLIC_DISPLAY_TRADING_VIEW }}" >> .env.local
+          echo "NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}" >> .env.local
+          echo "NEXT_PUBLIC_SOLANA_RPC_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_RPC_ENDPOINT }}" >> .env.local
+          echo "NEXT_PUBLIC_SOLSCAN_TOKEN=${{ secrets.NEXT_PUBLIC_SOLSCAN_TOKEN }}" >> .env.local
+          echo "NEXT_PUBLIC_USDC_REFERRAL=${{ secrets.NEXT_PUBLIC_USDC_REFERRAL }}" >> .env.local
+          echo "NEXT_PUBLIC_USDT_REFERRAL=${{ secrets.NEXT_PUBLIC_USDT_REFERRAL }}" >> .env.local
+          echo "NEXT_PUBLIC_WEBSITE_TITLE=${{ secrets.NEXT_PUBLIC_WEBSITE_TITLE }}" >> .env.local
+
       - name: Stop and remove existing container
         run: |
           docker stop front-end || true
           docker rm front-end || true
+
       - name: Remove unused Docker images and build cache
         run: |
           docker image prune --force
           docker builder prune --force --all
+
       - name: Build Docker image
         run: docker build -t my-docker-image .
+
       - name: Run Docker container
-        run: docker run -d --name front-end -p 3000:3000 my-docker-image
+        run: docker run -d --name front-end -p 3000:3000  my-docker-image
+
       - name: Remove unused Docker images
         run: docker image prune --force
