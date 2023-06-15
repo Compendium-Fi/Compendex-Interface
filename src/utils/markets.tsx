@@ -410,7 +410,7 @@ export function useBonfidaTrades() {
   return useAsyncData(
     getBonfidaTrades,
     tuple("getBonfidaTrades", marketAddress),
-    { refreshInterval: _SLOW_REFRESH_INTERVAL },
+    { refreshInterval: _FAST_REFRESH_INTERVAL },
     false
   );
 }
