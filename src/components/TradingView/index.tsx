@@ -61,7 +61,7 @@ const TVChartContainer = () => {
     fullscreen: false,
     autosize: true,
     studiesOverrides: {},
-    timeframe: "1D",
+    //timeframe: "1D",
   };
 
   const tvWidgetRef = React.useRef<IChartingLibraryWidget | null>(null);
